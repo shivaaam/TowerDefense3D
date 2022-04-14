@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   rotateSpeed: 200
-  zoomSpeed: 0
   movementDamping: 1
   rotationDamping: 0.025
+  zoomSpeed: 150
+  zoomDamping: 0.05
+  minZoom: -37
+  maxZoom: -4

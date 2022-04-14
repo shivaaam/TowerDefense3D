@@ -7,8 +7,12 @@ namespace TowerDefense3D
     {
         public float moveSpeed;
         public float rotateSpeed;
-        public float zoomSpeed;
         public float movementDamping;
         public float rotationDamping;
+        [Header("Zoom")]
+        public float zoomSpeed;
+        public float zoomDamping;
+        public float minZoom;
+        public float maxZoom;
     }
 }

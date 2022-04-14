@@ -1,3 +1,4 @@
+using System;
 using Cinemachine;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ namespace TowerDefense3D
         private CinemachineTransposer inGameCameraTransposer;
         private CinemachineOrbitalTransposer inGameCameraOrbitalTransposer;
         private float currentCameraRotationFactor;
+        private float currentCameraZoomFactor;
 
         private void Awake()
         {
@@ -31,8 +33,13 @@ namespace TowerDefense3D
             }
             if(UserInputs.inputData.moveCameraSecondary != Vector2.zero)
                 MoveCamera(UserInputs.inputData.moveCameraSecondary);
-            //if (UserInputs.inputData.rotateCameraSecondary != Vector2.zero)
-                RotateCamera(UserInputs.inputData.rotateCameraSecondary);
+
+            RotateCamera(UserInputs.inputData.rotateCameraSecondary);
+            UpdateCameraZoom(UserInputs.inputData.zoomCamera);
+
+            if (UserInputs.inputData.zoomCamera != 0f)
+            {
+            }
         }
 
         public void MoveCamera(Vector2 moveInput)
@@ -52,6 +59,14 @@ namespace TowerDefense3D
             if(inGameCameraOrbitalTransposer != null)
                 inGameCameraOrbitalTransposer.m_Heading.m_Bias += (currentCameraRotationFactor % 180f);
         }
+
+        public void UpdateCameraZoom(float zoomInput)
+        {
+            float zoomFactor = zoomInput * settings.zoomSpeed * Time.deltaTime;
+            currentCameraZoomFactor = Mathf.Lerp(currentCameraZoomFactor, zoomFactor, settings.zoomDamping);
+
+            float finalZoom = Mathf.Clamp(inGameCameraTransposer.m_FollowOffset.z + currentCameraZoomFactor, settings.minZoom, settings.maxZoom);
+            inGameCameraTransposer.m_FollowOffset = new Vector3(inGameCameraTransposer.m_FollowOffset.x, inGameCameraTransposer.m_FollowOffset.y, finalZoom);
+        }
     }
-    
 }
