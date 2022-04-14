@@ -15,6 +15,7 @@ namespace TowerDefense3D
         private float currentCameraRotationFactor;
         private float currentCameraZoomFactor;
 
+        private Vector2 lastMiddleMouseHoldPosition;
         private void Awake()
         {
             inGameCameraTransposer = inGameCamera.GetCinemachineComponent<CinemachineTransposer>();
@@ -27,25 +28,35 @@ namespace TowerDefense3D
 
         private void Update()
         {
+            // move using primary controls
+            Vector2 mousePositionDifference = lastMiddleMouseHoldPosition - UserInputs.inputData.mousePosition;
+            lastMiddleMouseHoldPosition = UserInputs.inputData.mousePosition;
+
             if (UserInputs.inputData.middleMouseButtonHold)
             {
-                // see if mouse position is changing
+                MoveCamera(mousePositionDifference * settings.primaryMovementMultiplier);
             }
-            if(UserInputs.inputData.moveCameraSecondary != Vector2.zero)
+
+            // move using secondary controls
+            if (UserInputs.inputData.moveCameraSecondary != Vector2.zero)
                 MoveCamera(UserInputs.inputData.moveCameraSecondary);
 
-            RotateCamera(UserInputs.inputData.rotateCameraSecondary);
-            UpdateCameraZoom(UserInputs.inputData.zoomCamera);
-
-            if (UserInputs.inputData.zoomCamera != 0f)
+            // rotate using primary controls
+            if (UserInputs.inputData.mouseRightClickHold)
             {
+                RotateCamera(mousePositionDifference * settings.primaryRotationMultiplier);
             }
+            
+            // rotate using secondary controls
+            RotateCamera(UserInputs.inputData.rotateCameraSecondary);
+            
+            UpdateCameraZoom(UserInputs.inputData.zoomCamera);
         }
 
         public void MoveCamera(Vector2 moveInput)
         {
             Vector3 inputDirection = new Vector3(moveInput.x, 0, moveInput.y);
-            Vector3 moveDirection = inGameCamera.transform.TransformDirection(inputDirection).normalized;
+            Vector3 moveDirection = inGameCamera.transform.TransformDirection(inputDirection);
             cameraFollowTarget.Translate(moveDirection.x * settings.moveSpeed * Time.deltaTime, 0, moveDirection.z * settings.moveSpeed * Time.deltaTime);
         }
 

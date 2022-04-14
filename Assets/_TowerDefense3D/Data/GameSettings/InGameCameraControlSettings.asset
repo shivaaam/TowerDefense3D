@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 399276fc56792bf418a4bfe2dab4785b, type: 3}
   m_Name: InGameCameraControlSettings
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  primaryMovementMultiplier: 0.35
+  moveSpeed: 15
+  movementDamping: 0.8
+  primaryRotationMultiplier: -0.15
   rotateSpeed: 200
-  movementDamping: 1
   rotationDamping: 0.025
   zoomSpeed: 150
   zoomDamping: 0.05
