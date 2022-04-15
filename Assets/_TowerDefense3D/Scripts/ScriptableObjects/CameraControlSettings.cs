@@ -14,6 +14,7 @@ namespace TowerDefense3D
         public float primaryRotationMultiplier;
         public float rotateSpeed;
         public float rotationDamping;
+
         [Header("Zoom")]
         public float zoomSpeed;
         public float zoomDamping;
