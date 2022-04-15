@@ -1,4 +1,3 @@
-using System;
 using Cinemachine;
 using UnityEngine;
 
@@ -12,7 +11,8 @@ namespace TowerDefense3D
 
         private CinemachineTransposer inGameCameraTransposer;
         private CinemachineOrbitalTransposer inGameCameraOrbitalTransposer;
-        private float currentCameraRotationFactor;
+        private float currentCameraYawFactor;
+        private float currentCameraPitchFactor;
         private float currentCameraZoomFactor;
 
         private Vector2 lastMiddleMouseHoldPosition;
@@ -62,13 +62,25 @@ namespace TowerDefense3D
 
         public void RotateCamera(Vector2 rotateInput)
         {
-            Vector3 inputDirection = new Vector3(rotateInput.x, 0, rotateInput.y);
-            float rotationYaw = inputDirection.x * settings.rotateSpeed * Time.deltaTime;
-            currentCameraRotationFactor = Mathf.Lerp(currentCameraRotationFactor, rotationYaw, settings.rotationDamping);
-            float rotationPitch = 0;
+            float rotationYaw = rotateInput.x * settings.rotateSpeed * Time.deltaTime;
+            float rotationPitch = -rotateInput.y * settings.rotateSpeed * Time.deltaTime;
 
+            currentCameraYawFactor = Mathf.Lerp(currentCameraYawFactor, rotationYaw, settings.rotationDamping);
+            currentCameraPitchFactor = Mathf.Lerp(currentCameraPitchFactor, rotationPitch, settings.rotationDamping);
+
+            Vector3 directionTowardsCamera = inGameCameraTransposer.m_FollowOffset;
+            Vector3 directionTowardsCameraOnPlane = Vector3.ProjectOnPlane(directionTowardsCamera, Vector3.up); ;
+
+            // Pitch
+            float angle = Vector3.Angle(directionTowardsCameraOnPlane, directionTowardsCamera);
+            angle += currentCameraPitchFactor;
+            inGameCameraTransposer.m_FollowOffset = new Vector3(0,
+                directionTowardsCamera.magnitude * Mathf.Sin(angle * Mathf.Deg2Rad),
+                -directionTowardsCamera.magnitude * Mathf.Cos(angle * Mathf.Deg2Rad));
+
+            // Yaw
             if(inGameCameraOrbitalTransposer != null)
-                inGameCameraOrbitalTransposer.m_Heading.m_Bias += (currentCameraRotationFactor % 180f);
+                inGameCameraOrbitalTransposer.m_Heading.m_Bias += (currentCameraYawFactor % 180f);
         }
 
         public void UpdateCameraZoom(float zoomInput)
