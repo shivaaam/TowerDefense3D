@@ -11,6 +11,10 @@ namespace TowerDefense3D
             
         }
 
+        public virtual void Attack(IDamageDealer attacker, IDamageable defender)
+        {
+        }
+
         public virtual void DealDamage(IDamageable defender, float damage)
         {
             

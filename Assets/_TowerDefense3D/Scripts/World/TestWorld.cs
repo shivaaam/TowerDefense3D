@@ -159,4 +159,11 @@ namespace TowerDefense3D
     }
 
     [System.Serializable] public class WorldPrefabsDictionary : SerializableDictionary<PathCellType, GameObject> { }
+
+    public enum WorldCellType
+    {
+        Environment,
+        Path,
+        ItemPlaceable,
+    }
 }

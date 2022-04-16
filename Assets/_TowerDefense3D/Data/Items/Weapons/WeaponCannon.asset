@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 751f9de1411eacb44b527c3d95fae30b, type: 3}
   m_Name: WeaponCannon
   m_EditorClassIdentifier: 
+  size: {x: 1, y: 1}
   cost: 500
   cooldownTime: 10
   icon: {fileID: 21300000, guid: ef561cd15cc8e964382fe4910fc30ac6, type: 3}

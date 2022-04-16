@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace TowerDefense3D
 {
     public class PlaceableItemAttributes : ScriptableObject
     {
+        public AssetReferenceGameObject prefab;
+        public Vector2 size;
         public int cost;
         public int cooldownTime;
         public Sprite icon;
