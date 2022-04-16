@@ -6,6 +6,11 @@ namespace TowerDefense3D
     {
         public DefensiveItemAttributes itemAttributes;
 
+        public override PlaceableItemAttributes GetItemAttributes()
+        {
+            return itemAttributes;
+        }
+
         public virtual void TakeDamage(float damage)
         {
             

@@ -6,7 +6,8 @@ namespace TowerDefense3D
 {
     public class PlayerController : MonoBehaviour
     {
-        private PlaceableItemAttributes currentSelectedItemAttributes;
+        private PlayerData playerData;
+        private IPlaceable currentSelectedItem;
 
         private void OnEnable()
         {
@@ -20,7 +21,23 @@ namespace TowerDefense3D
 
         private void OnItemSelectedToPlace(PlaceableItemAttributes attributes)
         {
-            currentSelectedItemAttributes = attributes;
+            // instantiate the item with matching attributes
+            // cache item in currentSelectedItem
         }
+
+        public void PlaceSelectedItem()
+        {
+            if (currentSelectedItem != null)
+            {
+                currentSelectedItem.Place(new Vector2(0, 0)); // spawn at current selected grid cell
+                GameEvents.OnSelectedItemPlaced?.Invoke(currentSelectedItem.GetItemAttributes());
+            }
+        }
+    }
+
+    [System.Serializable]
+    public class PlayerData
+    {
+        public int money;
     }
 }

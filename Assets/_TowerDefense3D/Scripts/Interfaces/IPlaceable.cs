@@ -4,6 +4,8 @@ namespace TowerDefense3D
 {
     public interface IPlaceable
     {
+        public PlaceableItemAttributes GetItemAttributes();
+
         /// <summary>
         /// Place the item on given grid coordinate
         /// </summary>
