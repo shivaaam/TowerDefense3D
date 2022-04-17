@@ -11,5 +11,7 @@ namespace TowerDefense3D
         /// </summary>
         /// <param name="coordinate"></param>
         public void Place(Vector2 coordinate);
+
+        public void ToggleGhostMode(bool isActive);
     }
 }

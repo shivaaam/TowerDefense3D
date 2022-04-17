@@ -21,6 +21,18 @@ MonoBehaviour:
     m_Address: Building_LaserCannon
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 16102ed94d8c24641b0e369f571e3dbc
+    m_Address: Building_Ballista
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3956213cd6914154b97a87112473d6a0
+    m_Address: Building_Cannon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 791166728e6e0264ca4e6c6733eb4a66
+    m_Address: Building_Catapult
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 27dc8d6da581831498fe9fee5c77f8e0, type: 2}
   m_SchemaSet:
