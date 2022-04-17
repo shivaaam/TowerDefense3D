@@ -44,15 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d118ef5ff98db24a95435d7198dfe6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputs:
-    mousePosition: {x: 0, y: 0}
-    middleMouseButtonHold: 0
-    mouseRightClickHold: 0
-    moveCameraSecondary: {x: 0, y: 0}
-    rotateCameraSecondary: {x: 0, y: 0}
-    zoomCamera: 0
-    togglePause: 0
-    performAction: 0
 --- !u!114 &7376687776073764013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,6 +197,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 04a80fb3-2f32-4abe-90a2-85206f18248e
     m_ActionName: InGameControls/PerformAction[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7376687776073764003}
+        m_TargetAssemblyTypeName: TowerDefense3D.UserInputs, Assembly-CSharp
+        m_MethodName: OnCancelSelection
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8b043965-173b-4d7f-b562-1f42d00b02ca
+    m_ActionName: InGameControls/CancelSelection[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: InGameControls

@@ -18,12 +18,12 @@ namespace TowerDefense3D
 
         private void OnEnable()
         {
-            GameEvents.OnSelectedItemPlaced.AddListener(OnSelectedItemPlaced);
+            GameEvents.OnPlaceSelectedItem.AddListener(OnPlaceSelectedItem);
         }
 
         private void OnDisable()
         {
-            GameEvents.OnSelectedItemPlaced.RemoveListener(OnSelectedItemPlaced);
+            GameEvents.OnPlaceSelectedItem.RemoveListener(OnPlaceSelectedItem);
         }
 
         public void SetButtonData(PlaceableItemAttributes l_att)
@@ -36,7 +36,7 @@ namespace TowerDefense3D
 
         public void SelectItem()
         {
-            GameEvents.OnPlaceableItemSelected?.Invoke(attributes);
+            GameEvents.OnSelectPlaceableItem?.Invoke(attributes);
         }
 
         private void ToggleButtonInteractable(bool isActive)
@@ -68,7 +68,7 @@ namespace TowerDefense3D
             ToggleButtonInteractable(true);
         }
 
-        private void OnSelectedItemPlaced(PlaceableItemAttributes l_att)
+        private void OnPlaceSelectedItem(PlaceableItemAttributes l_att)
         {
             if (l_att.id == attributes.id)
             {

@@ -11,6 +11,7 @@ namespace TowerDefense3D
 
         public static UnityEvent<InputAction.CallbackContext> OnPerformActionInputEvent = new UnityEvent<InputAction.CallbackContext>();
         public static UnityEvent<InputAction.CallbackContext> OnTogglePauseInputEvent = new UnityEvent<InputAction.CallbackContext>();
+        public static UnityEvent<InputAction.CallbackContext> OnCancelSelectionInputEvent = new UnityEvent<InputAction.CallbackContext>();
 
         public void OnMousePosition(InputAction.CallbackContext context)
         {
@@ -58,6 +59,10 @@ namespace TowerDefense3D
             OnPerformActionInputEvent?.Invoke(context);
         }
 
+        public void OnCancelSelection(InputAction.CallbackContext context)
+        {
+            OnCancelSelectionInputEvent?.Invoke(context);
+        }
 
         private void MiddleMouseHoldInput(bool input)
         {

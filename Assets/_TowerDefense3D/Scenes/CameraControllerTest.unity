@@ -1082,7 +1082,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 555421866}
-  m_LocalRotation: {x: 0.28421503, y: 0.0000000164968, z: -0.0000000048903135, w: 0.95876056}
+  m_LocalRotation: {x: 0.28421503, y: -0.000000016496799, z: 0.000000004890313, w: 0.95876056}
   m_LocalPosition: {x: 0, y: 6.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1710,6 +1710,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: fe09be8bcb78f3a408781a716253658f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b3d98deb6ad71b64aa1f405178eed03e, type: 2}
+    - target: {fileID: -7511558181221131132, guid: fe09be8bcb78f3a408781a716253658f, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9e067bd13d21dad4187de1cbc8a35506, type: 2}
+    - target: {fileID: -7511558181221131132, guid: fe09be8bcb78f3a408781a716253658f, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: f9bffeea718622f46832e8335aa09ff0, type: 2}
     - target: {fileID: 919132149155446097, guid: fe09be8bcb78f3a408781a716253658f, type: 3}
       propertyPath: m_Name
       value: towerSquare_sampleB
@@ -2122,6 +2134,49 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 56b590d12492ed84f81663db14ed318c, type: 3}
   m_PrefabInstance: {fileID: 1397745271}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1413742248
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1413742250}
+  - component: {fileID: 1413742249}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1413742249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413742248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772f85e1d4f2c1246a3055802c600e74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1413742250
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413742248}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1433959920 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 56b590d12492ed84f81663db14ed318c, type: 3}
@@ -3263,7 +3318,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3732513638144844604, guid: 54be50b3bb5a6314eb4c1ef47ce571be, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4044376423851508601, guid: 54be50b3bb5a6314eb4c1ef47ce571be, type: 3}
       propertyPath: m_RaycastTarget
@@ -3405,11 +3460,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1283958373, guid: 876f1232fadaa564cbb3c7cd2313f7e9, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000164968
+      value: -0.000000016496799
       objectReference: {fileID: 0}
     - target: {fileID: 1283958373, guid: 876f1232fadaa564cbb3c7cd2313f7e9, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000048903135
+      value: 0.000000004890313
       objectReference: {fileID: 0}
     - target: {fileID: 732029334795951825, guid: 876f1232fadaa564cbb3c7cd2313f7e9, type: 3}
       propertyPath: m_RootOrder

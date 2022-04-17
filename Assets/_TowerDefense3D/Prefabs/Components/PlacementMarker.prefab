@@ -113,6 +113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7702edf98a1bb1a479c577f4ed9dd8b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentCamera: {fileID: 0}
+  markerImage: {fileID: 4044376423851508601}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64

@@ -5,7 +5,9 @@ namespace TowerDefense3D
 {
     public class GameEvents
     {
-        public static UnityEvent<PlaceableItemAttributes> OnPlaceableItemSelected = new UnityEvent<PlaceableItemAttributes>();
-        public static UnityEvent<PlaceableItemAttributes> OnSelectedItemPlaced = new UnityEvent<PlaceableItemAttributes>();
+        public static UnityEvent<PlaceableItemAttributes> OnSelectPlaceableItem = new UnityEvent<PlaceableItemAttributes>();
+        public static UnityEvent OnDeselectCurrentItem = new UnityEvent();
+
+        public static UnityEvent<PlaceableItemAttributes> OnPlaceSelectedItem = new UnityEvent<PlaceableItemAttributes>();
     }
 }
