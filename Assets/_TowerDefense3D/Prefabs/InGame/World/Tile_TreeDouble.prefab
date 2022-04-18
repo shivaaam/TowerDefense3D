@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3941220740315593538}
   - component: {fileID: 2955113485819683156}
-  m_Layer: 0
+  - component: {fileID: 6937675512776626652}
+  m_Layer: 6
   m_Name: Tile_TreeDouble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,6 +48,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   validForPlacement: -1
   cellType: 0
+--- !u!65 &6937675512776626652
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050215903741943199}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.2, z: 1}
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!1001 &3186380996070506653
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -98,9 +112,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7392225327938827759, guid: 96d51d94137e30b4db12fc52b05ad06a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 96d51d94137e30b4db12fc52b05ad06a, type: 3}
       propertyPath: m_Name
       value: tile_treeDouble
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 96d51d94137e30b4db12fc52b05ad06a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3681790978099765340, guid: 96d51d94137e30b4db12fc52b05ad06a, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96d51d94137e30b4db12fc52b05ad06a, type: 3}

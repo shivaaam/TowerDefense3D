@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1850471932568085431}
   - component: {fileID: 4978624758765281717}
-  m_Layer: 0
+  - component: {fileID: -9125537325404355477}
+  m_Layer: 6
   m_Name: Tile_Hill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,6 +48,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   validForPlacement: -1
   cellType: 0
+--- !u!65 &-9125537325404355477
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5188789237342206200}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.2, z: 1}
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!1001 &1467316939505260366
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -98,9 +112,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1499549837338632917, guid: 86600efabcd144f47ae057e13d1de0fc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 86600efabcd144f47ae057e13d1de0fc, type: 3}
       propertyPath: m_Name
       value: tile_hill
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 86600efabcd144f47ae057e13d1de0fc, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86600efabcd144f47ae057e13d1de0fc, type: 3}

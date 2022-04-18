@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3781000259201523681}
   - component: {fileID: 9012129860472721657}
-  m_Layer: 0
+  - component: {fileID: 377347949567030343}
+  m_Layer: 6
   m_Name: Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,6 +48,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   validForPlacement: -1
   cellType: 0
+--- !u!65 &377347949567030343
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2642209444710653585}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.2, z: 1}
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!1001 &4140065825877321436
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -101,6 +115,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d1276714437b55c48a317bbe6846fab6, type: 3}
       propertyPath: m_Name
       value: tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d1276714437b55c48a317bbe6846fab6, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1276714437b55c48a317bbe6846fab6, type: 3}

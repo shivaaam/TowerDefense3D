@@ -40,13 +40,13 @@ namespace TowerDefense3D
 
         public void PlaceSelectedItem()
         {
-            if (currentSelectedItem != null)
-            {
-                currentSelectedItem.Place(new Vector2(0, 0)); // spawn at current selected grid cell
-                GameEvents.OnPlaceSelectedItem?.Invoke(currentSelectedItem.GetItemAttributes());
-                currentSelectedItem = null;
-            }
-
+            if (currentSelectedItem == null)
+                return;
+            
+            currentSelectedItem.Place(new Vector2(0, 0)); // spawn at current selected grid cell
+            GameEvents.OnPlaceSelectedItem?.Invoke(currentSelectedItem.GetItemAttributes());
+            currentSelectedItem = null;
+        
             // get another item instance to place
             OnItemSelectedToPlace(currentSelectedItemAttributes);
         }

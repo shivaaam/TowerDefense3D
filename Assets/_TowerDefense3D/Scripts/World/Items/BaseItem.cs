@@ -43,7 +43,6 @@ namespace TowerDefense3D
                     mat.SetInt(isGhostMatParamString, val);
                 }
             }
-            Debug.Log($"{name} ghost mode: {isActive}");
         }
 
         private void GetAllMaterials()
