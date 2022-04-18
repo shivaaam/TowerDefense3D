@@ -6,6 +6,8 @@ namespace TowerDefense3D
     {
         public PlaceableItemAttributes GetItemAttributes();
 
+        public PlaceableItemType GetPlaceableItemType();
+
         /// <summary>
         /// Place the item on given grid coordinate
         /// </summary>

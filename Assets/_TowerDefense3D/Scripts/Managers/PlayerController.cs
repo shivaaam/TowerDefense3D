@@ -9,7 +9,8 @@ namespace TowerDefense3D
     public class PlayerController : MonoBehaviour
     {
         private PlayerData playerData;
-        private IPlaceable currentSelectedItem;
+        private PlaceableItemAttributes currentSelectedItemAttributes;
+        private BaseItem currentSelectedItem;
 
         private void OnEnable()
         {
@@ -27,9 +28,14 @@ namespace TowerDefense3D
 
         private void OnItemSelectedToPlace(PlaceableItemAttributes attributes)
         {
+            currentSelectedItemAttributes = attributes;
+
+            if(currentSelectedItem != null)
+                RemoveCurrentSelectedItem();
+
             GameObject obj = AddressableLoader.InstantiateAddressable(attributes.prefab); 
             obj.transform.SetParent(transform);
-            currentSelectedItem = obj.GetComponent<IPlaceable>();
+            currentSelectedItem = obj.GetComponent<BaseItem>();
         }
 
         public void PlaceSelectedItem()
@@ -38,16 +44,30 @@ namespace TowerDefense3D
             {
                 currentSelectedItem.Place(new Vector2(0, 0)); // spawn at current selected grid cell
                 GameEvents.OnPlaceSelectedItem?.Invoke(currentSelectedItem.GetItemAttributes());
+                currentSelectedItem = null;
             }
+
+            // get another item instance to place
+            OnItemSelectedToPlace(currentSelectedItemAttributes);
         }
 
         private void OnCancelSelectionInput(InputAction.CallbackContext context)
         {
+            if (currentSelectedItem == null)
+                return;
             if (context.phase == InputActionPhase.Started)
             {
-                currentSelectedItem = null;
+                RemoveCurrentSelectedItem();
                 GameEvents.OnDeselectCurrentItem?.Invoke();
             }
+        }
+
+        private void RemoveCurrentSelectedItem()
+        {
+            if (currentSelectedItem == null)
+                return;
+            AddressableLoader.DestroyAndReleaseAddressable(currentSelectedItem.gameObject);
+            currentSelectedItem = null;
         }
 
         private void OnPerformActionInput(InputAction.CallbackContext context)

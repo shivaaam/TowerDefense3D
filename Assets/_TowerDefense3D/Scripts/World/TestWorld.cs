@@ -164,6 +164,5 @@ namespace TowerDefense3D
     {
         Environment,
         Path,
-        ItemPlaceable,
     }
 }
