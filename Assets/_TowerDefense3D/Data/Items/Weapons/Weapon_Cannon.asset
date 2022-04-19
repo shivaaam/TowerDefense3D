@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Weapon_Cannon
   m_EditorClassIdentifier: 
   id: 1
+  type: 1
   prefab:
     m_AssetGUID: 3956213cd6914154b97a87112473d6a0
     m_SubObjectName: 

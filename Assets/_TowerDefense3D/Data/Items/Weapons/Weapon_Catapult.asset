@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Weapon_Catapult
   m_EditorClassIdentifier: 
   id: 2
+  type: 1
   prefab:
     m_AssetGUID: 791166728e6e0264ca4e6c6733eb4a66
     m_SubObjectName: 

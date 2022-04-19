@@ -7,7 +7,7 @@ namespace TowerDefense3D
     {
         public LevelController levelController;
         [SerializeField] private Camera currentCamera;
-        public UnityEngine.UI.Image markerImage;
+        [SerializeField] private UnityEngine.UI.Image markerImage;
 
         [Header("Colors")] 
         public Color validColor;
@@ -20,6 +20,8 @@ namespace TowerDefense3D
 
 
         private PlaceableItemAttributes selectedItem;
+        public bool IsCurrentPositionValid { get; private set; }
+        public Transform Marker => markerImage.transform;
 
         private void OnEnable()
         {
@@ -66,8 +68,8 @@ namespace TowerDefense3D
         private void OnMarkerPositionChange(Vector3 position)
         {
             // check for placement validity
-            bool isValid = IsPositionValidForPlacement(position);
-            markerImage.color = isValid ? validColor : invalidColor;
+            IsCurrentPositionValid = IsPositionValidForPlacement(position);
+            markerImage.color = IsCurrentPositionValid ? validColor : invalidColor;
         }
 
         private bool IsPositionValidForPlacement(Vector3 position)
@@ -76,8 +78,8 @@ namespace TowerDefense3D
             Vector3 boxExtents = new Vector3(selectedItem.size.x / 2.25f, 5f, selectedItem.size.y / 2.25f);
             Collider[] colls = Physics.OverlapBox(position, boxExtents, Quaternion.identity, placementValidityCheckLayer);
 
-            bool isUnoccupied = colls.All(t => t.gameObject.layer != itemsLayer);
-            if (!isUnoccupied)
+            bool isOccupied = colls.Any(t => (1 << t.gameObject.layer | itemsLayer) == itemsLayer);
+            if (isOccupied)
                 return false;
 
             foreach (var coll in colls)

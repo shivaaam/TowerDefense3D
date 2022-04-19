@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using nStation;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.PlayerLoop;
 
 namespace TowerDefense3D
 {
     public class PlayerController : MonoBehaviour
     {
+        public PlacementMarker placementMarker;
+
         private PlayerData playerData;
         private PlaceableItemAttributes currentSelectedItemAttributes;
         private BaseItem currentSelectedItem;
@@ -26,6 +29,12 @@ namespace TowerDefense3D
             UserInputs.OnPerformActionInputEvent.RemoveListener(OnPerformActionInput);
         }
 
+        private void Update()
+        {
+            if (currentSelectedItem != null)
+                currentSelectedItem.transform.position = placementMarker.Marker.position;
+        }
+
         private void OnItemSelectedToPlace(PlaceableItemAttributes attributes)
         {
             currentSelectedItemAttributes = attributes;
@@ -40,10 +49,10 @@ namespace TowerDefense3D
 
         public void PlaceSelectedItem()
         {
-            if (currentSelectedItem == null)
+            if (currentSelectedItem == null || placementMarker == null || !placementMarker.IsCurrentPositionValid)
                 return;
             
-            currentSelectedItem.Place(new Vector2(0, 0)); // spawn at current selected grid cell
+            currentSelectedItem.Place(placementMarker.Marker.position);
             GameEvents.OnPlaceSelectedItem?.Invoke(currentSelectedItem.GetItemAttributes());
             currentSelectedItem = null;
         

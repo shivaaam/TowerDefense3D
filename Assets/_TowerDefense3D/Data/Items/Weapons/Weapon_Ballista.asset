@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Weapon_Ballista
   m_EditorClassIdentifier: 
   id: 0
+  type: 1
   prefab:
     m_AssetGUID: 16102ed94d8c24641b0e369f571e3dbc
     m_SubObjectName: 
