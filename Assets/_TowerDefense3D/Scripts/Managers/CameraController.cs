@@ -74,6 +74,7 @@ namespace TowerDefense3D
             // Pitch
             float angle = Vector3.Angle(directionTowardsCameraOnPlane, directionTowardsCamera);
             angle += currentCameraPitchFactor;
+            angle = Mathf.Clamp(angle, settings.minPitchAngle, settings.maxPitchAngle);
             inGameCameraTransposer.m_FollowOffset = new Vector3(0,
                 directionTowardsCamera.magnitude * Mathf.Sin(angle * Mathf.Deg2Rad),
                 -directionTowardsCamera.magnitude * Mathf.Cos(angle * Mathf.Deg2Rad));

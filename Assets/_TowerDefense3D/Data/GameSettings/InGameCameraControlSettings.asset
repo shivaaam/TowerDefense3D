@@ -18,7 +18,9 @@ MonoBehaviour:
   primaryRotationMultiplier: -0.15
   rotateSpeed: 200
   rotationDamping: 0.025
+  minPitchAngle: 10
+  maxPitchAngle: 70
   zoomSpeed: 250
-  zoomDamping: 0.01
+  zoomDamping: 0.025
   minZoom: -37
   maxZoom: -4
