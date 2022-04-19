@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8313265575227332300}
   - component: {fileID: 6975262272091168937}
-  m_Layer: 0
+  - component: {fileID: 3624528687368834713}
+  m_Layer: 7
   m_Name: Building_Catapult
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,8 +46,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1730cbd29c98e543b9b68fab7f612fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: 1
   itemAttributes: {fileID: 11400000, guid: 27f4eee6c55e8434b8482542f9408fe8, type: 2}
+--- !u!65 &3624528687368834713
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4256992508152449015}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &21810819226638002
 PrefabInstance:
   m_ObjectHideFlags: 0

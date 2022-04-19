@@ -11,6 +11,11 @@ namespace TowerDefense3D
             return itemAttributes;
         }
 
+        public override PlaceableItemType GetPlaceableItemType()
+        {
+            return itemAttributes.type;
+        }
+
         public virtual void TakeDamage(float damage)
         {
             

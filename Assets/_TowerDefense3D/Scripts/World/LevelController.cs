@@ -39,6 +39,12 @@ namespace TowerDefense3D
 
         private void UpdateBoxColliderSize()
         {
+            if (GetComponent<MeshCombiner2>() == null)
+            {
+                boxCollider.enabled = false;
+                return;
+            }
+
             if (boxCollider == null)
                 return;
 

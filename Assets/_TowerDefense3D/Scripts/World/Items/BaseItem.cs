@@ -5,8 +5,6 @@ namespace TowerDefense3D
 {
     public abstract class BaseItem : MonoBehaviour, IPlaceable
     {
-        [SerializeField] private PlaceableItemType itemType;
-
         private string isGhostMatParamString = "_IsGhost";
         private Renderer[] renderers;
         private List<Material> materials = new List<Material>();
@@ -23,9 +21,9 @@ namespace TowerDefense3D
             return null;
         }
 
-        public PlaceableItemType GetPlaceableItemType()
+        public virtual PlaceableItemType GetPlaceableItemType()
         {
-            return itemType;
+            return PlaceableItemType.None;
         }
 
         public virtual void Place(Vector2 coordinate)
