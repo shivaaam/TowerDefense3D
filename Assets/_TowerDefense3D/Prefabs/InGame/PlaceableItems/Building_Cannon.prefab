@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2a1dad649e7f6b4497b70cb6b09fdf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemAttributes: {fileID: 11400000, guid: a635c2c373a6b0946b9e1ac59e6280c2, type: 2}
+  itemAttributes: {fileID: 11400000, guid: dc6a62c06321b10499b6a0422295cc37, type: 2}
+  ammo: {fileID: 11400000, guid: b4139856847402540b7fd412b6c3a900, type: 2}
 --- !u!65 &8625681725149155296
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -60,6 +61,37 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!1 &6667360862468324139
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5646754085921526057}
+  m_Layer: 0
+  m_Name: Muzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5646754085921526057
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6667360862468324139}
+  m_LocalRotation: {x: -0.70710677, y: -3.0616795e-14, z: -1.0519615e-14, w: 0.7071069}
+  m_LocalPosition: {x: 0, y: 0.378, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4663383720002386334}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1001 &419641093504830894
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -212,3 +244,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c129f1408265748478f89108bff4823e, type: 3}
+--- !u!4 &4663383720002386334 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -6110536800543132278, guid: c129f1408265748478f89108bff4823e, type: 3}
+  m_PrefabInstance: {fileID: 7747504100978740244}
+  m_PrefabAsset: {fileID: 0}

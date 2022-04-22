@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 
 public class MeshCombiner2 : MonoBehaviour
 {
@@ -82,21 +83,28 @@ public class MeshCombiner2 : MonoBehaviour
         Material[] materialsArray = materials.ToArray(typeof(Material)) as Material[];
         meshRendererCombine.materials = materialsArray;
 
-        //foreach (MeshFilter meshFilter in meshFilters)
+        //// destroy children
+        //int childrenCount = transform.childCount;
+        //GameObject[] children = new GameObject[childrenCount];
+        //for (int i = 0; i < childrenCount; i++)
         //{
-        //    DestroyImmediate(meshFilter.gameObject);
+        //    children[i] = transform.GetChild(i).gameObject;
         //}
 
-        int childrenCount = transform.childCount;
-        GameObject[] children = new GameObject[childrenCount];
-        for (int i = 0; i < childrenCount; i++)
-        {
-            children[i] = transform.GetChild(i).gameObject;
-        }
+        //foreach (var child in children)
+        //{
+        //    Destroy(child);
+        //}
 
-        foreach (var child in children)
+        // destroy objects with mesh renderer
+        MeshRenderer[] renderers = transform.GetComponentsInChildren<MeshRenderer>();
+        if (renderers.Length > 0)
         {
-            Destroy(child);
+            foreach (var renderer in renderers)
+            {
+                if(renderer.gameObject != gameObject)
+                    Destroy(renderer.gameObject);
+            }
         }
     }
 

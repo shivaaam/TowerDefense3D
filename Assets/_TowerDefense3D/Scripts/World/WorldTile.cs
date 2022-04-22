@@ -7,6 +7,5 @@ namespace TowerDefense3D
     {
         [EnumFlags] public PlaceableItemType validForPlacement;
         public WorldCellType cellType;
-        //public GridCell gridCell;
     }
 }

@@ -2,30 +2,17 @@ using UnityEngine;
 
 namespace TowerDefense3D
 {
-    public class WeaponItem : BaseItem, IDamageable, IDamageDealer
+    public abstract class WeaponItem : BaseItem, IDamageable
     {
-        public WeaponItemAttributes itemAttributes;
+        protected IDamageable target;
+        protected int health;
 
-        public override PlaceableItemAttributes GetItemAttributes()
+        public virtual Transform GetDamageableTransform()
         {
-            return itemAttributes;
+            return transform;
         }
 
-        public override PlaceableItemType GetPlaceableItemType()
-        {
-            return itemAttributes.type;
-        }
-
-        public virtual void TakeDamage(float damage)
-        {
-            
-        }
-
-        public virtual void Attack(IDamageDealer attacker, IDamageable defender)
-        {
-        }
-
-        public virtual void DealDamage(IDamageable defender, float damage)
+        public virtual void TakeDamage(int damage)
         {
             
         }

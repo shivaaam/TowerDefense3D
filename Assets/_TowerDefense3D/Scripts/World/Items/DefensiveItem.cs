@@ -6,6 +6,8 @@ namespace TowerDefense3D
     {
         public DefensiveItemAttributes itemAttributes;
 
+        private int health;
+
         public override PlaceableItemAttributes GetItemAttributes()
         {
             return itemAttributes;
@@ -16,9 +18,14 @@ namespace TowerDefense3D
             return itemAttributes.type;
         }
 
-        public virtual void TakeDamage(float damage)
+        public virtual void TakeDamage(int damage)
         {
-            
+            health = Mathf.Clamp(health - damage, 0, itemAttributes.maxHealth);
+        }
+
+        public virtual Transform GetDamageableTransform()
+        {
+            return transform;
         }
     }
 }

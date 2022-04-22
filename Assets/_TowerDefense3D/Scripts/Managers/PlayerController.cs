@@ -15,6 +15,9 @@ namespace TowerDefense3D
         private PlaceableItemAttributes currentSelectedItemAttributes;
         private BaseItem currentSelectedItem;
 
+        private List<BaseItem> placedItems = new List<BaseItem>();
+        private float lastSelectedItemPlacedTime;
+
         private void OnEnable()
         {
             GameEvents.OnSelectPlaceableItem.AddListener(OnItemSelectedToPlace);
@@ -29,6 +32,11 @@ namespace TowerDefense3D
             UserInputs.OnPerformActionInputEvent.RemoveListener(OnPerformActionInput);
         }
 
+        private void Start()
+        {
+            lastSelectedItemPlacedTime = -50;
+        }
+
         private void Update()
         {
             if (currentSelectedItem != null)
@@ -37,7 +45,12 @@ namespace TowerDefense3D
 
         private void OnItemSelectedToPlace(PlaceableItemAttributes attributes)
         {
-            currentSelectedItemAttributes = attributes;
+            if (currentSelectedItemAttributes == null || attributes.id != currentSelectedItemAttributes.id)
+            {
+                currentSelectedItemAttributes = attributes;
+                if(placedItems.Count > 0)
+                    lastSelectedItemPlacedTime = 0;
+            }
 
             if(currentSelectedItem != null)
                 RemoveCurrentSelectedItem();
@@ -49,15 +62,23 @@ namespace TowerDefense3D
 
         public void PlaceSelectedItem()
         {
-            if (currentSelectedItem == null || placementMarker == null || !placementMarker.IsCurrentPositionValid)
+            if (currentSelectedItem == null || placementMarker == null || !placementMarker.IsCurrentPositionValid || (Time.time - lastSelectedItemPlacedTime < currentSelectedItemAttributes.cooldownTime))
                 return;
-            
+
+            lastSelectedItemPlacedTime = Time.time;
             currentSelectedItem.Place(placementMarker.Marker.position);
+            AddToPlacedItems(currentSelectedItem);
             GameEvents.OnPlaceSelectedItem?.Invoke(currentSelectedItem.GetItemAttributes());
             currentSelectedItem = null;
         
             // get another item instance to place
             OnItemSelectedToPlace(currentSelectedItemAttributes);
+        }
+
+        private void AddToPlacedItems(BaseItem item)
+        {
+            if(!placedItems.Contains(item))
+                placedItems.Add(item);
         }
 
         private void OnCancelSelectionInput(InputAction.CallbackContext context)
