@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 527a11a61a195d742a515a2ad75f89bd, type: 3}
+  m_Name: CameraSetup_Level1
+  m_EditorClassIdentifier: 
+  targetPosition: {x: 9.804385, y: 0, z: 1.5954436}
+  cameraFollowOffset: {x: 0, y: 14.662598, z: -32.932735}
+  cameraYawBias: 25.19107
+  cameraPosition: {x: -4.941449, y: 21.857983, z: -24.785872}
+  cameraRotation: {x: 23.999996, y: 25.191065, z: -0.0000009345716}

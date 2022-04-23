@@ -5,6 +5,7 @@ namespace TowerDefense3D
 {
     public class CameraController : MonoBehaviour
     {
+        public InitialCameraSetupSettings initialSetup;
         public CameraControlSettings settings;
         public CinemachineVirtualCamera inGameCamera;
         public Transform cameraFollowTarget;
@@ -24,6 +25,11 @@ namespace TowerDefense3D
             inGameCameraTransposer.m_ZDamping = settings.movementDamping;
 
             inGameCameraOrbitalTransposer = inGameCamera.GetCinemachineComponent<CinemachineOrbitalTransposer>();
+        }
+
+        private void Start()
+        {
+            SetupInitialCamera();
         }
 
         private void Update()
@@ -91,6 +97,18 @@ namespace TowerDefense3D
 
             float finalZoom = Mathf.Clamp(inGameCameraTransposer.m_FollowOffset.z + currentCameraZoomFactor, settings.minZoom, settings.maxZoom);
             inGameCameraTransposer.m_FollowOffset = new Vector3(inGameCameraTransposer.m_FollowOffset.x, inGameCameraTransposer.m_FollowOffset.y, finalZoom);
+        }
+
+        public void SetupInitialCamera()
+        {
+            cameraFollowTarget.position = initialSetup.targetPosition;
+            inGameCameraTransposer.m_FollowOffset = initialSetup.cameraFollowOffset;
+            inGameCameraOrbitalTransposer.m_Heading.m_Bias = initialSetup.cameraYawBias;
+        }
+
+        public void RecenterCamera()
+        {
+            SetupInitialCamera();
         }
     }
 }

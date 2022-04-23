@@ -55,6 +55,11 @@ namespace TowerDefense3D
             boxCollider.center = boxCollider.size / 2f;
         }
 
+        private void SetCameraInitialView()
+        {
+
+        }
+
         private void OnDrawGizmosSelected()
         {
             Grid grid = worldGrid;
