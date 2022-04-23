@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace TowerDefense3D
 {
-    public class CatapultWeapon : WeaponItem
+    public class CatapultWeapon : RangeWeapon
     {
     }
 }

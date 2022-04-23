@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace TowerDefense3D
 {
-    public abstract class MeleeWeapon : WeaponItem
+    public class GroundRangeEnemy : RangeEnemy
     {
-        public MeleeWeaponAttributes itemAttributes;
+        
     }
 }

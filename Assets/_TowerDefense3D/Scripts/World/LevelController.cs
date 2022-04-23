@@ -6,11 +6,10 @@ namespace TowerDefense3D
 {
     public class LevelController : MonoBehaviour
     {
-        public bool showGrid;
-        public Color gridColor;
         public Grid worldGrid;
-
         private BoxCollider boxCollider;
+
+        public InitialCameraSetupSettings initialCameraSetup;
 
         void Start()
         {
@@ -18,23 +17,19 @@ namespace TowerDefense3D
 
             boxCollider = GetComponent<BoxCollider>();
             UpdateBoxColliderSize();
+            SetCameraInitialView();
         }
 
         public GridCell GetGridCellAtWorldPosition(Vector3 l_pos)
         {
-            Vector3 localPos = transform.InverseTransformPoint(l_pos);
-            int row = Mathf.FloorToInt(localPos.z / worldGrid.cellSize);
-            int col = Mathf.FloorToInt(localPos.x / worldGrid.cellSize);
-            
-            return worldGrid.cells[row, col];
+            return worldGrid.GetGridCellAtWorldPoint(l_pos, transform);
         }
 
         public Vector3 GetGridCellWorldPosition(GridCell cell)
         {
-            float x = (cell.coordinate.y * cell.size) + cell.size/2f;
-            float z = (cell.coordinate.x * cell.size) + cell.size/2f;
-
-            return new Vector3(x, transform.position.y, z);
+            Vector3 worldPos = worldGrid.GetGridCellWorldPosition(cell, new Vector2(cell.size / 2f, cell.size / 2f), transform);
+            worldPos = new Vector3(worldPos.x, transform.position.y, worldPos.z);
+            return worldPos;
         }
 
         private void UpdateBoxColliderSize()
@@ -57,35 +52,17 @@ namespace TowerDefense3D
 
         private void SetCameraInitialView()
         {
+            CameraController.SetInitialCameraSettings(initialCameraSetup);
+        }
 
+        public void RecenterCamera()
+        {
+            SetCameraInitialView();
         }
 
         private void OnDrawGizmosSelected()
         {
-            Grid grid = worldGrid;
-
-            // draw grid
-            if (showGrid)
-            {
-                Gizmos.color = gridColor;
-                for (int i = 0; i < grid.rows; i++)
-                {
-                    for (int j = 0; j < grid.columns; j++)
-                    {
-                        Gizmos.DrawLine(transform.TransformPoint(new Vector3(j, 0,i) * grid.cellSize), transform.TransformPoint(new Vector3(j, 0, i+1) * grid.cellSize)); // vertical
-                        Gizmos.DrawLine(transform.TransformPoint(new Vector3(j, 0,i) * grid.cellSize), transform.TransformPoint(new Vector3(j+1, 0, i) * grid.cellSize)); // horizontal
-                        if (j == grid.columns - 1) // for last column
-                        {
-                            Gizmos.DrawLine(transform.TransformPoint(new Vector3(j+1, 0,i) * grid.cellSize), transform.TransformPoint(new Vector3(j+1, 0, i+1) * grid.cellSize)); // vertical
-                        }
-                        if (i == grid.rows - 1) // for last column
-                        {
-                            Gizmos.DrawLine(transform.TransformPoint(new Vector3(j, 0, i+1) * grid.cellSize), transform.TransformPoint(new Vector3(j + 1, 0, i + 1) * grid.cellSize)); // vertical
-                        }
-                    }
-                }
-            }
-
+            worldGrid.DrawGrid(transform);
         }
         
     }

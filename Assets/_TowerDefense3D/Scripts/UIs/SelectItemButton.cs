@@ -70,7 +70,7 @@ namespace TowerDefense3D
 
         private void OnPlaceSelectedItem(PlaceableItemAttributes l_att)
         {
-            if (l_att.id == attributes.id)
+            if (l_att != null && l_att.id == attributes.id)
             {
                 ToggleButtonInteractable(false);
                 StartTimer();

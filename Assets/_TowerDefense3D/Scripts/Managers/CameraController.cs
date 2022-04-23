@@ -1,11 +1,11 @@
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace TowerDefense3D
 {
     public class CameraController : MonoBehaviour
     {
-        public InitialCameraSetupSettings initialSetup;
         public CameraControlSettings settings;
         public CinemachineVirtualCamera inGameCamera;
         public Transform cameraFollowTarget;
@@ -17,6 +17,9 @@ namespace TowerDefense3D
         private float currentCameraZoomFactor;
 
         private Vector2 lastMiddleMouseHoldPosition;
+
+        private static UnityEvent<InitialCameraSetupSettings> SetInitialCameraSettingsEvent = new UnityEvent<InitialCameraSetupSettings>();
+
         private void Awake()
         {
             inGameCameraTransposer = inGameCamera.GetCinemachineComponent<CinemachineTransposer>();
@@ -27,9 +30,14 @@ namespace TowerDefense3D
             inGameCameraOrbitalTransposer = inGameCamera.GetCinemachineComponent<CinemachineOrbitalTransposer>();
         }
 
-        private void Start()
+        private void OnEnable()
         {
-            SetupInitialCamera();
+            SetInitialCameraSettingsEvent.AddListener(SetupInitialCamera);
+        }
+
+        private void OnDisable()
+        {
+            SetInitialCameraSettingsEvent.RemoveListener(SetupInitialCamera);
         }
 
         private void Update()
@@ -99,16 +107,16 @@ namespace TowerDefense3D
             inGameCameraTransposer.m_FollowOffset = new Vector3(inGameCameraTransposer.m_FollowOffset.x, inGameCameraTransposer.m_FollowOffset.y, finalZoom);
         }
 
-        public void SetupInitialCamera()
+        public static void SetInitialCameraSettings(InitialCameraSetupSettings initialSetup)
+        {
+            SetInitialCameraSettingsEvent?.Invoke(initialSetup);
+        }
+
+        public void SetupInitialCamera(InitialCameraSetupSettings initialSetup)
         {
             cameraFollowTarget.position = initialSetup.targetPosition;
             inGameCameraTransposer.m_FollowOffset = initialSetup.cameraFollowOffset;
             inGameCameraOrbitalTransposer.m_Heading.m_Bias = initialSetup.cameraYawBias;
-        }
-
-        public void RecenterCamera()
-        {
-            SetupInitialCamera();
         }
     }
 }
