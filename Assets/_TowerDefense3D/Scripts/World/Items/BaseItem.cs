@@ -5,15 +5,28 @@ namespace TowerDefense3D
 {
     public abstract class BaseItem : MonoBehaviour, IPlaceable
     {
+        public PlaceableItemState state;
+
         private string isGhostMatParamString = "_IsGhost";
         private Renderer[] renderers;
         private List<Material> materials = new List<Material>();
 
-        private void Start()
+        protected virtual void OnEnable()
+        {
+
+        }
+
+        protected virtual void OnDisable()
+        {
+
+        }
+
+        protected virtual void Start()
         {
             renderers = GetComponentsInChildren<Renderer>();
             GetAllMaterials();
             ToggleGhostMode(true);
+            SetItemState(PlaceableItemState.GettingPlaced);
         }
 
         public virtual PlaceableItemAttributes GetItemAttributes()
@@ -28,6 +41,7 @@ namespace TowerDefense3D
 
         public virtual void Place(Vector2 coordinate)
         {
+            SetItemState(PlaceableItemState.Ready);
             ToggleGhostMode(false);
         }
 
@@ -41,6 +55,16 @@ namespace TowerDefense3D
                     mat.SetInt(isGhostMatParamString, val);
                 }
             }
+        }
+
+        public PlaceableItemState GetItemState()
+        {
+            return state;
+        }
+
+        public void SetItemState(PlaceableItemState l_state)
+        {
+            state = l_state;
         }
 
         private void GetAllMaterials()
@@ -64,5 +88,12 @@ namespace TowerDefense3D
         Weapon = 1 << 0,
         Defense = 1 << 1,
         Cosmetic = 1 << 2
+    }
+
+    public enum PlaceableItemState
+    {
+        GettingPlaced,
+        UnderConstruction,
+        Ready,
     }
 }

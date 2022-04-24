@@ -27,3 +27,5 @@ MonoBehaviour:
   attackRadius: 7
   maxHealth: 200
   fireRate: 20
+  trackTargetSpeed: 5
+  rotationAxis: {x: 1, y: 1}

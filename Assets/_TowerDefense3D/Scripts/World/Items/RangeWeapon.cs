@@ -8,35 +8,42 @@ namespace TowerDefense3D
     public abstract class RangeWeapon : WeaponItem
     {
         public RangeWeaponAttributes itemAttributes;
-        public AmmoAttributes ammo;
         public AttackRadiusTrigger attackRadiusObject;
         public LayerMask enemyLayer;
+        
+        public Transform weaponYawRoot;
+        public Transform weaponPitchRoot;
+        public Transform[] muzzles;
 
         private SphereCollider attackRadiusCollider;
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
+            base.OnEnable();
             attackRadiusObject.OnObjectEnterRadius.AddListener(OnObjectEnterAttackRadius);
             attackRadiusObject.OnObjectExitRadius.AddListener(OnObjectExitAttackRadius);
         }
 
-        private void OnDisable()
+        protected override void OnDisable()
         {
+            base.OnDisable();
             attackRadiusObject.OnObjectEnterRadius.RemoveListener(OnObjectEnterAttackRadius);
             attackRadiusObject.OnObjectExitRadius.RemoveListener(OnObjectExitAttackRadius);
         }
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             InitializeAttackRadiusCollider();
+            health = itemAttributes.maxHealth;
         }
 
         private void Update()
         {
-            if (target == null)
+            if (target == null || state != PlaceableItemState.Ready)
                 return;
 
-            // chase target and fire with given fire rate
+            RotateTowardsTarget(target.GetDamageableTransform(), itemAttributes.trackTargetSpeed, itemAttributes.rotationAxis);
         }
 
         public override PlaceableItemAttributes GetItemAttributes()
@@ -92,6 +99,35 @@ namespace TowerDefense3D
             else
             {
                 target = null;
+            }
+        }
+
+        private void RotateTowardsTarget(Transform l_target, float speed, Vector2 l_rotationAxis)
+        {
+            if (l_target == null || health <= 0)
+                return;
+
+            // Yaw
+            if (l_rotationAxis.y != 0)
+            {
+                Vector3 yawRootFwd = Vector3.ProjectOnPlane(weaponYawRoot.forward, Vector3.up);
+                Vector3 dirToTargetYaw = Vector3.ProjectOnPlane(l_target.position - weaponYawRoot.position, Vector3.up);
+                float yawAngle = Vector3.SignedAngle(yawRootFwd, dirToTargetYaw, Vector3.up);
+                weaponYawRoot.Rotate(Vector3.up, yawAngle * Time.deltaTime * speed);
+            }
+
+            // Pitch
+            if (l_rotationAxis.x != 0)
+            {
+                Vector3 yawFwd = Vector3.ProjectOnPlane(weaponYawRoot.forward, Vector3.up);
+                Vector3 pitchRootFwd = weaponPitchRoot.forward;
+                Vector3 dirToTargetPitch = Vector3.ProjectOnPlane(l_target.position - weaponPitchRoot.position, weaponYawRoot.right); //Vector3.ProjectOnPlane(l_target.position - weaponPitchRoot.position, Vector3.up);
+                
+                float currentPitchAngle = Vector3.SignedAngle(yawFwd, pitchRootFwd, weaponYawRoot.right);
+                float finalPitchAngle = Vector3.SignedAngle(yawFwd, dirToTargetPitch, weaponYawRoot.right);
+                float pitchAngle = Mathf.Lerp(currentPitchAngle, finalPitchAngle, Time.deltaTime * itemAttributes.trackTargetSpeed);
+
+                weaponPitchRoot.localRotation = Quaternion.Euler(pitchAngle, weaponPitchRoot.localEulerAngles.y, 0);
             }
         }
 

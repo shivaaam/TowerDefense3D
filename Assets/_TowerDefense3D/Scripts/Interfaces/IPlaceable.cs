@@ -15,5 +15,9 @@ namespace TowerDefense3D
         public void Place(Vector2 coordinate);
 
         public void ToggleGhostMode(bool isActive);
+
+        public PlaceableItemState GetItemState();
+
+        public void SetItemState(PlaceableItemState l_state);
     }
 }
