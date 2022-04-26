@@ -26,6 +26,7 @@ MonoBehaviour:
   constructTime: 2
   attackRadius: 7
   maxHealth: 200
-  fireRate: 10
+  ammo: {fileID: 11400000, guid: b4139856847402540b7fd412b6c3a900, type: 2}
+  fireRate: 0.5
   trackTargetSpeed: 4
   rotationAxis: {x: 1, y: 1}

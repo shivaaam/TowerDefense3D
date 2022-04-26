@@ -16,5 +16,10 @@ namespace TowerDefense3D
         {
             
         }
+
+        public virtual void Attack(IDamageable l_target)
+        {
+
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace TowerDefense3D
 
         void Start()
         {
-            worldGrid = new Grid(worldGrid.rows, worldGrid.columns, worldGrid.cellSize);
+            worldGrid = new Grid(worldGrid.rows, worldGrid.columns, worldGrid.cellSize, worldGrid.origin);
 
             boxCollider = GetComponent<BoxCollider>();
             UpdateBoxColliderSize();

@@ -33,6 +33,18 @@ MonoBehaviour:
     m_Address: Building_Catapult
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: f79eaf6cb48c59540ba77c4ee8cc6827
+    m_Address: Enemy_UFO_NoWeapon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a84945ccbcb146841a842a303ecda0b6
+    m_Address: Bullet_CannonRocket
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: efcdece727424bc499aa1360af276c97
+    m_Address: Bullet_LaserCannon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 27dc8d6da581831498fe9fee5c77f8e0, type: 2}
   m_SchemaSet:

@@ -6,7 +6,7 @@ namespace TowerDefense3D
     public class RangeWeaponAttributes : WeaponItemAttributes
     {
         public AmmoAttributes ammo;
-        public int fireRate;
+        public float fireRate;
         
         [Header("Rotation")]
         public float trackTargetSpeed;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using nStation;
 using UnityEngine;
 
 namespace TowerDefense3D
@@ -16,6 +17,23 @@ namespace TowerDefense3D
         public Transform[] muzzles;
 
         private SphereCollider attackRadiusCollider;
+        private float fireInterval;
+        private float lastFireTime;
+
+        private int currentMuzzleIndex;
+
+        private Transform BulletsParent {
+            get
+            {
+                string parentObjName = "Bullets";
+                var obj = GameObject.Find(parentObjName);
+                if (obj == null)
+                {
+                    obj = new GameObject(parentObjName);
+                }
+                return obj.transform;
+            }
+        }
 
         protected override void OnEnable()
         {
@@ -36,6 +54,8 @@ namespace TowerDefense3D
             base.Start();
             InitializeAttackRadiusCollider();
             health = itemAttributes.maxHealth;
+            
+            fireInterval = itemAttributes.fireRate > 0 ? 1f / itemAttributes.fireRate : -1f;
         }
 
         private void Update()
@@ -44,6 +64,7 @@ namespace TowerDefense3D
                 return;
 
             RotateTowardsTarget(target.GetDamageableTransform(), itemAttributes.trackTargetSpeed, itemAttributes.rotationAxis);
+            FireWithInterval(fireInterval);
         }
 
         public override PlaceableItemAttributes GetItemAttributes()
@@ -121,7 +142,7 @@ namespace TowerDefense3D
             {
                 Vector3 yawFwd = Vector3.ProjectOnPlane(weaponYawRoot.forward, Vector3.up);
                 Vector3 pitchRootFwd = weaponPitchRoot.forward;
-                Vector3 dirToTargetPitch = Vector3.ProjectOnPlane(l_target.position - weaponPitchRoot.position, weaponYawRoot.right); //Vector3.ProjectOnPlane(l_target.position - weaponPitchRoot.position, Vector3.up);
+                Vector3 dirToTargetPitch = Vector3.ProjectOnPlane(l_target.position - weaponPitchRoot.position, weaponYawRoot.right);
                 
                 float currentPitchAngle = Vector3.SignedAngle(yawFwd, pitchRootFwd, weaponYawRoot.right);
                 float finalPitchAngle = Vector3.SignedAngle(yawFwd, dirToTargetPitch, weaponYawRoot.right);
@@ -131,19 +152,49 @@ namespace TowerDefense3D
             }
         }
 
+        private void FireWithInterval(float l_interval)
+        {
+            if (target == null || state != PlaceableItemState.Ready || health <= 0 || l_interval <= 0)
+                return;
+
+            if (Time.time - lastFireTime >= l_interval)
+            {
+                // fire weapon 
+                Debug.Log($"Fire --> {name}");
+                Attack(target);
+                lastFireTime = Time.time;
+            }
+        }
+
+        public override void Attack(IDamageable l_target)
+        {
+            base.Attack(l_target);
+            GameObject bulletObject = AddressableLoader.InstantiateAddressable(itemAttributes.ammo.prefab);
+            bulletObject.transform.position = muzzles[currentMuzzleIndex].transform.position;
+            bulletObject.transform.rotation = muzzles[currentMuzzleIndex].transform.rotation;
+            bulletObject.transform.SetParent(BulletsParent);
+            BaseAmmo ammo = bulletObject.GetComponent<BaseAmmo>();
+            if (ammo != null)
+            {
+                ammo.SetAttributes(itemAttributes.ammo);
+                ammo.Attack(ammo, target);
+            }
+            currentMuzzleIndex = (currentMuzzleIndex + 1) % muzzles.Length;
+        }
+
         private void OnDrawGizmos()
         {
-            // draw attack radius
-            Gizmos.color = new Color(0, 1, 1, 0.25f);
-            Gizmos.DrawSphere(transform.position, itemAttributes.attackRadius);
+            //// draw attack radius
+            //Gizmos.color = new Color(0, 1, 1, 0.25f);
+            //Gizmos.DrawSphere(transform.position, itemAttributes.attackRadius);
 
 
-            // draw gizmo on target
-            Gizmos.color = Color.red;
-            if (target != null)
-            {
-                Gizmos.DrawSphere(target.GetDamageableTransform().position, 1f);
-            }
+            //// draw gizmo on target
+            //Gizmos.color = Color.red;
+            //if (target != null)
+            //{
+            //    Gizmos.DrawSphere(target.GetDamageableTransform().position, 1f);
+            //}
         }
     }
 }

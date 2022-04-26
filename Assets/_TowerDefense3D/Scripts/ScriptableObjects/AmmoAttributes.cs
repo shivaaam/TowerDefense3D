@@ -7,8 +7,14 @@ namespace TowerDefense3D
     public class AmmoAttributes : ScriptableObject
     {
         public AssetReferenceGameObject prefab;
+        public float moveSpeed;
         public int damage;
         public float damageRadius;
         public AnimationCurve damageDistanceCurve;
+        public LayerMask damageLayer;
+        public float maxLifetime;
+        public AudioClip fireSound;
+        public AudioClip collisionSound;
+        public AssetReferenceGameObject collisionParticlesPrefab;
     }
 }

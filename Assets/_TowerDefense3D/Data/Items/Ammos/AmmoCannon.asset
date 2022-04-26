@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17b5d531d8519534bbc695b331adbbd1, type: 3}
-  m_Name: CannonAmmo
+  m_Name: AmmoCannon
   m_EditorClassIdentifier: 
   prefab:
-    m_AssetGUID: 
+    m_AssetGUID: a84945ccbcb146841a842a303ecda0b6
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  moveSpeed: 5
   damage: 200
   damageRadius: 10
   damageDistanceCurve:
@@ -43,3 +44,14 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  damageLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  maxLifetime: 2.5
+  fireSound: {fileID: 0}
+  collisionSound: {fileID: 0}
+  collisionParticlesPrefab:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

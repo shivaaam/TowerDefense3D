@@ -8,12 +8,13 @@ namespace TowerDefense3D
     {
         public override void Attack(IDamageDealer attacker, IDamageable defender)
         {
+            Debug.Log("Move bullet towards target");
             base.Attack(attacker, defender);
         }
 
-        public override void DealDamage(IDamageable defender, float damage)
+        public override void DealDamage(IDamageDealer damageDealer, IDamageable defender, float damage)
         {
-            base.DealDamage(defender, damage);
+            base.DealDamage(damageDealer, defender, damage);
         }
     }
 }

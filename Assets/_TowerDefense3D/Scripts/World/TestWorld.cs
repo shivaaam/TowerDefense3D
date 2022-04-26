@@ -23,7 +23,7 @@ namespace TowerDefense3D
 
         void Start()
         {
-            worldGrid = new Grid(16, 20, 1);
+            worldGrid = new Grid(16, 20, 1, Vector2.zero);
         }
 
         public List<PathCell> GetRandomPath(Grid grid, GridCell start, GridCell end, int complexity = 30, int coverArea = 100)

@@ -14,8 +14,9 @@ namespace TowerDefense3D
         [SerializeField] private bool drawGrid = true;
         [SerializeField] private Color gridColor = new Color(0, 1, 1, 0.25f);
 
-        public Grid(int l_rows, int l_columns, int l_size)
+        public Grid(int l_rows, int l_columns, int l_size, Vector2 l_origin)
         {
+            origin = l_origin;
             rows = l_rows;
             columns = l_columns;
             cellSize = l_size;
