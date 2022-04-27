@@ -48,7 +48,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   maxLifetime: 2.5
-  fireSound: {fileID: 0}
+  fireSound: {fileID: 8300000, guid: be9e4af9fd1f5c14aa87f08250f73d2a, type: 3}
   collisionSound: {fileID: 0}
   collisionParticlesPrefab:
     m_AssetGUID: 

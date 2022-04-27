@@ -10,7 +10,6 @@ namespace TowerDefense3D
     {
         public RangeWeaponAttributes itemAttributes;
         public AttackRadiusTrigger attackRadiusObject;
-        public LayerMask enemyLayer;
         
         public Transform weaponYawRoot;
         public Transform weaponPitchRoot;
@@ -110,7 +109,7 @@ namespace TowerDefense3D
             if (enemy == null)
                 return;
 
-            Collider[] colls = Physics.OverlapSphere(attackRadiusCollider.transform.position, attackRadiusCollider.radius, enemyLayer);
+            Collider[] colls = Physics.OverlapSphere(attackRadiusCollider.transform.position, attackRadiusCollider.radius, itemAttributes.ammo.damageLayer);
             if (colls.Length > 0)
             {
                 var nearestEnemy = colls.OrderBy(t => Vector3.Distance(t.transform.position, transform.position)).FirstOrDefault();
