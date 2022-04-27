@@ -52,6 +52,15 @@ namespace TowerDefense3D
         protected override void Start()
         {
             base.Start();
+
+            // setup audio sources
+            foreach (var muzzle in muzzles)
+            {
+                if (audioSources.Length > 0)
+                    gameObject.AddComponent<AudioSource>(audioSources[0]);
+            }
+            audioSources = GetComponents<AudioSource>();
+            
             InitializeAttackRadiusCollider();
             health = itemAttributes.maxHealth;
             
@@ -160,7 +169,6 @@ namespace TowerDefense3D
             if (Time.time - lastFireTime >= l_interval)
             {
                 // fire weapon 
-                Debug.Log($"Fire --> {name}");
                 Attack(target);
                 lastFireTime = Time.time;
             }
@@ -179,6 +187,7 @@ namespace TowerDefense3D
                 ammo.SetAttributes(itemAttributes.ammo);
                 ammo.Attack(ammo, target);
             }
+            PlayOneShotAudioClip(itemAttributes.ammo.fireSound, true);
             currentMuzzleIndex = (currentMuzzleIndex + 1) % muzzles.Length;
         }
 

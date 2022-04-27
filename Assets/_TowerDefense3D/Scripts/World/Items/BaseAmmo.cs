@@ -6,13 +6,18 @@ namespace TowerDefense3D
 {
     public abstract class BaseAmmo : MonoBehaviour, IDamageDealer
     {
+        protected AudioSource audioSource;
         protected IDamageable target;
         protected AmmoAttributes attributes;
         private Coroutine selfDestructionTimerCoroutine;
 
+        protected virtual void Start()
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+
         public virtual void Attack(IDamageDealer attacker, IDamageable defender)
         {
-            // TODO: Play fire sound
             target = defender;
 
             // start self destruct timer

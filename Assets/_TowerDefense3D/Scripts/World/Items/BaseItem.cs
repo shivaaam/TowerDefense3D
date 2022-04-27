@@ -7,9 +7,12 @@ namespace TowerDefense3D
     {
         public PlaceableItemState state;
 
+        protected AudioSource[] audioSources;
         private string isGhostMatParamString = "_IsGhost";
         private Renderer[] renderers;
         private List<Material> materials = new List<Material>();
+
+        private int currentAudioSourceIndex;
 
         protected virtual void OnEnable()
         {
@@ -23,6 +26,7 @@ namespace TowerDefense3D
 
         protected virtual void Start()
         {
+            audioSources = GetComponents<AudioSource>();
             renderers = GetComponentsInChildren<Renderer>();
             GetAllMaterials();
             ToggleGhostMode(true);
@@ -79,7 +83,16 @@ namespace TowerDefense3D
             }
         }
 
-
+        protected void PlayOneShotAudioClip(AudioClip clip, bool makeRandomChanges = false)
+        {
+            if (audioSources[currentAudioSourceIndex] != null)
+            {
+                audioSources[currentAudioSourceIndex].volume = makeRandomChanges ? Random.Range(0.85f, 1f) : 1;
+                audioSources[currentAudioSourceIndex].pitch = makeRandomChanges ? Random.Range(0.8f, 1.2f) : 1;
+                audioSources[currentAudioSourceIndex].PlayOneShot(clip);
+                currentAudioSourceIndex = (currentAudioSourceIndex + 1) % audioSources.Length;
+            }
+        }
     }
 
     public enum PlaceableItemType
