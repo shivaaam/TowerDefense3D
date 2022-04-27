@@ -17,7 +17,7 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  moveSpeed: 5
+  moveSpeed: 8
   damage: 200
   damageRadius: 10
   damageDistanceCurve:

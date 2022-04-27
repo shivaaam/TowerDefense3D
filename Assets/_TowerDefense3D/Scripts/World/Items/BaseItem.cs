@@ -85,6 +85,9 @@ namespace TowerDefense3D
 
         protected void PlayOneShotAudioClip(AudioClip clip, bool makeRandomChanges = false)
         {
+            if (clip == null)
+                return;
+
             if (audioSources[currentAudioSourceIndex] != null)
             {
                 audioSources[currentAudioSourceIndex].volume = makeRandomChanges ? Random.Range(0.85f, 1f) : 1;

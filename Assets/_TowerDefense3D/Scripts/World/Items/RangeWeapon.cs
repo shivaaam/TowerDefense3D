@@ -53,14 +53,7 @@ namespace TowerDefense3D
         {
             base.Start();
 
-            // setup audio sources
-            foreach (var muzzle in muzzles)
-            {
-                if (audioSources.Length > 0)
-                    gameObject.AddComponent<AudioSource>(audioSources[0]);
-            }
-            audioSources = GetComponents<AudioSource>();
-            
+            SetupMultipleAudioSources(muzzles.Length);
             InitializeAttackRadiusCollider();
             health = itemAttributes.maxHealth;
             
@@ -189,6 +182,28 @@ namespace TowerDefense3D
             }
             PlayOneShotAudioClip(itemAttributes.ammo.fireSound, true);
             currentMuzzleIndex = (currentMuzzleIndex + 1) % muzzles.Length;
+        }
+
+        private void SetAudioSourceSettings(AudioSource src)
+        {
+            if (audioSources.Length <= 0)
+                return;
+
+            src.maxDistance = audioSources[0].maxDistance;
+            src.spatialBlend = audioSources[0].spatialBlend;
+        }
+
+        private void SetupMultipleAudioSources(int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                if (audioSources.Length > 0)
+                {
+                    var src = gameObject.AddComponent<AudioSource>();
+                    SetAudioSourceSettings(src);
+                }
+            }
+            audioSources = GetComponents<AudioSource>();
         }
 
         private void OnDrawGizmos()

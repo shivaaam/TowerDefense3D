@@ -61,6 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c78e2a801c475e43bdaa664fcd9e598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSteeringForce: 5
 --- !u!82 &-2058219659847327102
 AudioSource:
   m_ObjectHideFlags: 0
