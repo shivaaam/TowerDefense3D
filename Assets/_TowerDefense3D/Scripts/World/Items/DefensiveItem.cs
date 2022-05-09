@@ -18,6 +18,11 @@ namespace TowerDefense3D
             return itemAttributes.type;
         }
 
+        public int GetCurrentDamageableHealth()
+        {
+            return health;
+        }
+
         public virtual void TakeDamage(int damage)
         {
             health = Mathf.Clamp(health - damage, 0, itemAttributes.maxHealth);

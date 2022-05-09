@@ -18,7 +18,7 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   moveSpeed: 30
-  damage: 50
+  damage: 15
   damageRadius: 0
   damageDistanceCurve:
     serializedVersion: 2

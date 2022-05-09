@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea02781d68f459d41aa88e239f77140a, type: 3}
   m_Name: Enemy_UFONoWeapon
   m_EditorClassIdentifier: 
-  maxHealth: 100
   movementSpeed: 2
+  steerSpeed: 1
+  lookAheadTime: 0.25
+  maxHealth: 100
   attackRate: 0
   attackDamage: 0
   attackRadius: 0

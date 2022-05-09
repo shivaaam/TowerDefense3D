@@ -94,7 +94,7 @@ namespace TowerDefense3D
         private void OnObjectEnterAttackRadius(GameObject obj)
         {
             BaseEnemy enemy = obj.GetComponent<BaseEnemy>();
-            if (enemy == null)
+            if (enemy == null || enemy.GetCurrentDamageableHealth() <= 0)
                 return;
             
             if (target == null)
@@ -106,7 +106,7 @@ namespace TowerDefense3D
         private void OnObjectExitAttackRadius(GameObject obj)
         {
             BaseEnemy enemy = obj.GetComponent<BaseEnemy>();
-            if (enemy == null)
+            if (enemy == null || enemy.GetCurrentDamageableHealth() <= 0)
                 return;
 
             Collider[] colls = Physics.OverlapSphere(attackRadiusCollider.transform.position, attackRadiusCollider.radius, itemAttributes.ammo.damageLayer);
@@ -203,6 +203,12 @@ namespace TowerDefense3D
                 }
             }
             audioSources = GetComponents<AudioSource>();
+        }
+
+        protected override void OnDamageableHealthZero(IDamageable l_damageable)
+        {
+            base.OnDamageableHealthZero(l_damageable);
+            OnObjectExitAttackRadius(l_damageable.GetDamageableTransform().gameObject);
         }
 
         private void OnDrawGizmos()

@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64d9b3c390d495046b7aa11dcb2bae3b, type: 3}
   m_Name: Enemy_Mummy
   m_EditorClassIdentifier: 
-  maxHealth: 40
   movementSpeed: 5
-  attackRate: 0.5
+  steerSpeed: 2.5
+  lookAheadTime: 0.5
+  maxHealth: 100
+  attackRate: 0
   attackDamage: 5

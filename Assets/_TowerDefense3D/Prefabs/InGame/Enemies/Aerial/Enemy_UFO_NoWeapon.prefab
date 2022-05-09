@@ -48,6 +48,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyAttributes: {fileID: 11400000, guid: d5c25c9a5c196df40b63ec0b5a7837c5, type: 2}
+  healthBar: {fileID: 0}
+  currentPath:
+    splinePath: {fileID: 0}
+    pathRadius: 0
+  radius: 2
+  currentPathFollowSettings:
+    maxMoveSpeed: 0
+    minSteerSpeed: 0
+    maxSteerSpeed: 0
+    lookAheadTime: 0
+  evadeSettings:
+    evadeObstacles: 0
+    minEvadeDistance: 0
+    maxEvadeForce: 0
 --- !u!135 &2779704591521163381
 SphereCollider:
   m_ObjectHideFlags: 0

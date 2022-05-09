@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace TowerDefense3D
 {
-    public abstract class BaseItem : MonoBehaviour, IPlaceable
+    public abstract class BaseItem : MonoBehaviour, IPlaceable, IObstacle
     {
         public PlaceableItemState state;
 
@@ -95,6 +95,21 @@ namespace TowerDefense3D
                 audioSources[currentAudioSourceIndex].PlayOneShot(clip);
                 currentAudioSourceIndex = (currentAudioSourceIndex + 1) % audioSources.Length;
             }
+        }
+
+        public Transform GetObstacleTransform()
+        {
+            return transform;
+        }
+
+        public Vector3 GetObstacleVelocity()
+        {
+            return Vector3.zero;
+        }
+
+        public float GetObstacleRadius()
+        {
+            return Mathf.Sqrt(Mathf.Pow(GetItemAttributes().size.x/2, 2) + Mathf.Pow(GetItemAttributes().size.y/2, 2));
         }
     }
 

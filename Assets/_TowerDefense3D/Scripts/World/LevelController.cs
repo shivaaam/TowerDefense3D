@@ -6,6 +6,9 @@ namespace TowerDefense3D
 {
     public class LevelController : MonoBehaviour
     {
+        public Path[] groundPaths;
+        public Path[] aerialPaths;
+
         public Grid worldGrid;
         private BoxCollider boxCollider;
 
