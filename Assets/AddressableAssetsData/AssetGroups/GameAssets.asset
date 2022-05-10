@@ -45,6 +45,10 @@ MonoBehaviour:
     m_Address: Bullet_LaserCannon
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: e6ef1aa2f008efa4cbcd297b7d9982b6
+    m_Address: Enemy_Mummy
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 27dc8d6da581831498fe9fee5c77f8e0, type: 2}
   m_SchemaSet:

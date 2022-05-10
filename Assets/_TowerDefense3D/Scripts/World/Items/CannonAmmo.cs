@@ -25,9 +25,9 @@ namespace TowerDefense3D
             isSpawned = true;
         }
 
-        public override void DealDamage(IDamageDealer damageDealer, IDamageable defender, float damage)
+        public override void DealDamage(IDamageDealer damageDealer, IDamageable defender, float damage, Vector3 hitPoint)
         {
-            base.DealDamage(damageDealer, defender, damage);
+            base.DealDamage(damageDealer, defender, damage, hitPoint);
         }
     }
 }

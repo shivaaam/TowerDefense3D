@@ -366,8 +366,8 @@ MonoBehaviour:
   radius: 0.4
   currentPathFollowSettings:
     maxMoveSpeed: 2
-    minSteerSpeed: 5
-    maxSteerSpeed: 20
+    minSteerSpeed: 0.5
+    maxSteerSpeed: 4
     lookAheadTime: 0.2
   evadeSettings:
     evadeObstacles: 1
@@ -376,6 +376,7 @@ MonoBehaviour:
       m_Bits: 384
     minEvadeDistance: 8
     maxEvadeForce: 2
+  animator: {fileID: 4629833816704777678}
 --- !u!136 &4629833817072635404
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -830,5 +831,10 @@ PrefabInstance:
 --- !u!4 &4629833816697049704 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400070, guid: 3353e4f866c39d043a315b41717c9bb7, type: 3}
+  m_PrefabInstance: {fileID: 4629833816697440430}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4629833816704777678 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: 3353e4f866c39d043a315b41717c9bb7, type: 3}
   m_PrefabInstance: {fileID: 4629833816697440430}
   m_PrefabAsset: {fileID: 0}

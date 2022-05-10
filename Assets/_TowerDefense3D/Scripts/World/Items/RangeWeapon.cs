@@ -78,7 +78,7 @@ namespace TowerDefense3D
             return itemAttributes.type;
         }
 
-        public override void TakeDamage(int damage)
+        public override void TakeDamage(int damage, Vector3 hitPoint)
         {
             health = Mathf.Clamp(health - damage, 0, itemAttributes.maxHealth);
         }

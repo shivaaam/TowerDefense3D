@@ -6,7 +6,7 @@ namespace TowerDefense3D
     {
         public void Attack(IDamageDealer attacker, IDamageable defender);
 
-        public void DealDamage(IDamageDealer damageDealer, IDamageable defender, float damage);
+        public void DealDamage(IDamageDealer damageDealer, IDamageable defender, float damage, Vector3 hitPoint);
 
         public Transform GetDamageDealerTransform();
     }

@@ -6,7 +6,7 @@ namespace TowerDefense3D
     {
         public int GetCurrentDamageableHealth();
 
-        public void TakeDamage(int damage);
+        public void TakeDamage(int damage, Vector3 hitPoint);
 
         public Transform GetDamageableTransform();
     }

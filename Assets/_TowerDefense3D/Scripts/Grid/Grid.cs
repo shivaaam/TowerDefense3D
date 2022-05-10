@@ -35,13 +35,10 @@ namespace TowerDefense3D
         {
             Vector3 localPosition = referenceTransform.InverseTransformPoint(l_position) - new Vector3(origin.x, 0, origin.y);
 
-            int column = Mathf.FloorToInt(localPosition.x / cellSize);
-            int row = Mathf.FloorToInt(localPosition.z / cellSize);
+            int column = Mathf.Clamp(Mathf.FloorToInt(localPosition.x / cellSize), 0, columns-1);
+            int row = Mathf.Clamp(Mathf.FloorToInt(localPosition.z / cellSize), 0, rows-1);
             
-            if (column < columns && row < rows)
-                return cells[row, column];
-
-            return null;
+            return cells[row, column];
         }
 
         public Vector3 GetCellLocalPosition(GridCell cell, Vector2 offset)

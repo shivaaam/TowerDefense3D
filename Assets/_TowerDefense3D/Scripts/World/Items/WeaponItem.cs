@@ -35,7 +35,7 @@ namespace TowerDefense3D
             return health;
         }
 
-        public virtual void TakeDamage(int damage)
+        public virtual void TakeDamage(int damage, Vector3 hitPoint)
         {
             
         }

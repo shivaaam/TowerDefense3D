@@ -26,9 +26,9 @@ namespace TowerDefense3D
             selfDestructionTimerCoroutine = StartCoroutine(SelfDestructionTimer(attributes.maxLifetime));
         }
 
-        public virtual void DealDamage(IDamageDealer damageDealer, IDamageable defender, float damage)
+        public virtual void DealDamage(IDamageDealer damageDealer, IDamageable defender, float damage, Vector3 hitPoint)
         {
-            defender.TakeDamage(Mathf.FloorToInt(damage));
+            defender.TakeDamage(Mathf.FloorToInt(damage), hitPoint);
         }
 
         public virtual Transform GetDamageDealerTransform()
@@ -49,9 +49,10 @@ namespace TowerDefense3D
                 if (damageable != null)
                 {
                     // deal full damage to the collided object
-                    DealDamage(this, damageable, attributes.damage);
+                    DealDamage(this, damageable, attributes.damage, l_coll.ClosestPoint(transform.position));
                     DealDamageInRadius(l_coll, attributes.damageRadius);
                     SpawnCollisionParticles(transform.position);
+                    //Destroy(gameObject);
                     AddressableLoader.DestroyAndReleaseAddressable(gameObject);
                 }
 
@@ -73,7 +74,7 @@ namespace TowerDefense3D
                             if (dmgObj != null)
                             {
                                 float distanceToCurrentDamageable = Vector3.Distance(GetDamageDealerTransform().position, dmgObj.GetDamageableTransform().position);
-                                DealDamage(this, dmgObj, attributes.damage * attributes.damageDistanceCurve.Evaluate(distanceToCurrentDamageable / dmgRadius));
+                                DealDamage(this, dmgObj, attributes.damage * attributes.damageDistanceCurve.Evaluate(distanceToCurrentDamageable / dmgRadius), l_coll.ClosestPoint(transform.position));
                             }
                         }
                     }
@@ -92,8 +93,8 @@ namespace TowerDefense3D
             yield return new WaitForSeconds(time); 
             DealDamageInRadius(null, attributes.damageRadius);
             SpawnCollisionParticles(transform.position);
+            //Destroy(gameObject);
             AddressableLoader.DestroyAndReleaseAddressable(gameObject);
-
         }
     }
 }

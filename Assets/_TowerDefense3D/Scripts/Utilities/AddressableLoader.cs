@@ -92,8 +92,6 @@ namespace nStation
             if (addressable)
             {
                 var info = assetInfos.FirstOrDefault(x => x.instanceAssets.Contains(addressable));
-
-
                 GameObject loadedOb = info.prefabAsset;
 
                 info.RemoveInstance(addressable);

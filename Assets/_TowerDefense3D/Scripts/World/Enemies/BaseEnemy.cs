@@ -19,9 +19,8 @@ namespace TowerDefense3D
         [SerializeField] protected PathFollowSettings currentPathFollowSettings;
         [SerializeField] protected EvadeSettings evadeSettings;
 
-        private Collider[] overlappedColliders = new Collider[15];
-        private Coroutine moveCoroutine;
-        private Vector3 calculatedMoveDir;
+        protected Collider[] overlappedColliders = new Collider[15];
+        protected Vector3 calculatedMoveDir;
 
         protected virtual void Start()
         {
@@ -30,79 +29,9 @@ namespace TowerDefense3D
             StartPathFollow(currentPath, currentPathFollowSettings, evadeSettings);
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             UpdateVelocity();
-            Pose orientation = new Pose(transform.forward, Quaternion.identity);
-            calculatedMoveDir = orientation.position;
-
-            // path following
-            if (isFollowingPath && currentPath.splinePath != null)
-            {
-                orientation = AutonomousAgent.FollowPath(currentPath, currentPathFollowSettings, transform.position, transform.rotation);
-                calculatedMoveDir = transform.TransformDirection(orientation.position);
-                transform.rotation = orientation.rotation;
-            }
-
-            // evade obstacle (separation)
-            if (evadeSettings.evadeObstacles/* && Time.time - lastEvadeTime >= evadeUpdateInterval*/)
-            {
-                //lastEvadeTime = Time.time;
-                Physics.OverlapSphereNonAlloc(transform.position, evadeSettings.minEvadeDistance, overlappedColliders, evadeSettings.evadeLayer);
-                if (overlappedColliders[0] != null)
-                {
-                    IObstacle[] obstacles = overlappedColliders.Where(t => t != null)
-                        ?.Select(y => y.GetComponent<IObstacle>())
-                        ?.Where(u => u != (IObstacle)this).ToArray();
-                    
-                    if (obstacles.Length > 0)
-                    {
-                        obstacles = obstacles.OrderBy(w => Vector3.Distance(transform.position, w.GetObstacleTransform().position)).ToArray();
-                        Vector3 resultantVector = AutonomousAgent.Evade(obstacles, transform.position, GetObstacleRadius());
-                        calculatedMoveDir += resultantVector * evadeSettings.maxEvadeForce;
-                    }
-                }
-            }
-            transform.Translate(calculatedMoveDir * Time.deltaTime, Space.World);
-        }
-
-        private IEnumerator MoveCoroutine(float updateInterval, float evadeUpdateInterval)
-        {
-            float lastEvadeTime = 0;
-            while (true)
-            {
-                UpdateVelocity();
-                Pose orientation = new Pose(transform.forward, Quaternion.identity);
-                calculatedMoveDir = orientation.position;
-
-                // path following
-                if (isFollowingPath && currentPath.splinePath != null)
-                {
-                    orientation = AutonomousAgent.FollowPath(currentPath, currentPathFollowSettings, transform.position, transform.rotation);
-                    calculatedMoveDir = transform.TransformDirection(orientation.position);
-                    transform.rotation = orientation.rotation;
-                }
-
-                // evade obstacle (separation)
-                if (evadeSettings.evadeObstacles && Time.time - lastEvadeTime >= evadeUpdateInterval)
-                {
-                    lastEvadeTime = Time.time;
-                    Physics.OverlapSphereNonAlloc(transform.position, evadeSettings.minEvadeDistance, overlappedColliders, evadeSettings.evadeLayer);
-                    if (overlappedColliders[0] != null)
-                    {
-                        IObstacle[] obstacles = overlappedColliders.Where(t => t != null)
-                            ?.Select(y => y.GetComponent<IObstacle>())
-                            ?.Where(u => u != (IObstacle)this).ToArray();
-
-                        if (obstacles.Length > 0)
-                        {
-                            Vector3 resultantVector = AutonomousAgent.Evade(obstacles, transform.position, GetObstacleRadius());
-                            calculatedMoveDir += resultantVector * evadeSettings.maxEvadeForce;
-                        }
-                    }
-                }
-                yield return new WaitForSeconds(updateInterval);
-            }
         }
 
         private void UpdateVelocity()
@@ -116,14 +45,18 @@ namespace TowerDefense3D
             return health;
         }
 
-        public virtual void TakeDamage(int damage)
+        public virtual void TakeDamage(int damage, Vector3 hitPoint)
         {
             health = Mathf.Clamp(health - damage, 0, enemyAttributes.maxHealth);
             if (healthBar != null)
                 healthBar.UpdateHealth(health, enemyAttributes.maxHealth);
 
-            if(health <= 0)
+            if (health <= 0)
+            {
+                Die(hitPoint);
                 GameEvents.OnDamageableDie?.Invoke(this);
+            }
+
         }
 
         public Transform GetDamageableTransform()
@@ -154,12 +87,7 @@ namespace TowerDefense3D
         {
             isFollowingPath = false;
         }
-
-        private Path FindNearestPath()
-        {
-            return new Path();
-        }
-
+        
         public Transform GetObstacleTransform()
         {
             return transform;
@@ -173,6 +101,11 @@ namespace TowerDefense3D
         public float GetObstacleRadius()
         {
             return radius;
+        }
+
+        protected virtual void Die(Vector3 hitPoint)
+        {
+            // disable all the components
         }
     }
 }

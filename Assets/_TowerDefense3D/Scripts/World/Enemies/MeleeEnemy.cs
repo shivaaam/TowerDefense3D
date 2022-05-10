@@ -11,7 +11,7 @@ namespace TowerDefense3D
 
         }
 
-        public virtual void DealDamage(IDamageDealer damageDealer, IDamageable defender, float damage)
+        public virtual void DealDamage(IDamageDealer damageDealer, IDamageable defender, float damage, Vector3 hitPoint)
         {
 
         }
