@@ -12,9 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea02781d68f459d41aa88e239f77140a, type: 3}
   m_Name: Enemy_UFONoWeapon
   m_EditorClassIdentifier: 
-  movementSpeed: 2
-  steerSpeed: 1
-  lookAheadTime: 0.25
+  category: 2
+  type: 1
+  prefab:
+    m_AssetGUID: f79eaf6cb48c59540ba77c4ee8cc6827
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  spawnHeight: 0
+  pathFollowSettings:
+    characterRadius: 0
+    maxMoveSpeed: 0
+    minSteerSpeed: 0
+    maxSteerSpeed: 0
+    lookAheadTime: 0
+  evadeSettings:
+    evadeObstacles: 0
+    evadeLayer:
+      serializedVersion: 2
+      m_Bits: 0
+    minEvadeDistance: 0
+    maxEvadeForce: 0
   maxHealth: 100
   attackRate: 0
   attackDamage: 0

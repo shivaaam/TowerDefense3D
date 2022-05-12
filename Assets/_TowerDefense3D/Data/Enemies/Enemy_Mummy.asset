@@ -12,9 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64d9b3c390d495046b7aa11dcb2bae3b, type: 3}
   m_Name: Enemy_Mummy
   m_EditorClassIdentifier: 
-  movementSpeed: 5
-  steerSpeed: 2.5
-  lookAheadTime: 0.5
+  category: 0
+  type: 0
+  prefab:
+    m_AssetGUID: e6ef1aa2f008efa4cbcd297b7d9982b6
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  spawnHeight: 0.141
+  pathFollowSettings:
+    characterRadius: 0.4
+    maxMoveSpeed: 2
+    minSteerSpeed: 0.5
+    maxSteerSpeed: 4
+    lookAheadTime: 0.2
+  evadeSettings:
+    evadeObstacles: 1
+    evadeLayer:
+      serializedVersion: 2
+      m_Bits: 384
+    minEvadeDistance: 8
+    maxEvadeForce: 2
   maxHealth: 100
   attackRate: 0
   attackDamage: 5

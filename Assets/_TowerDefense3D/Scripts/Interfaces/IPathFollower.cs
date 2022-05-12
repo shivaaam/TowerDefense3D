@@ -9,6 +9,8 @@ namespace TowerDefense3D
     {
         public void SetFollowPath(Path l_path);
 
+        public void SetPathFollowSettings(PathFollowSettings followSettings);
+
         public Path GetFollowPath();
 
         public void StartPathFollow(Path path, PathFollowSettings followSettings, EvadeSettings evadeSettings);
@@ -21,6 +23,7 @@ namespace TowerDefense3D
     [System.Serializable]
     public struct PathFollowSettings
     {
+        public float characterRadius;
         public float maxMoveSpeed;
         public float minSteerSpeed;
         public float maxSteerSpeed;

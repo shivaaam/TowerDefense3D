@@ -1,13 +1,16 @@
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace TowerDefense3D
 {
     public class EnemyAttributes : ScriptableObject
     {
-        [Header("Path Follow settings")]
-        public float movementSpeed;
-        public float steerSpeed;
-        public float lookAheadTime;
+        public EnemyCategory category;
+        public EnemyType type;
+        public AssetReferenceGameObject prefab;
+        public float spawnHeight;
+        public PathFollowSettings pathFollowSettings;
+        public EvadeSettings evadeSettings;
         [Header("Other settings")]
         public int maxHealth;
         public float attackRate;

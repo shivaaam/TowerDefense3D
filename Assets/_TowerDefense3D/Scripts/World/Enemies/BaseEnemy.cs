@@ -12,7 +12,6 @@ namespace TowerDefense3D
         protected bool isFollowingPath;
         [SerializeField] protected Healthbar healthBar;
         [SerializeField] protected Path currentPath;
-        [SerializeField] protected float radius;
         protected int health;
         protected Vector3 velocity;
 
@@ -69,6 +68,16 @@ namespace TowerDefense3D
             currentPath = l_path;
         }
 
+        public void SetPathFollowSettings(PathFollowSettings followSettings)
+        {
+            currentPathFollowSettings = followSettings;
+        }
+
+        public void SetEvadeSettings(EvadeSettings l_settings)
+        {
+            evadeSettings = l_settings;
+        }
+
         public Path GetFollowPath()
         {
             return currentPath;
@@ -100,7 +109,7 @@ namespace TowerDefense3D
 
         public float GetObstacleRadius()
         {
-            return radius;
+            return enemyAttributes.pathFollowSettings.characterRadius;
         }
 
         protected virtual void Die(Vector3 hitPoint)

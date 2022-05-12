@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace nStation
+namespace TowerDefense3D
 {
     public static class AddressableLoader
     {
