@@ -9,5 +9,7 @@ namespace TowerDefense3D
         public void TakeDamage(int damage, Vector3 hitPoint);
 
         public Transform GetDamageableTransform();
+
+        public Vector3 GetDamageableVelocity();
     }
 }

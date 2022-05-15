@@ -5,6 +5,7 @@ namespace TowerDefense3D
 {
     public abstract class BaseItem : MonoBehaviour, IPlaceable, IObstacle
     {
+        [SerializeField] protected PlaceableItemAttributes itemAttributes;
         public PlaceableItemState state;
 
         protected AudioSource[] audioSources;

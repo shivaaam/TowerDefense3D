@@ -12,10 +12,12 @@ namespace TowerDefense3D
         private Vector3 previousPosition;
         protected bool isFollowingPath;
         protected Collider collider;
+        [SerializeField] protected PerceptionTrigger perceptionTrigger;
         [SerializeField] protected Healthbar healthBar;
         [SerializeField] protected Path currentPath;
         protected int health;
         protected Vector3 velocity;
+        protected float minMoveThreshold = 0.3f;
 
         [SerializeField] protected PathFollowSettings currentPathFollowSettings;
         [SerializeField] protected EvadeSettings evadeSettings;
@@ -24,10 +26,33 @@ namespace TowerDefense3D
         protected Vector3 calculatedMoveDir;
 
         private Coroutine buryCoroutine;
+        protected IDamageable target;
+        protected EnemyStates currentState;
+
+        protected virtual void OnEnable()
+        {
+            if (perceptionTrigger)
+            {
+                perceptionTrigger.OnItemEnterRadius.AddListener(OnItemEnterRadius);
+                perceptionTrigger.OnItemExitRadius.AddListener(OnItemExitRadius);
+            }
+        }
+
+        protected virtual void OnDisable()
+        {
+            if (perceptionTrigger)
+            {
+                perceptionTrigger.OnItemEnterRadius.RemoveListener(OnItemEnterRadius);
+                perceptionTrigger.OnItemExitRadius.RemoveListener(OnItemExitRadius);
+            }
+        }
 
         protected virtual void Start()
         {
             collider = GetComponent<Collider>();
+            previousPosition = transform.position;
+            if(perceptionTrigger && enemyAttributes.perceptionRadius > 0)
+                perceptionTrigger.SetRadius(enemyAttributes.perceptionRadius);
         }
 
         protected virtual void Update()
@@ -37,7 +62,7 @@ namespace TowerDefense3D
 
         private void UpdateVelocity()
         {
-            velocity = (transform.position - previousPosition) * Time.deltaTime;
+            velocity = (transform.position - previousPosition) / Time.deltaTime;
             previousPosition = transform.position;
         }
 
@@ -63,6 +88,12 @@ namespace TowerDefense3D
         public Transform GetDamageableTransform()
         {
             return transform;
+        }
+
+        public Vector3 GetDamageableVelocity()
+        {
+            Debug.Log($"velocity: {velocity}");
+            return velocity;
         }
 
         public void SetFollowPath(Path l_path)
@@ -152,5 +183,46 @@ namespace TowerDefense3D
             yield return new WaitForSeconds(animationTime);
             AddressableLoader.DestroyAndReleaseAddressable(gameObject);
         }
+
+        public void SetState(EnemyStates l_state)
+        {
+            currentState = l_state;
+        }
+
+        public void SetTarget(IDamageable l_target)
+        {
+            target = l_target;
+            OnSetTarget(l_target);
+        }
+
+        private void OnSetTarget(IDamageable l_target)
+        {
+            if (l_target == null)
+                SetState(EnemyStates.Moving);
+        }
+
+        private void OnItemEnterRadius(BaseItem item)
+        {
+            if (item is IDamageable damageable)
+            {
+                GameEvents.OnItemEnterEnemyRadius?.Invoke(damageable, this);
+            }
+
+        }
+
+        private void OnItemExitRadius(BaseItem item)
+        {
+            if (item is IDamageable damageable)
+            {
+                GameEvents.OnItemExitEnemyRadius?.Invoke(damageable, this);
+            }
+
+        }
+    }
+
+    public enum EnemyStates
+    {
+        Moving,
+        Attacking
     }
 }

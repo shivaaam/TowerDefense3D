@@ -68,8 +68,9 @@ namespace TowerDefense3D
             ToggleButtonInteractable(true);
         }
 
-        private void OnPlaceSelectedItem(PlaceableItemAttributes l_att)
+        private void OnPlaceSelectedItem(BaseItem item)
         {
+            var l_att = item.GetItemAttributes();
             if (l_att != null && l_att.id == attributes.id)
             {
                 ToggleButtonInteractable(false);

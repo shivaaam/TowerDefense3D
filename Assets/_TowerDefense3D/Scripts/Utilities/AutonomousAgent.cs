@@ -14,8 +14,12 @@ namespace TowerDefense3D
                 {
                     if (obstacle != null)
                     {
-                        obstaclesCount += 1;
-                        resultantVector += Evade(obstacle, currentPosition);
+                        float heightDifference = Mathf.Abs(currentPosition.y - obstacle.GetObstacleTransform().position.y);
+                        if (heightDifference < vehicleRadius * 2)
+                        {
+                            obstaclesCount += 1;
+                            resultantVector += Evade(obstacle, currentPosition);
+                        }
                     }
                 }
                 if (obstaclesCount > 0)

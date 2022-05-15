@@ -124,10 +124,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnArea: {fileID: 1115708628}
   enemyPrefabsDictionary:
-    m_keys: 0000000002000000
+    m_keys: 000000000200000001000000
     m_values:
     - {fileID: 11400000, guid: 1baf90077d9709d41a3c4fa536ed7529, type: 2}
     - {fileID: 11400000, guid: d5c25c9a5c196df40b63ec0b5a7837c5, type: 2}
+    - {fileID: 11400000, guid: 095444c3669248742802952be23d9ce8, type: 2}
   groundPaths:
   - splinePath: {fileID: 0}
     pathRadius: 0.65

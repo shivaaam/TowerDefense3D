@@ -32,5 +32,10 @@ namespace TowerDefense3D
         {
             return transform;
         }
+
+        public Vector3 GetDamageableVelocity()
+        {
+            return Vector3.zero;
+        }
     }
 }

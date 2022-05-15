@@ -67,7 +67,7 @@ namespace TowerDefense3D
             lastSelectedItemPlacedTime = Time.time;
             currentSelectedItem.Place(placementMarker.Marker.position);
             AddToPlacedItems(currentSelectedItem);
-            GameEvents.OnPlaceSelectedItem?.Invoke(currentSelectedItem.GetItemAttributes());
+            GameEvents.OnPlaceSelectedItem?.Invoke(currentSelectedItem);
             currentSelectedItem = null;
         
             // get another item instance to place

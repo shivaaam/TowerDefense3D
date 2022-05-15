@@ -24,9 +24,10 @@ MonoBehaviour:
   cooldownTime: 10
   icon: {fileID: 21300000, guid: 8c2f039e1cf0de4439794dab9534954b, type: 3}
   constructTime: 2
+  lookAheadFactor: 0.25
   attackRadius: 7
   maxHealth: 200
   ammo: {fileID: 11400000, guid: d420fd862274f454f847c4f2080f42ce, type: 2}
   fireRate: 3.5
-  trackTargetSpeed: 5
+  trackTargetSpeed: 10
   rotationAxis: {x: 0, y: 1}

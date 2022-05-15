@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d9b3c390d495046b7aa11dcb2bae3b, type: 3}
+  m_Name: Enemy_Spider
+  m_EditorClassIdentifier: 
+  category: 1
+  type: 0
+  prefab:
+    m_AssetGUID: 613be0695018b48439f21940388dbf62
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  spawnHeight: 0.159
+  pathFollowSettings:
+    characterRadius: 0.6
+    maxMoveSpeed: 4
+    minSteerSpeed: 2
+    maxSteerSpeed: 8
+    lookAheadTime: 0.2
+  evadeSettings:
+    evadeObstacles: 1
+    evadeLayer:
+      serializedVersion: 2
+      m_Bits: 384
+    minEvadeDistance: 8
+    maxEvadeForce: 2
+  maxHealth: 150
+  perceptionRadius: 3
+  attackRate: 0
+  attackDamage: 0

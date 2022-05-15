@@ -107,6 +107,12 @@ namespace TowerDefense3D
         {
             SpawnEnemy(EnemyCategory.AerialUfoWithoutWeapons);
         }
+
+        [ContextMenu("Spawn Spider")]
+        public void SpawnKaroSpider()
+        {
+            SpawnEnemy(EnemyCategory.GroundSpider);
+        }
 #endif
     }
 

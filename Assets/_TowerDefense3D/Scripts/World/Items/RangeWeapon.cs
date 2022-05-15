@@ -7,7 +7,7 @@ namespace TowerDefense3D
 {
     public abstract class RangeWeapon : WeaponItem
     {
-        public RangeWeaponAttributes itemAttributes;
+        public RangeWeaponAttributes Attributes => itemAttributes as RangeWeaponAttributes;
         public AttackRadiusTrigger attackRadiusObject;
         
         public Transform weaponYawRoot;
@@ -53,9 +53,9 @@ namespace TowerDefense3D
 
             SetupMultipleAudioSources(muzzles.Length);
             InitializeAttackRadiusCollider();
-            health = itemAttributes.maxHealth;
+            health = Attributes.maxHealth;
             
-            fireInterval = itemAttributes.fireRate > 0 ? 1f / itemAttributes.fireRate : -1f;
+            fireInterval = Attributes.fireRate > 0 ? 1f / Attributes.fireRate : -1f;
         }
 
         private void Update()
@@ -63,7 +63,8 @@ namespace TowerDefense3D
             if (target == null || state != PlaceableItemState.Ready)
                 return;
 
-            RotateTowardsTarget(target.GetDamageableTransform(), itemAttributes.trackTargetSpeed, itemAttributes.rotationAxis);
+            Vector3 predictedPos = target.GetDamageableTransform().position + target.GetDamageableVelocity() * (Attributes.lookAheadFactor > 0 ? Attributes.lookAheadFactor : 1);
+            RotateTowardsTarget(predictedPos, Attributes.trackTargetSpeed, Attributes.rotationAxis);
             FireWithInterval(fireInterval);
         }
 
@@ -77,17 +78,12 @@ namespace TowerDefense3D
             return itemAttributes.type;
         }
 
-        public override void TakeDamage(int damage, Vector3 hitPoint)
-        {
-            health = Mathf.Clamp(health - damage, 0, itemAttributes.maxHealth);
-        }
-
         private void InitializeAttackRadiusCollider()
         {
             attackRadiusCollider = attackRadiusObject.GetComponent<SphereCollider>();
 
             if (attackRadiusCollider != null)
-                attackRadiusCollider.radius = itemAttributes.attackRadius;
+                attackRadiusCollider.radius = Attributes.attackRadius;
         }
 
         private void OnObjectEnterAttackRadius(GameObject obj)
@@ -108,7 +104,7 @@ namespace TowerDefense3D
             if (enemy == null || enemy.GetCurrentDamageableHealth() <= 0)
                 return;
 
-            Collider[] colls = Physics.OverlapSphere(attackRadiusCollider.transform.position, attackRadiusCollider.radius, itemAttributes.ammo.damageLayer);
+            Collider[] colls = Physics.OverlapSphere(attackRadiusCollider.transform.position, attackRadiusCollider.radius, Attributes.ammo.damageLayer);
             if (colls.Length > 0)
             {
                 var nearestEnemy = colls.OrderBy(t => Vector3.Distance(t.transform.position, transform.position)).FirstOrDefault();
@@ -123,16 +119,16 @@ namespace TowerDefense3D
             }
         }
 
-        private void RotateTowardsTarget(Transform l_target, float speed, Vector2 l_rotationAxis)
+        private void RotateTowardsTarget(Vector3 l_targetPos, float speed, Vector2 l_rotationAxis)
         {
-            if (l_target == null || health <= 0)
+            if (health <= 0)
                 return;
 
             // Yaw
             if (l_rotationAxis.y != 0)
             {
                 Vector3 yawRootFwd = Vector3.ProjectOnPlane(weaponYawRoot.forward, Vector3.up);
-                Vector3 dirToTargetYaw = Vector3.ProjectOnPlane(l_target.position - weaponYawRoot.position, Vector3.up);
+                Vector3 dirToTargetYaw = Vector3.ProjectOnPlane(l_targetPos - weaponYawRoot.position, Vector3.up);
                 float yawAngle = Vector3.SignedAngle(yawRootFwd, dirToTargetYaw, Vector3.up);
                 weaponYawRoot.Rotate(Vector3.up, yawAngle * Time.deltaTime * speed);
             }
@@ -142,11 +138,11 @@ namespace TowerDefense3D
             {
                 Vector3 yawFwd = Vector3.ProjectOnPlane(weaponYawRoot.forward, Vector3.up);
                 Vector3 pitchRootFwd = weaponPitchRoot.forward;
-                Vector3 dirToTargetPitch = Vector3.ProjectOnPlane(l_target.position - weaponPitchRoot.position, weaponYawRoot.right);
+                Vector3 dirToTargetPitch = Vector3.ProjectOnPlane(l_targetPos - weaponPitchRoot.position, weaponYawRoot.right);
                 
                 float currentPitchAngle = Vector3.SignedAngle(yawFwd, pitchRootFwd, weaponYawRoot.right);
                 float finalPitchAngle = Vector3.SignedAngle(yawFwd, dirToTargetPitch, weaponYawRoot.right);
-                float pitchAngle = Mathf.Lerp(currentPitchAngle, finalPitchAngle, Time.deltaTime * itemAttributes.trackTargetSpeed);
+                float pitchAngle = Mathf.Lerp(currentPitchAngle, finalPitchAngle, Time.deltaTime * Attributes.trackTargetSpeed);
 
                 weaponPitchRoot.localRotation = Quaternion.Euler(pitchAngle, weaponPitchRoot.localEulerAngles.y, 0);
             }
@@ -168,17 +164,17 @@ namespace TowerDefense3D
         public override void Attack(IDamageable l_target)
         {
             base.Attack(l_target);
-            GameObject bulletObject = AddressableLoader.InstantiateAddressable(itemAttributes.ammo.prefab);
+            GameObject bulletObject = AddressableLoader.InstantiateAddressable(Attributes.ammo.prefab);
             bulletObject.transform.position = muzzles[currentMuzzleIndex].transform.position;
             bulletObject.transform.rotation = muzzles[currentMuzzleIndex].transform.rotation;
             bulletObject.transform.SetParent(BulletsParent);
             BaseAmmo ammo = bulletObject.GetComponent<BaseAmmo>();
             if (ammo != null)
             {
-                ammo.SetAttributes(itemAttributes.ammo);
+                ammo.SetAttributes(Attributes.ammo);
                 ammo.Attack(ammo, target);
             }
-            PlayOneShotAudioClip(itemAttributes.ammo.fireSound, true);
+            PlayOneShotAudioClip(Attributes.ammo.fireSound, true);
             currentMuzzleIndex = (currentMuzzleIndex + 1) % muzzles.Length;
         }
 

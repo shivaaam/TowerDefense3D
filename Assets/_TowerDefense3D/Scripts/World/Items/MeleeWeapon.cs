@@ -6,6 +6,6 @@ namespace TowerDefense3D
 {
     public abstract class MeleeWeapon : WeaponItem
     {
-        public MeleeWeaponAttributes itemAttributes;
+        public MeleeWeaponAttributes Attributes => itemAttributes as MeleeWeaponAttributes; 
     }
 }

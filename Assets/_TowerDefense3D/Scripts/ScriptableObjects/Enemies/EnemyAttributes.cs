@@ -13,6 +13,8 @@ namespace TowerDefense3D
         public EvadeSettings evadeSettings;
         [Header("Other settings")]
         public int maxHealth;
+
+        public float perceptionRadius;
         public float attackRate;
         public float attackDamage;
     }
