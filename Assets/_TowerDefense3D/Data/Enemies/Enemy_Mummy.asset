@@ -24,7 +24,7 @@ MonoBehaviour:
     characterRadius: 0.4
     maxMoveSpeed: 2
     minSteerSpeed: 0.5
-    maxSteerSpeed: 4
+    maxSteerSpeed: 5
     lookAheadTime: 0.2
   evadeSettings:
     evadeObstacles: 1
@@ -35,4 +35,4 @@ MonoBehaviour:
     maxEvadeForce: 2
   maxHealth: 100
   attackRate: 0
-  attackDamage: 5
+  attackDamage: 0

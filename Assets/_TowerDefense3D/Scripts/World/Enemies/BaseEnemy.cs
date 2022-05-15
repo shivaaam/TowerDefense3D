@@ -2,6 +2,7 @@ using System.Collections;
 using System.Linq;
 using BezierSolution;
 using UnityEngine;
+using UnityEngine.Video;
 
 namespace TowerDefense3D
 {
@@ -10,6 +11,7 @@ namespace TowerDefense3D
         [SerializeField] protected EnemyAttributes enemyAttributes;
         private Vector3 previousPosition;
         protected bool isFollowingPath;
+        protected Collider collider;
         [SerializeField] protected Healthbar healthBar;
         [SerializeField] protected Path currentPath;
         protected int health;
@@ -21,11 +23,11 @@ namespace TowerDefense3D
         protected Collider[] overlappedColliders = new Collider[15];
         protected Vector3 calculatedMoveDir;
 
+        private Coroutine buryCoroutine;
+
         protected virtual void Start()
         {
-            health = enemyAttributes.maxHealth;
-            SetFollowPath(currentPath);
-            StartPathFollow(currentPath, currentPathFollowSettings, evadeSettings);
+            collider = GetComponent<Collider>();
         }
 
         protected virtual void Update()
@@ -96,7 +98,12 @@ namespace TowerDefense3D
         {
             isFollowingPath = false;
         }
-        
+
+        public void SetHealth(int l_health)
+        {
+            health = l_health;
+        }
+
         public Transform GetObstacleTransform()
         {
             return transform;
@@ -115,6 +122,35 @@ namespace TowerDefense3D
         protected virtual void Die(Vector3 hitPoint)
         {
             // disable all the components
+            collider.enabled = false;
+            BuryInGround(5f);
+        }
+
+
+        public void BuryInGround(float delayTime)
+        {
+            if(buryCoroutine != null)
+                StopCoroutine(buryCoroutine);
+            buryCoroutine = StartCoroutine(BuryCorouitine(delayTime));
+        }
+
+        private IEnumerator BuryCorouitine(float delayTime)
+        {
+            yield return new WaitForSeconds(delayTime);
+            float animationTime = 1f;
+            float timeElapsed = 0f;
+            float initY = transform.position.y;
+            float yOffset = 2f;
+            while (timeElapsed < animationTime)
+            {
+                float y = Mathf.Lerp(initY, initY-yOffset, timeElapsed / animationTime);
+                transform.position = new Vector3(transform.position.x, y, transform.position.z);
+                timeElapsed += Time.deltaTime;
+                yield return null; 
+            }
+
+            yield return new WaitForSeconds(animationTime);
+            AddressableLoader.DestroyAndReleaseAddressable(gameObject);
         }
     }
 }

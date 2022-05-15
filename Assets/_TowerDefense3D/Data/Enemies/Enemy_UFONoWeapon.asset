@@ -19,20 +19,20 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  spawnHeight: 0
+  spawnHeight: 2.16
   pathFollowSettings:
-    characterRadius: 0
-    maxMoveSpeed: 0
-    minSteerSpeed: 0
-    maxSteerSpeed: 0
-    lookAheadTime: 0
+    characterRadius: 0.4
+    maxMoveSpeed: 2
+    minSteerSpeed: 0.5
+    maxSteerSpeed: 4
+    lookAheadTime: 0.2
   evadeSettings:
-    evadeObstacles: 0
+    evadeObstacles: 1
     evadeLayer:
       serializedVersion: 2
-      m_Bits: 0
-    minEvadeDistance: 0
-    maxEvadeForce: 0
+      m_Bits: 384
+    minEvadeDistance: 8
+    maxEvadeForce: 2
   maxHealth: 100
   attackRate: 0
   attackDamage: 0

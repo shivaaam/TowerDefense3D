@@ -56,11 +56,15 @@ namespace TowerDefense3D
             int rngPathIndex = Random.Range(0, selectedPathsList.Length);
 
             // set path settings
-            enemyComponent.SetPathFollowSettings(GetRandomPathFollowingSettings(selectedAttributes.pathFollowSettings, pathFollowRandomFactor));
+            var followSettings = GetRandomPathFollowingSettings(selectedAttributes.pathFollowSettings, pathFollowRandomFactor);
+            enemyComponent.SetPathFollowSettings(followSettings);
             enemyComponent.SetFollowPath(selectedPathsList[rngPathIndex]);
 
             // set evade settings
             enemyComponent.SetEvadeSettings(selectedAttributes.evadeSettings);
+            enemyComponent.StartPathFollow(selectedPathsList[rngPathIndex], followSettings, selectedAttributes.evadeSettings);
+
+            enemyComponent.SetHealth(selectedAttributes.maxHealth);
         }
 
         private PathFollowSettings GetRandomPathFollowingSettings(PathFollowSettings l_pathFollowSettings, float l_randomFactor)
@@ -96,6 +100,12 @@ namespace TowerDefense3D
         public void SpawnKaroMummy()
         {
             SpawnEnemy(EnemyCategory.GroundMummy);
+        }
+
+        [ContextMenu("Spawn UFO")]
+        public void SpawnKaroUFO()
+        {
+            SpawnEnemy(EnemyCategory.AerialUfoWithoutWeapons);
         }
 #endif
     }
