@@ -11,7 +11,7 @@ namespace TowerDefense3D
 
         }
 
-        public virtual void DealDamage(IDamageDealer damageDealer, IDamageable defender, float damage, Vector3 hitPoint)
+        public virtual void DealDamage(IDamageDealer damageDealer, IDamageable defender, int damage, Vector3 hitPoint)
         {
 
         }
@@ -20,5 +20,7 @@ namespace TowerDefense3D
         {
             return transform;
         }
+
+        public float LastAttackTime { get; set; }
     }
 }

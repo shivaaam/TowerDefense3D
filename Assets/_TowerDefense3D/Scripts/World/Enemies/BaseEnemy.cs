@@ -92,7 +92,6 @@ namespace TowerDefense3D
 
         public Vector3 GetDamageableVelocity()
         {
-            Debug.Log($"velocity: {velocity}");
             return velocity;
         }
 

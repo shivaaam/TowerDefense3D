@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 namespace TowerDefense3D
@@ -50,6 +49,7 @@ namespace TowerDefense3D
                     if (!enemiesOnItemDictionary[damageable].Contains(enemy))
                     {
                         enemiesOnItemDictionary[damageable].Add(enemy);
+                        enemy.SetTarget(damageable);
                         enemy.SetState(EnemyStates.Attacking);
                     }
                 }

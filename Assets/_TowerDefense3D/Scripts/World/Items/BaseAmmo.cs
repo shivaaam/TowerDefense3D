@@ -25,7 +25,7 @@ namespace TowerDefense3D
             selfDestructionTimerCoroutine = StartCoroutine(SelfDestructionTimer(attributes.maxLifetime));
         }
 
-        public virtual void DealDamage(IDamageDealer damageDealer, IDamageable defender, float damage, Vector3 hitPoint)
+        public virtual void DealDamage(IDamageDealer damageDealer, IDamageable defender, int damage, Vector3 hitPoint)
         {
             defender.TakeDamage(Mathf.FloorToInt(damage), hitPoint);
         }
@@ -34,6 +34,8 @@ namespace TowerDefense3D
         {
             return transform;
         }
+
+        public float LastAttackTime { get; set; }
 
         public void SetAttributes(AmmoAttributes l_att)
         {
@@ -73,7 +75,7 @@ namespace TowerDefense3D
                             if (dmgObj != null)
                             {
                                 float distanceToCurrentDamageable = Vector3.Distance(GetDamageDealerTransform().position, dmgObj.GetDamageableTransform().position);
-                                DealDamage(this, dmgObj, attributes.damage * attributes.damageDistanceCurve.Evaluate(distanceToCurrentDamageable / dmgRadius), l_coll.ClosestPoint(transform.position));
+                                DealDamage(this, dmgObj, Mathf.CeilToInt(attributes.damage * attributes.damageDistanceCurve.Evaluate(distanceToCurrentDamageable / dmgRadius)), l_coll.ClosestPoint(transform.position));
                             }
                         }
                     }

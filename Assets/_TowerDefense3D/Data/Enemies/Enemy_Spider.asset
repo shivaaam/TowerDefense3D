@@ -35,5 +35,6 @@ MonoBehaviour:
     maxEvadeForce: 2
   maxHealth: 150
   perceptionRadius: 3
-  attackRate: 0
-  attackDamage: 0
+  attackRate: 1
+  attackDamage: 4
+  attackDistance: 1.2

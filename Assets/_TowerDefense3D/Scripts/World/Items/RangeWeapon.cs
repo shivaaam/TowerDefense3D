@@ -65,7 +65,7 @@ namespace TowerDefense3D
 
             Vector3 predictedPos = target.GetDamageableTransform().position + target.GetDamageableVelocity() * (Attributes.lookAheadFactor > 0 ? Attributes.lookAheadFactor : 1);
             RotateTowardsTarget(predictedPos, Attributes.trackTargetSpeed, Attributes.rotationAxis);
-            FireWithInterval(fireInterval);
+            //FireWithInterval(fireInterval);
         }
 
         public override PlaceableItemAttributes GetItemAttributes()

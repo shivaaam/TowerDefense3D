@@ -13,5 +13,7 @@ namespace TowerDefense3D
         public const float minEnemyMoveSpeed = 0.65f;
         public const float maxEnemyMoveSpeed = 6f;
         public const float maxEnemyLookAheadOffset = 3f;
+
+        public const string animationEvent_AttackHit = "AttackHit";
     }
 }

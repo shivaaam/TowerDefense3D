@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using UnityEngine;
 
 namespace TowerDefense3D
@@ -47,11 +48,19 @@ namespace TowerDefense3D
             health = Mathf.Clamp(health - damage, 0, Attributes.maxHealth);
             if (healthBar != null)
                 healthBar.UpdateHealth(health, Attributes.maxHealth);
+            if(health <= 0)
+                DestroyItem();
         }
 
         public virtual void Attack(IDamageable l_target)
         {
 
+        }
+
+        public virtual void DestroyItem()
+        {
+            GameEvents.OnDamageableDie?.Invoke(this);
+            AddressableLoader.DestroyAndReleaseAddressable(gameObject);
         }
     }
 }

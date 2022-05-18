@@ -16,6 +16,7 @@ namespace TowerDefense3D
 
         public float perceptionRadius;
         public float attackRate;
-        public float attackDamage;
+        public int attackDamage;
+        public float attackDistance;
     }
 }
