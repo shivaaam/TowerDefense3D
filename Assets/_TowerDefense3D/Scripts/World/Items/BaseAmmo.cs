@@ -75,7 +75,7 @@ namespace TowerDefense3D
                             if (dmgObj != null)
                             {
                                 float distanceToCurrentDamageable = Vector3.Distance(GetDamageDealerTransform().position, dmgObj.GetDamageableTransform().position);
-                                DealDamage(this, dmgObj, Mathf.CeilToInt(attributes.damage * attributes.damageDistanceCurve.Evaluate(distanceToCurrentDamageable / dmgRadius)), l_coll.ClosestPoint(transform.position));
+                                DealDamage(this, dmgObj, Mathf.CeilToInt(attributes.damage * attributes.damageDistanceCurve.Evaluate(distanceToCurrentDamageable / dmgRadius)), l_coll != null ? l_coll.ClosestPoint(transform.position) : transform.position);
                             }
                         }
                     }

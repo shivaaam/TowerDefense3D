@@ -65,7 +65,7 @@ namespace TowerDefense3D
 
             Vector3 predictedPos = target.GetDamageableTransform().position + target.GetDamageableVelocity() * (Attributes.lookAheadFactor > 0 ? Attributes.lookAheadFactor : 1);
             RotateTowardsTarget(predictedPos, Attributes.trackTargetSpeed, Attributes.rotationAxis);
-            //FireWithInterval(fireInterval);
+            FireWithInterval(fireInterval);
         }
 
         public override PlaceableItemAttributes GetItemAttributes()
@@ -143,6 +143,7 @@ namespace TowerDefense3D
                 float currentPitchAngle = Vector3.SignedAngle(yawFwd, pitchRootFwd, weaponYawRoot.right);
                 float finalPitchAngle = Vector3.SignedAngle(yawFwd, dirToTargetPitch, weaponYawRoot.right);
                 float pitchAngle = Mathf.Lerp(currentPitchAngle, finalPitchAngle, Time.deltaTime * Attributes.trackTargetSpeed);
+                pitchAngle = Mathf.Clamp(pitchAngle, -90, 0); // do not pitch towards ground
 
                 weaponPitchRoot.localRotation = Quaternion.Euler(pitchAngle, weaponPitchRoot.localEulerAngles.y, 0);
             }

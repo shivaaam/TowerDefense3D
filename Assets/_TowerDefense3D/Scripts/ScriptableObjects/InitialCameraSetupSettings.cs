@@ -8,5 +8,7 @@ namespace TowerDefense3D
         public Vector3 targetPosition;
         public Vector3 cameraFollowOffset;
         public float cameraYawBias;
+        public Vector2 minCameraPanPosition;
+        public Vector2 maxCameraPanPosition;
     }
 }

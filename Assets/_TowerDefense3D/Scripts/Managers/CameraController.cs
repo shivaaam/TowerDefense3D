@@ -16,6 +16,9 @@ namespace TowerDefense3D
         private float currentCameraPitchFactor;
         private float currentCameraZoomFactor;
 
+        private Vector3 minFollowTargetPosition;
+        private Vector3 maxFollowTargetPosition;
+
         private Vector2 lastMiddleMouseHoldPosition;
 
         private static UnityEvent<InitialCameraSetupSettings> SetInitialCameraSettingsEvent = new UnityEvent<InitialCameraSetupSettings>();
@@ -71,7 +74,15 @@ namespace TowerDefense3D
         {
             Vector3 inputDirection = new Vector3(moveInput.x, 0, moveInput.y);
             Vector3 moveDirection = inGameCamera.transform.TransformDirection(inputDirection);
-            cameraFollowTarget.Translate(moveDirection.x * settings.moveSpeed * Time.deltaTime, 0, moveDirection.z * settings.moveSpeed * Time.deltaTime);
+
+            if (IsFollowTargetInPanRange())
+            {
+                cameraFollowTarget.Translate(moveDirection.x * settings.moveSpeed * Time.deltaTime, 0, moveDirection.z * settings.moveSpeed * Time.deltaTime);
+                float clampedX = Mathf.Clamp(cameraFollowTarget.position.x, minFollowTargetPosition.x, maxFollowTargetPosition.x);
+                float clampedZ = Mathf.Clamp(cameraFollowTarget.position.z, minFollowTargetPosition.z, maxFollowTargetPosition.z);
+                cameraFollowTarget.position = new Vector3(clampedX, cameraFollowTarget.position.y, clampedZ);
+            }
+
         }
 
         public void RotateCamera(Vector2 rotateInput)
@@ -117,6 +128,15 @@ namespace TowerDefense3D
             cameraFollowTarget.position = initialSetup.targetPosition;
             inGameCameraTransposer.m_FollowOffset = initialSetup.cameraFollowOffset;
             inGameCameraOrbitalTransposer.m_Heading.m_Bias = initialSetup.cameraYawBias;
+
+            minFollowTargetPosition = new Vector3(initialSetup.minCameraPanPosition.x, cameraFollowTarget.position.y, initialSetup.minCameraPanPosition.y);
+            maxFollowTargetPosition = new Vector3(initialSetup.maxCameraPanPosition.x, cameraFollowTarget.position.y, initialSetup.maxCameraPanPosition.y);
+        }
+
+        private bool IsFollowTargetInPanRange()
+        {
+            return cameraFollowTarget.position.x >= minFollowTargetPosition.x && cameraFollowTarget.position.x <= maxFollowTargetPosition.x &&
+                cameraFollowTarget.position.z >= minFollowTargetPosition.z && cameraFollowTarget.position.z <= maxFollowTargetPosition.z;
         }
     }
 }

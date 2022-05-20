@@ -15,5 +15,5 @@ MonoBehaviour:
   targetPosition: {x: 9.804385, y: 0, z: 1.5954436}
   cameraFollowOffset: {x: 0, y: 14.662598, z: -32.932735}
   cameraYawBias: 25.19107
-  cameraPosition: {x: -4.941449, y: 21.857983, z: -24.785872}
-  cameraRotation: {x: 23.999996, y: 25.191065, z: -0.0000009345716}
+  minCameraPanPosition: {x: 0.2, y: -5.5}
+  maxCameraPanPosition: {x: 27, y: 17}
