@@ -13,10 +13,10 @@ namespace TowerDefense3D
             if (!isSpawned)
                 return;
 
-            Vector3 desired = (target.GetDamageableTransform().position - transform.position).normalized;
-
-            transform.Translate(Vector3.forward * attributes.moveSpeed * Time.deltaTime);
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(desired), maxSteeringForce * Time.deltaTime);
+            Vector3 predictedPos = target.GetDamageableTransform().position + target.GetDamageableVelocity() * (attributes.targetTrackingLookAheadFactor > 0 ? attributes.targetTrackingLookAheadFactor : 1);
+            Pose seekOrientation  = AutonomousAgent.Seek(predictedPos, transform.position, transform.rotation, attributes.moveSpeed, maxSteeringForce);
+            transform.rotation = seekOrientation.rotation;
+            transform.Translate(transform.TransformDirection(seekOrientation.position) * Time.deltaTime);
         }
 
         public override void Attack(IDamageDealer attacker, IDamageable defender)

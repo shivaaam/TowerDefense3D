@@ -8,6 +8,7 @@ namespace TowerDefense3D
     {
         public AssetReferenceGameObject prefab;
         public float moveSpeed;
+        public float targetTrackingLookAheadFactor;
         public int damage;
         public float damageRadius;
         public AnimationCurve damageDistanceCurve;

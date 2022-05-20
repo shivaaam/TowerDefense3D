@@ -18,6 +18,7 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   moveSpeed: 8
+  targetTrackingLookAheadFactor: 0.25
   damage: 200
   damageRadius: 10
   damageDistanceCurve:
