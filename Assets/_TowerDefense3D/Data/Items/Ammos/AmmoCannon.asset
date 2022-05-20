@@ -18,9 +18,9 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   moveSpeed: 8
-  targetTrackingLookAheadFactor: 0.25
-  damage: 200
-  damageRadius: 10
+  targetTrackingLookAheadFactor: 0.5
+  damage: 40
+  damageRadius: 6
   damageDistanceCurve:
     serializedVersion: 2
     m_Curve:
@@ -47,7 +47,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   damageLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 320
   maxLifetime: 2.5
   fireSound: {fileID: 8300000, guid: be9e4af9fd1f5c14aa87f08250f73d2a, type: 3}
   collisionSound: {fileID: 0}

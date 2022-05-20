@@ -92,15 +92,22 @@ namespace TowerDefense3D
             if (addressable)
             {
                 var info = assetInfos.FirstOrDefault(x => x.instanceAssets.Contains(addressable));
-                GameObject loadedOb = info.prefabAsset;
-
-                info.RemoveInstance(addressable);
-                MonoBehaviour.Destroy(addressable);
-
-                if (info.IsAssetEmpty())
+                if (info != null)
                 {
-                    ReleaseAddressable(loadedOb);
-                    assetInfos.Remove(info);
+                    GameObject loadedOb = info.prefabAsset;
+
+                    info.RemoveInstance(addressable);
+                    MonoBehaviour.Destroy(addressable);
+
+                    if (info.IsAssetEmpty())
+                    {
+                        ReleaseAddressable(loadedOb);
+                        assetInfos.Remove(info);
+                    }
+                }
+                else
+                {
+                    MonoBehaviour.Destroy(addressable);
                 }
             }
 

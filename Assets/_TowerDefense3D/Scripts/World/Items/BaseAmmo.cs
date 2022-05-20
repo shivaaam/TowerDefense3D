@@ -8,11 +8,13 @@ namespace TowerDefense3D
         protected AudioSource audioSource;
         protected IDamageable target;
         protected AmmoAttributes attributes;
+        protected Vector3 spawnPos;
         private Coroutine selfDestructionTimerCoroutine;
 
         protected virtual void Start()
         {
             audioSource = GetComponent<AudioSource>();
+            spawnPos = transform.position;
         }
 
         public virtual void Attack(IDamageDealer attacker, IDamageable defender)
@@ -53,10 +55,8 @@ namespace TowerDefense3D
                     DealDamage(this, damageable, attributes.damage, l_coll.ClosestPoint(transform.position));
                     DealDamageInRadius(l_coll, attributes.damageRadius);
                     SpawnCollisionParticles(transform.position);
-                    //Destroy(gameObject);
-                    AddressableLoader.DestroyAndReleaseAddressable(gameObject);
                 }
-
+                AddressableLoader.DestroyAndReleaseAddressable(gameObject);
             }
         }
 
