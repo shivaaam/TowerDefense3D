@@ -8,7 +8,7 @@ namespace TowerDefense3D
 
         public virtual void Attack(IDamageDealer attacker, IDamageable defender)
         {
-
+            LastAttackTime = Time.time;
         }
 
         public virtual void DealDamage(IDamageDealer damageDealer, IDamageable defender, int damage, Vector3 hitPoint)

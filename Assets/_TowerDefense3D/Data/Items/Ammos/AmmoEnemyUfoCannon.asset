@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b5d531d8519534bbc695b331adbbd1, type: 3}
+  m_Name: AmmoEnemyUfoCannon
+  m_EditorClassIdentifier: 
+  prefab:
+    m_AssetGUID: 51e75f5f57160c040b3130f38855aff1
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  moveSpeed: 4
+  targetTrackingLookAheadFactor: 0.5
+  damage: 20
+  damageRadius: 4
+  damageDistanceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.031467553
+      outSlope: -0.031467553
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -2.274573
+      outSlope: -2.274573
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  damageLayer:
+    serializedVersion: 2
+    m_Bits: 192
+  maxLifetime: 5
+  fireSound: {fileID: 8300000, guid: be9e4af9fd1f5c14aa87f08250f73d2a, type: 3}
+  collisionSound: {fileID: 0}
+  collisionParticlesPrefab:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

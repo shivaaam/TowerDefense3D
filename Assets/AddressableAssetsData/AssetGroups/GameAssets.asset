@@ -53,6 +53,14 @@ MonoBehaviour:
     m_Address: Enemy_Spider
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 28b6af987a7f121499b940e7ca4d16b2
+    m_Address: Enemy_UFO_Missiles
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 51e75f5f57160c040b3130f38855aff1
+    m_Address: Bullet_UFOMissile
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 27dc8d6da581831498fe9fee5c77f8e0, type: 2}
   m_SchemaSet:

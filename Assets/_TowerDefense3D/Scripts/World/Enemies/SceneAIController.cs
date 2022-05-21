@@ -61,7 +61,10 @@ namespace TowerDefense3D
             if (enemiesOnItemDictionary.ContainsKey(damageable))
             {
                 if (enemiesOnItemDictionary[damageable].Contains(enemy))
+                {
                     enemiesOnItemDictionary[damageable].Remove(enemy);
+                    enemy.SetTarget(null);
+                }
             }
         }
 
@@ -69,7 +72,6 @@ namespace TowerDefense3D
         {
             if (item is IDamageable damageable)
             {
-                // add to dictionary
                 if(!enemiesOnItemDictionary.ContainsKey(damageable))
                     enemiesOnItemDictionary.Add(damageable, new List<BaseEnemy>());
             }

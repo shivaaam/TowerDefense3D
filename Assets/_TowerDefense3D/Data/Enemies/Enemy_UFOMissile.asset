@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea02781d68f459d41aa88e239f77140a, type: 3}
-  m_Name: Enemy_UFONoWeapon
+  m_Name: Enemy_UFOMissile
   m_EditorClassIdentifier: 
   category: 2
   type: 1
   prefab:
-    m_AssetGUID: f79eaf6cb48c59540ba77c4ee8cc6827
+    m_AssetGUID: 28b6af987a7f121499b940e7ca4d16b2
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
@@ -23,8 +23,8 @@ MonoBehaviour:
   pathFollowSettings:
     characterRadius: 0.4
     maxMoveSpeed: 2
-    minSteerSpeed: 0.5
-    maxSteerSpeed: 4
+    minSteerSpeed: 3
+    maxSteerSpeed: 7
     lookAheadTime: 0.2
   evadeSettings:
     evadeObstacles: 1
@@ -34,9 +34,9 @@ MonoBehaviour:
     minEvadeDistance: 8
     maxEvadeForce: 2
   maxHealth: 100
-  perceptionRadius: 0
-  attackRate: 0
-  attackDamage: 0
-  attackDistance: 0
-  ammo: {fileID: 0}
-  attackRadius: 0
+  perceptionRadius: 6
+  attackRate: 1.5
+  attackDamage: 10
+  attackDistance: 6
+  ammo: {fileID: 11400000, guid: 6d43fe61e922f7a439e5671bfebe492f, type: 2}
+  attackRadius: 4

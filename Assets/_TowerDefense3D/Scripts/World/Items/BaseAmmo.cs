@@ -11,6 +11,16 @@ namespace TowerDefense3D
         protected Vector3 spawnPos;
         private Coroutine selfDestructionTimerCoroutine;
 
+        protected virtual void OnEnable()
+        {
+            GameEvents.OnDamageableDie.AddListener(OnItemDestroyed);
+        }
+
+        protected virtual void OnDisable()
+        {
+            GameEvents.OnDamageableDie.RemoveListener(OnItemDestroyed);
+        }
+
         protected virtual void Start()
         {
             audioSource = GetComponent<AudioSource>();
@@ -81,6 +91,12 @@ namespace TowerDefense3D
                     }
                 }
             }
+        }
+
+        private void OnItemDestroyed(IDamageable item)
+        {
+            if(target == item)
+                target = null;
         }
 
         private void SpawnCollisionParticles(Vector3 position)

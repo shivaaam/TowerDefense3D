@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -2058219659847327102}
   - component: {fileID: 816521447377871889}
   m_Layer: 0
-  m_Name: Bullet_CannonRocket
+  m_Name: Bullet_UFOMissile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -242,6 +242,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23320693179146640, guid: 91a268ff863283649ae6dce76cf7ea65, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 565175fc23adbb8479f5ec980a7227a5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91a268ff863283649ae6dce76cf7ea65, type: 3}
 --- !u!4 &1920105912414249447 stripped

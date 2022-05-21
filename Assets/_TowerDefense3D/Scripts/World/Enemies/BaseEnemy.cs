@@ -36,6 +36,7 @@ namespace TowerDefense3D
                 perceptionTrigger.OnItemEnterRadius.AddListener(OnItemEnterRadius);
                 perceptionTrigger.OnItemExitRadius.AddListener(OnItemExitRadius);
             }
+            GameEvents.OnDamageableDie.AddListener(OnTargetDead);
         }
 
         protected virtual void OnDisable()
@@ -45,6 +46,7 @@ namespace TowerDefense3D
                 perceptionTrigger.OnItemEnterRadius.RemoveListener(OnItemEnterRadius);
                 perceptionTrigger.OnItemExitRadius.RemoveListener(OnItemExitRadius);
             }
+            GameEvents.OnDamageableDie.RemoveListener(OnTargetDead);
         }
 
         protected virtual void Start()
@@ -198,6 +200,8 @@ namespace TowerDefense3D
         {
             if (l_target == null)
                 SetState(EnemyStates.Moving);
+            else
+                SetState(EnemyStates.Attacking);
         }
 
         private void OnItemEnterRadius(BaseItem item)
@@ -206,7 +210,6 @@ namespace TowerDefense3D
             {
                 GameEvents.OnItemEnterEnemyRadius?.Invoke(damageable, this);
             }
-
         }
 
         private void OnItemExitRadius(BaseItem item)
@@ -215,7 +218,12 @@ namespace TowerDefense3D
             {
                 GameEvents.OnItemExitEnemyRadius?.Invoke(damageable, this);
             }
+        }
 
+        private void OnTargetDead(IDamageable l_target)
+        {
+            if (target == l_target)
+                target = null;
         }
     }
 

@@ -124,7 +124,6 @@ namespace TowerDefense3D
 
         public override void Attack(IDamageDealer attacker, IDamageable defender)
         {
-            base.Attack(attacker, defender);
             if (Time.time - LastAttackTime > Attributes.attackRate)
             {
                 LastAttackTime = Time.time;
