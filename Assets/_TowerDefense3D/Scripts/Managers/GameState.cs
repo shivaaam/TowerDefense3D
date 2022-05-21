@@ -9,12 +9,12 @@ namespace TowerDefense3D
         public static GameData GetGameData => gameData;
         private static GameData gameData;
 
-        public GameData GetSaveableData()
+        public static GameData GetSaveableData()
         {
             return gameData;
         }
 
-        public void LoadSavedData(GameData l_data)
+        public static void LoadSavedData(GameData l_data)
         {
             gameData = l_data;
         }
