@@ -8,11 +8,15 @@ namespace TowerDefense3D
     public class EnemySpawner : MonoBehaviour
     {
         public BoxCollider spawnArea;
+        public LevelWavesData levelWaves;
         public EnemyTypePrefabDictionary enemyPrefabsDictionary = new EnemyTypePrefabDictionary();
 
         [Header("Enemy Paths")]
         public Path[] groundPaths;
         public Path[] aerialPaths;
+
+        private Coroutine enemyWaveCoroutine;
+        private Coroutine levelWavesCoroutine;
 
         public Transform SpawnParent 
         {
@@ -32,6 +36,11 @@ namespace TowerDefense3D
             }
         }
         private GameObject spawnParentObj;
+
+        private void Start()
+        {
+            StartLevelWaves(levelWaves);
+        }
 
         public void SpawnEnemy(EnemyCategory enemy, float pathFollowRandomFactor = 0.2f)
         {
@@ -92,7 +101,46 @@ namespace TowerDefense3D
 
         public void SpawnEnemyWave(EnemyWaveData waveData)
         {
+            if (enemyWaveCoroutine != null)
+                StopCoroutine(enemyWaveCoroutine);
+            enemyWaveCoroutine = StartCoroutine(EnemyWaveCoroutine(waveData));
+        }
 
+        private IEnumerator EnemyWaveCoroutine(EnemyWaveData waveData)
+        {
+            foreach (var entry in waveData.enemiesDictionary)
+            {
+                for (int i = 0; i < entry.Value; i++)
+                {
+                    SpawnEnemy(entry.Key);
+                    yield return new WaitForSeconds(waveData.spawnIntervalSameEnemies);
+                }
+                yield return new WaitForSeconds(waveData.spawnIntervalDifferentEnemies);
+            }
+            //Debug.Log("enemy wave done spawning");
+        }
+
+        public void StartLevelWaves(LevelWavesData levelWavesData)
+        {
+            if(levelWavesCoroutine != null)
+                StopCoroutine(levelWavesCoroutine);
+            levelWavesCoroutine = StartCoroutine(LevelWavesCoroutine(levelWavesData));
+        }
+
+        private IEnumerator LevelWavesCoroutine(LevelWavesData wavesData)
+        {
+            foreach (var wave in wavesData.waves)
+            {
+                SpawnEnemyWave(wave);
+                float allSpawnTime = 0;
+                foreach (var entry in wave.enemiesDictionary)
+                {
+                    allSpawnTime += (float)entry.Value * wave.spawnIntervalSameEnemies;
+                }
+                allSpawnTime += (wave.enemiesDictionary.Count - 1) * wave.spawnIntervalDifferentEnemies;
+                allSpawnTime += wavesData.spawnIntervalBetweenWaves;
+                yield return new WaitForSeconds(allSpawnTime);
+            }
         }
 
 #if UNITY_EDITOR

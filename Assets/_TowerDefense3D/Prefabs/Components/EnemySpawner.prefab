@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnArea: {fileID: 1115708628}
+  levelWaves: {fileID: 11400000, guid: fa77d194620bcc341aa6efa50a1e84a4, type: 2}
   enemyPrefabsDictionary:
     m_keys: 00000000020000000100000004000000
     m_values:

@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Level1Waves
-  m_EditorClassIdentifier: Assembly-CSharp:TowerDefense3D:LevelWaves
+  m_Script: {fileID: 11500000, guid: 78235c019df32bc4c922a705282f220e, type: 3}
+  m_Name: Level1AllWaves
+  m_EditorClassIdentifier: 
   waves:
   - {fileID: 11400000, guid: 806661f7e994aaf47acd33e58e93aaef, type: 2}
   - {fileID: 11400000, guid: 9ef1c207d9430ce4aa151bc85ce16878, type: 2}
