@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace TowerDefense3D
 {
@@ -7,6 +8,7 @@ namespace TowerDefense3D
     {
         public string id;
         public string name;
+        public AssetReference scene;
         public Grid levelGrid;
         public InitialCameraSetupSettings initialCameraSettings;
         public LevelWavesData levelWaves;

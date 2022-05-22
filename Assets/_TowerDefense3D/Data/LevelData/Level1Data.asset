@@ -14,6 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: level1
   name: Level 1
+  scene:
+    m_AssetGUID: 3fa55691735f56f4788a264aa120953b
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   levelGrid:
     origin: {x: 0, y: 0}
     rows: 16

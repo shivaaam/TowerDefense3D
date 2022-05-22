@@ -12,5 +12,8 @@ namespace TowerDefense3D
 
         public static UnityEvent<IDamageable, BaseEnemy> OnItemEnterEnemyRadius = new UnityEvent<IDamageable, BaseEnemy>();
         public static UnityEvent<IDamageable, BaseEnemy> OnItemExitEnemyRadius = new UnityEvent<IDamageable, BaseEnemy>();
+
+        public static UnityEvent<LevelData> OnClickLevelButton = new UnityEvent<LevelData>();
+        public static UnityEvent<LevelData> OnGameSceneLoaded = new UnityEvent<LevelData>();
     }
 }
