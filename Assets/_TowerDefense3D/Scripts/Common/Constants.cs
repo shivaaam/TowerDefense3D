@@ -6,6 +6,11 @@ namespace TowerDefense3D
     {
         public const string version = "0.0.1";
 
+        public const int startPlayerMoney = 2000;
+        public const int maxPlayerMoney = 99999;
+        public const int startPlayerLives = 3;
+        public const int maxPlayerLives = 5;
+
         public const float minHealthBarDistance = 30f;
         public const float maxHealthBarDistance = 42f;
 

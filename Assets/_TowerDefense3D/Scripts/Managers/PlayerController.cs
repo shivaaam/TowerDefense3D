@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using UnityEngine.PlayerLoop;
 
 namespace TowerDefense3D
 {
@@ -13,13 +12,18 @@ namespace TowerDefense3D
         private PlayerData playerData;
         private PlaceableItemAttributes currentSelectedItemAttributes;
         private BaseItem currentSelectedItem;
+        private int playerLives;
 
         private List<BaseItem> placedItems = new List<BaseItem>();
         private float lastSelectedItemPlacedTime;
 
+        [HideInInspector] public UnityEvent<int> OnUpdateCollectedMoney = new UnityEvent<int>();
+        [HideInInspector] public UnityEvent<int> OnUpdatePlayerLives = new UnityEvent<int>();
+
         private void OnEnable()
         {
             GameEvents.OnSelectPlaceableItem.AddListener(OnItemSelectedToPlace);
+            GameEvents.OnGameSceneLoaded.AddListener(OnGameLevelLoaded);
             UserInputs.OnCancelSelectionInputEvent.AddListener(OnCancelSelectionInput);
             UserInputs.OnPerformActionInputEvent.AddListener(OnPerformActionInput);
         }
@@ -27,6 +31,7 @@ namespace TowerDefense3D
         private void OnDisable()
         {
             GameEvents.OnSelectPlaceableItem.RemoveListener(OnItemSelectedToPlace);
+            GameEvents.OnGameSceneLoaded.RemoveListener(OnGameLevelLoaded);
             UserInputs.OnCancelSelectionInputEvent.RemoveListener(OnCancelSelectionInput);
             UserInputs.OnPerformActionInputEvent.RemoveListener(OnPerformActionInput);
         }
@@ -61,9 +66,12 @@ namespace TowerDefense3D
 
         public void PlaceSelectedItem()
         {
-            if (currentSelectedItem == null || placementMarker == null || !placementMarker.IsCurrentPositionValid || (Time.time - lastSelectedItemPlacedTime < currentSelectedItemAttributes.cooldownTime))
+            if (currentSelectedItem == null || placementMarker == null || !placementMarker.IsCurrentPositionValid ||
+                (Time.time - lastSelectedItemPlacedTime < currentSelectedItemAttributes.cooldownTime) ||
+                playerData.money < currentSelectedItemAttributes.cost)
                 return;
 
+            UpdateMoneyAmount(-currentSelectedItemAttributes.cost);
             lastSelectedItemPlacedTime = Time.time;
             currentSelectedItem.Place(placementMarker.Marker.position);
             AddToPlacedItems(currentSelectedItem);
@@ -109,11 +117,40 @@ namespace TowerDefense3D
                 PlaceSelectedItem();
             }
         }
+
+        /// <summary>
+        /// Takes -ve for subtracting and +ve for adding
+        /// </summary>
+        private void UpdateMoneyAmount(int amountToChange)
+        {
+            playerData.money = Mathf.Clamp(playerData.money + amountToChange, 0, Constants.maxPlayerMoney);
+            OnUpdateCollectedMoney?.Invoke(playerData.money);
+        }
+
+        private void UpdatePlayerLives(int amountToChange)
+        {
+            playerLives = Mathf.Clamp(playerLives + amountToChange, 0, Constants.maxPlayerLives);
+            OnUpdatePlayerLives?.Invoke(playerLives);
+
+            if(playerLives <= 0)
+                GameEvents.OnPLayerLIfeReachesZero?.Invoke();
+        }
+
+        private void OnGameLevelLoaded(LevelData l_data)
+        {
+            playerLives = Constants.startPlayerLives;
+            playerData = GameState.GetGameData.playerData;
+        }
     }
 
     [System.Serializable]
     public class PlayerData
     {
         public int money;
+
+        public PlayerData()
+        {
+            money = Constants.startPlayerMoney;
+        }
     }
 }

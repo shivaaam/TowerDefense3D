@@ -43,5 +43,11 @@ namespace TowerDefense3D
     {
         public PlayerData playerData;
         public int maxLevelsCleared;
+
+        public GameData()
+        {
+            playerData = new PlayerData();
+            maxLevelsCleared = 0;
+        }
     }
 }

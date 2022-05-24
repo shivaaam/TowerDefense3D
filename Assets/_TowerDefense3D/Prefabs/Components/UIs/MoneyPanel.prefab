@@ -163,6 +163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6889113081037556052}
+  - component: {fileID: 5381820187394570642}
   m_Layer: 5
   m_Name: MoneyPanel
   m_TagString: Untagged
@@ -191,6 +192,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 397.0905, y: 167.48}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &5381820187394570642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6046208273979001269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f07676b80ca9c7940975f8ff9d9b4ca9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  moneyText: {fileID: 8421070353018057603}
 --- !u!1 &7111906674870314835
 GameObject:
   m_ObjectHideFlags: 0

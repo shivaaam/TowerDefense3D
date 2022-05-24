@@ -8,8 +8,33 @@ namespace TowerDefense3D
     {
         public Grid worldGrid;
         private BoxCollider boxCollider;
+        private LevelData levelData;
+        private int levelEnemiesKilled;
+        private int totalEnemiesInLevel;
 
         public InitialCameraSetupSettings initialCameraSetup;
+
+        private void OnEnable()
+        {
+            GameEvents.OnGameSceneLoaded.AddListener(OnLevelLoaded);
+            GameEvents.OnDamageableDie.AddListener(OnEnemyKilled);
+            GameEvents.OnPLayerLIfeReachesZero.AddListener(OnPlayerLifeFinish);
+        }
+
+        private void OnDisable()
+        {
+            GameEvents.OnGameSceneLoaded.RemoveListener(OnLevelLoaded);
+            GameEvents.OnDamageableDie.RemoveListener(OnEnemyKilled);
+            GameEvents.OnPLayerLIfeReachesZero.RemoveListener(OnPlayerLifeFinish);
+        }
+
+        private void OnLevelLoaded(LevelData data)
+        {
+            levelData = data;
+            initialCameraSetup = data.initialCameraSettings;
+            if(initialCameraSetup != null)
+                SetCameraInitialView();
+        }
 
         void Start()
         {
@@ -17,7 +42,6 @@ namespace TowerDefense3D
 
             boxCollider = GetComponent<BoxCollider>();
             UpdateBoxColliderSize();
-            SetCameraInitialView();
         }
 
         public GridCell GetGridCellAtWorldPosition(Vector3 l_pos)
@@ -58,6 +82,43 @@ namespace TowerDefense3D
         public void RecenterCamera()
         {
             SetCameraInitialView();
+        }
+
+        private int GetTotalLevelEnemiesCount()
+        {
+            int total = totalEnemiesInLevel;
+            if (total == 0)
+            {
+                foreach (var enemyWave in levelData.levelWaves.waves)
+                {
+                    foreach (var entry in enemyWave.enemiesDictionary)
+                    {
+                        total += entry.Value;
+                    }
+                }
+                totalEnemiesInLevel = total;
+            }
+            return total;
+        }
+
+        private void OnEnemyKilled(IDamageable damageable)
+        {
+            if (damageable is BaseEnemy enemy)
+            {
+                levelEnemiesKilled++;
+            }
+
+            if (levelEnemiesKilled >= GetTotalLevelEnemiesCount())
+            {
+                Debug.Log($"Level cleared");
+                GameEvents.OnLevelCleared?.Invoke(levelData);
+            }
+        }
+
+        private void OnPlayerLifeFinish()
+        {
+            Debug.Log($"Level lost");
+            GameEvents.OnLevelLost?.Invoke(levelData);
         }
 
         private void OnDrawGizmosSelected()

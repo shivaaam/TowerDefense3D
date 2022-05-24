@@ -37,9 +37,14 @@ namespace TowerDefense3D
         }
         private GameObject spawnParentObj;
 
-        private void Start()
+        private void OnEnable()
         {
-            StartLevelWaves(levelWaves);
+            GameEvents.OnGameSceneLoaded.AddListener(OnLevelLoaded);
+        }
+
+        private void OnDisable()
+        {
+            GameEvents.OnGameSceneLoaded.RemoveListener(OnLevelLoaded);
         }
 
         public void SpawnEnemy(EnemyCategory enemy, float pathFollowRandomFactor = 0.2f)
@@ -129,6 +134,9 @@ namespace TowerDefense3D
 
         private IEnumerator LevelWavesCoroutine(LevelWavesData wavesData)
         {
+            // wait for a few seconds before starting to spawn enemies
+            yield return new WaitForSeconds(wavesData.spawnStartTime);
+
             foreach (var wave in wavesData.waves)
             {
                 SpawnEnemyWave(wave);
@@ -141,6 +149,16 @@ namespace TowerDefense3D
                 allSpawnTime += wavesData.spawnIntervalBetweenWaves;
                 yield return new WaitForSeconds(allSpawnTime);
             }
+        }
+
+        private void OnLevelLoaded(LevelData l_data)
+        {
+            levelWaves = l_data.levelWaves;
+            if (levelWaves != null)
+            {
+                StartLevelWaves(levelWaves);
+            }
+
         }
 
 #if UNITY_EDITOR

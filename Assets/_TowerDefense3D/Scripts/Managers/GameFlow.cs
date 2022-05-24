@@ -71,10 +71,9 @@ namespace TowerDefense3D
             var asyncOperation = Addressables.LoadSceneAsync(l_level, LoadSceneMode.Additive);
             SceneInstance scene = asyncOperation.WaitForCompletion();
             yield return scene.ActivateAsync();
+            yield return new WaitForSeconds(0.35f); // just an offset
 
-            yield return new WaitForSeconds(1);
-
-            Debug.Log("scene activated");
+            Debug.Log("Level activated");
             GameEvents.OnGameSceneLoaded?.Invoke(lastClickedLevel);
             HideLoading();
             SceneManager.UnloadSceneAsync(mainMenuSceneIndex);
@@ -82,9 +81,10 @@ namespace TowerDefense3D
 
         public void StartNewGame()
         {
+            lastClickedLevel = levels[0];
             HideMainMenu();
             ShowLoading();
-            StartLevel(levels[0].scene);
+            StartLevel(lastClickedLevel.scene);
         }
 
         private IEnumerator UITransitionCoroutine(CanvasGroup canvasGroup, bool isActivating, float duration, System.Action onDone = null)

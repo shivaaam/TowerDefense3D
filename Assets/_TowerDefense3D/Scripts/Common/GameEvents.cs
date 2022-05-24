@@ -15,5 +15,10 @@ namespace TowerDefense3D
 
         public static UnityEvent<LevelData> OnClickLevelButton = new UnityEvent<LevelData>();
         public static UnityEvent<LevelData> OnGameSceneLoaded = new UnityEvent<LevelData>();
+
+        public static UnityEvent<LevelData> OnLevelCleared = new UnityEvent<LevelData>();
+        public static UnityEvent<LevelData> OnLevelLost = new UnityEvent<LevelData>();
+
+        public static UnityEvent OnPLayerLIfeReachesZero = new UnityEvent();
     }
 }
