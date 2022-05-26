@@ -1,27 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace TowerDefense3D
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] private GameObject levelObject;
+        [SerializeField] private LevelController levelController;
+        [SerializeField] private PlayerController player;
 
         private void OnEnable()
         {
-            GameEvents.OnGameSceneLoaded.AddListener(OnLevelLoaded);
+            GameEvents.OnLevelCleared.AddListener(OnLevelCleared);
         }
 
         private void OnDisable()
         {
-            GameEvents.OnGameSceneLoaded.RemoveListener(OnLevelLoaded);
+            GameEvents.OnLevelCleared.RemoveListener(OnLevelCleared);
         }
 
-        private void OnLevelLoaded(LevelData l_data)
+        private void OnLevelCleared(LevelData l_data)
         {
-
+            //levelController.Update
         }
     }
 }

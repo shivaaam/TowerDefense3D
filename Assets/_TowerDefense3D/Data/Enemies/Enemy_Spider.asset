@@ -38,3 +38,11 @@ MonoBehaviour:
   attackRate: 1
   attackDamage: 4
   attackDistance: 1.2
+  killReward: 20
+  specialReward: 100
+  specialRewardProbability: 0.3
+  specialRewardPrefab:
+    m_AssetGUID: 6e549dec3eecde742a4b220a355b9ee7
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

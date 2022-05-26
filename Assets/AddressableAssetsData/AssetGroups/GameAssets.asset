@@ -61,6 +61,10 @@ MonoBehaviour:
     m_Address: Bullet_UFOMissile
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 6e549dec3eecde742a4b220a355b9ee7
+    m_Address: Coin
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 27dc8d6da581831498fe9fee5c77f8e0, type: 2}
   m_SchemaSet:

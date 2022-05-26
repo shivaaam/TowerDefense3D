@@ -1,7 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 
@@ -13,12 +13,22 @@ namespace TowerDefense3D
         public LevelData[] levels;
         public int mainMenuSceneIndex;
 
-        [Header("UI")] 
+        [Header("Main Menu UI")]
+        public GameObject mainMenuParentUIObject;
         public GameObject mainMenuPanel;
         public GameObject levelSelectionPanel;
         public GameObject loadingPanel;
         public GameObject levelSelectionButtonObject;
         public Transform levelSelectionButtonParent;
+
+        [Header("Level UI")] 
+        public GameObject levelClearedLostParentUIObject;
+        public GameObject levelClearedLostPanel;
+        public UnityEngine.UI.Button nextLevelButton;
+        public UnityEngine.UI.Button replayLevelButton;
+        public UnityEngine.UI.Button selectLevelButton;
+        public GameObject levelClearedTextObj;
+        public GameObject levelLostTextObj;
 
         private CanvasGroup mainMenuCanvasGroup;
         private CanvasGroup levelSelectionCanvasGroup;
@@ -47,16 +57,20 @@ namespace TowerDefense3D
         private void OnEnable()
         {
             GameEvents.OnClickLevelButton.AddListener(OnClickLevelButton);
+            GameEvents.OnLevelLost.AddListener(OnLevelLost);
+            GameEvents.OnLevelCleared.AddListener(OnLevelCleared);
         }
 
         private void OnDisable()
         {
             GameEvents.OnClickLevelButton.RemoveListener(OnClickLevelButton);
+            GameEvents.OnLevelLost.RemoveListener(OnLevelLost);
+            GameEvents.OnLevelCleared.RemoveListener(OnLevelCleared);
         }
 
         private void Start()
         {
-            HideAllUI();
+            HideAllMainMenuUIPanels();
             ShowMainMenu();
             InstantiateLevelButtons(levels);
         }
@@ -74,9 +88,26 @@ namespace TowerDefense3D
             yield return new WaitForSeconds(0.35f); // just an offset
 
             Debug.Log("Level activated");
-            GameEvents.OnGameSceneLoaded?.Invoke(lastClickedLevel);
+            GameEvents.OnGameSceneLoaded?.Invoke(GetLevelIndex(lastClickedLevel), lastClickedLevel);
             HideLoading();
-            SceneManager.UnloadSceneAsync(mainMenuSceneIndex);
+            //SceneManager.UnloadSceneAsync(mainMenuSceneIndex);
+            ToggleMainMenuParentUI(false);
+        }
+
+        public void UnloadLevel(Scene l_level, System.Action onDone = null)
+        {
+            StartCoroutine(UnloadLevelCoroutine(l_level, onDone));
+        }
+
+        private IEnumerator UnloadLevelCoroutine(Scene l_level, System.Action onDone = null)
+        {
+            var op = SceneManager.UnloadSceneAsync(l_level);
+            yield return new WaitUntil (() => op.isDone);
+            yield return new WaitForSeconds(0.35f);
+
+            Debug.Log("level unloaded");
+            lastClickedLevel = null;
+            onDone?.Invoke();
         }
 
         public void StartNewGame()
@@ -103,8 +134,16 @@ namespace TowerDefense3D
             onDone?.Invoke();
         }
 
+        public void ToggleMainMenuParentUI(bool isActive)
+        {
+            mainMenuParentUIObject.SetActive(isActive);
+        }
+
         public void ShowMainMenu()
         {
+            if(!mainMenuParentUIObject.activeInHierarchy)
+                ToggleMainMenuParentUI(true);
+
             mainMenuPanel.SetActive(true);
             mainMenuCanvasGroup.interactable = true;
 
@@ -127,6 +166,9 @@ namespace TowerDefense3D
 
         public void ShowLevelSelection()
         {
+            if (!mainMenuParentUIObject.activeInHierarchy)
+                ToggleMainMenuParentUI(true);
+
             levelSelectionPanel.SetActive(true);
             levelSelectionCanvasGroup.interactable = true;
 
@@ -151,6 +193,9 @@ namespace TowerDefense3D
 
         public void ShowLoading()
         {
+            if (!mainMenuParentUIObject.activeInHierarchy)
+                ToggleMainMenuParentUI(true);
+
             loadingPanel.SetActive(true);
             loadingCanvasGroup.interactable = true;
 
@@ -173,7 +218,37 @@ namespace TowerDefense3D
                 }));
         }
 
-        private void HideAllUI()
+        public void ShowLevelClearedPanel()
+        {
+            levelClearedLostParentUIObject.SetActive(true);
+            levelClearedLostPanel.SetActive(true);
+
+            levelClearedTextObj.SetActive(true);
+            levelLostTextObj.SetActive(false);
+
+            replayLevelButton.interactable = true;
+            nextLevelButton.interactable = GetLevelIndex(lastClickedLevel) != levels.Length-1;
+        }
+
+        public void ShowLevelLostPanel()
+        {
+            levelClearedLostParentUIObject.SetActive(true);
+            levelClearedLostPanel.SetActive(true);
+
+            levelClearedTextObj.SetActive(false);
+            levelLostTextObj.SetActive(true);
+
+            replayLevelButton.interactable = true;
+            nextLevelButton.interactable = false;
+        }
+
+        public void HideLevelClearedLostPanel()
+        {
+            levelClearedLostParentUIObject.SetActive(false);
+            levelClearedLostPanel.SetActive(false);
+        }
+
+        private void HideAllMainMenuUIPanels()
         {
             mainMenuCanvasGroup.alpha = 0;
             levelSelectionCanvasGroup.alpha = 0;
@@ -215,11 +290,50 @@ namespace TowerDefense3D
 
         private void OnClickLevelButton(LevelData data)
         {
-            lastClickedLevel = data;
             HideLevelSelection();
             ShowLoading();
-            StartLevel(data.scene);
+
+            if (lastClickedLevel == null)
+            {
+                lastClickedLevel = data;
+                StartLevel(data.scene);
+            }
+            else
+            {
+                UnloadLevel(SceneManager.GetSceneAt(GetLevelIndex(lastClickedLevel) + 1), () => { lastClickedLevel = data; StartLevel(data.scene); });
+            }
         }
 
+        public void GotoNextLevel()
+        {
+            HideLevelClearedLostPanel();
+            int currentLevelIndex = GetLevelIndex(lastClickedLevel);
+            int nextLevelIndex = (currentLevelIndex + 1) % levels.Length;
+
+            UnloadLevel(SceneManager.GetSceneAt(GetLevelIndex(lastClickedLevel) + 1), () => { OnClickLevelButton(levels[nextLevelIndex]); }); 
+        }
+
+        public void ReplayLevel()
+        {
+            HideLevelClearedLostPanel();
+            int currentIndex = GetLevelIndex(lastClickedLevel);
+            UnloadLevel(SceneManager.GetSceneAt(currentIndex + 1), () => { OnClickLevelButton(levels[currentIndex]); });
+        }
+
+        private void OnLevelCleared(LevelData l_data)
+        {
+            HideLevelClearedLostPanel();
+            ShowLevelClearedPanel();
+        }
+
+        private void OnLevelLost(LevelData l_data)
+        {
+            ShowLevelLostPanel();
+        }
+
+        private int GetLevelIndex(LevelData l_data)
+        {
+            return Array.FindIndex(levels, t => t.id == l_data.id);
+        }
     }
 }

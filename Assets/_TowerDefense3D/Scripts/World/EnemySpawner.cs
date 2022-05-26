@@ -151,7 +151,7 @@ namespace TowerDefense3D
             }
         }
 
-        private void OnLevelLoaded(LevelData l_data)
+        private void OnLevelLoaded(int index, LevelData l_data)
         {
             levelWaves = l_data.levelWaves;
             if (levelWaves != null)

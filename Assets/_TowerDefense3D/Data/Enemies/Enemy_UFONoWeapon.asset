@@ -38,5 +38,13 @@ MonoBehaviour:
   attackRate: 0
   attackDamage: 0
   attackDistance: 0
+  killReward: 15
+  specialReward: 100
+  specialRewardProbability: 0.5
+  specialRewardPrefab:
+    m_AssetGUID: 6e549dec3eecde742a4b220a355b9ee7
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   ammo: {fileID: 0}
   attackRadius: 0

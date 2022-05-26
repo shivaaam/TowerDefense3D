@@ -14,11 +14,19 @@ namespace TowerDefense3D
         public static UnityEvent<IDamageable, BaseEnemy> OnItemExitEnemyRadius = new UnityEvent<IDamageable, BaseEnemy>();
 
         public static UnityEvent<LevelData> OnClickLevelButton = new UnityEvent<LevelData>();
-        public static UnityEvent<LevelData> OnGameSceneLoaded = new UnityEvent<LevelData>();
+        
+        /// <summary>
+        /// int -> index of level
+        /// LevelData -> Data of loaded level
+        /// </summary>
+        public static UnityEvent<int, LevelData> OnGameSceneLoaded = new UnityEvent<int, LevelData>();
 
         public static UnityEvent<LevelData> OnLevelCleared = new UnityEvent<LevelData>();
         public static UnityEvent<LevelData> OnLevelLost = new UnityEvent<LevelData>();
 
+        public static UnityEvent<BaseEnemy> OnEnemyReachedPathEnd = new UnityEvent<BaseEnemy>();
         public static UnityEvent OnPLayerLIfeReachesZero = new UnityEvent();
+
+        public static UnityEvent<Collectable> OnClickCollectable = new UnityEvent<Collectable>();
     }
 }

@@ -29,6 +29,24 @@ namespace TowerDefense3D
         protected IDamageable target;
         protected EnemyStates currentState;
 
+        private Transform rewardsParent;
+        protected Transform RewardsParent 
+        {
+            get
+            {
+                if (rewardsParent == null)
+                {
+                    GameObject obj = GameObject.Find("Rewards");
+                    if (obj == null)
+                    {
+                        obj = new GameObject("Rewards");
+                    }
+                    rewardsParent = obj.transform;
+                }
+                return rewardsParent;
+            }
+        }
+
         protected virtual void OnEnable()
         {
             if (perceptionTrigger)
@@ -37,6 +55,7 @@ namespace TowerDefense3D
                 perceptionTrigger.OnItemExitRadius.AddListener(OnItemExitRadius);
             }
             GameEvents.OnDamageableDie.AddListener(OnTargetDead);
+            GameEvents.OnEnemyReachedPathEnd.AddListener(OnReachedPathEnd);
         }
 
         protected virtual void OnDisable()
@@ -47,6 +66,7 @@ namespace TowerDefense3D
                 perceptionTrigger.OnItemExitRadius.RemoveListener(OnItemExitRadius);
             }
             GameEvents.OnDamageableDie.RemoveListener(OnTargetDead);
+            GameEvents.OnEnemyReachedPathEnd.RemoveListener(OnReachedPathEnd);
         }
 
         protected virtual void Start()
@@ -155,7 +175,26 @@ namespace TowerDefense3D
         {
             // disable all the components
             collider.enabled = false;
+
+            // spawn special Rewards
+            SpawnSpecialRewards();
+
             BuryInGround(5f);
+        }
+
+        private void SpawnSpecialRewards()
+        {
+            bool shouldSpawn = Random.Range(0f, 1f) < enemyAttributes.specialRewardProbability;
+            if (shouldSpawn)
+            {
+                var obj = AddressableLoader.InstantiateAddressable(enemyAttributes.specialRewardPrefab);
+                obj.transform.SetParent(RewardsParent);
+                obj.transform.position = transform.position;
+
+                Collectable objCollectable = obj.GetComponent<Collectable>();
+                if (objCollectable != null)
+                    objCollectable.collectableAmount = enemyAttributes.specialReward;
+            }
         }
 
 
@@ -224,6 +263,21 @@ namespace TowerDefense3D
         {
             if (target == l_target)
                 target = null;
+        }
+
+        private void OnReachedPathEnd(BaseEnemy l_enemy)
+        {
+            if (l_enemy == this)
+            {
+                // spawn vanish particles (whoosh)
+                GameEvents.OnDamageableDie?.Invoke(this);
+                AddressableLoader.DestroyAndReleaseAddressable(gameObject);
+            }
+        }
+
+        public int GetKillReward()
+        {
+            return enemyAttributes.killReward;
         }
     }
 

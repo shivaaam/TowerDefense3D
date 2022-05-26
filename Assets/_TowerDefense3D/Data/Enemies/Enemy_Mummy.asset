@@ -34,5 +34,15 @@ MonoBehaviour:
     minEvadeDistance: 8
     maxEvadeForce: 2
   maxHealth: 100
+  perceptionRadius: 0
   attackRate: 0
   attackDamage: 0
+  attackDistance: 0
+  killReward: 10
+  specialReward: 100
+  specialRewardProbability: 0.2
+  specialRewardPrefab:
+    m_AssetGUID: 6e549dec3eecde742a4b220a355b9ee7
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

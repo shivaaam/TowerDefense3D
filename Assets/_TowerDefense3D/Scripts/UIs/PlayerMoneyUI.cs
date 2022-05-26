@@ -33,7 +33,7 @@ namespace TowerDefense3D
             moneyText.text = l_newAmount.ToString();
         }
 
-        private void OnGameLevelLoaded(LevelData l_data)
+        private void OnGameLevelLoaded(int index, LevelData l_data)
         {
             OnUpdatePlayerMoney(GameState.GetGameData.playerData.money);
         }

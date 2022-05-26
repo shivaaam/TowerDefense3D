@@ -55,7 +55,7 @@ namespace TowerDefense3D
             }
         }
 
-        private void OnGameLevelLoaded(LevelData l_data)
+        private void OnGameLevelLoaded(int index, LevelData l_data)
         {
             OnUpdatePlayerLives(Constants.startPlayerLives);
         }

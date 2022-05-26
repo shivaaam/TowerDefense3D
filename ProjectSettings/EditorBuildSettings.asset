@@ -11,5 +11,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_TowerDefense3D/Scenes/Levels/Level1/Level1.unity
     guid: 3fa55691735f56f4788a264aa120953b
+  - enabled: 1
+    path: Assets/_TowerDefense3D/Scenes/Levels/Level1/Level2.unity
+    guid: 1153d2e063c3a8e4da7a00db5b7a7dae
+  - enabled: 1
+    path: Assets/_TowerDefense3D/Scenes/Levels/Level1/Level3.unity
+    guid: b30bf2ceab5dc404093b32544af4a938
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 22d2f35edd6d1704ab0f0aca69bd8e69, type: 2}

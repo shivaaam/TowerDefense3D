@@ -13,6 +13,7 @@ namespace TowerDefense3D
         private PlaceableItemAttributes currentSelectedItemAttributes;
         private BaseItem currentSelectedItem;
         private int playerLives;
+        private int currentLevelIndex;
 
         private List<BaseItem> placedItems = new List<BaseItem>();
         private float lastSelectedItemPlacedTime;
@@ -24,6 +25,10 @@ namespace TowerDefense3D
         {
             GameEvents.OnSelectPlaceableItem.AddListener(OnItemSelectedToPlace);
             GameEvents.OnGameSceneLoaded.AddListener(OnGameLevelLoaded);
+            GameEvents.OnEnemyReachedPathEnd.AddListener(OnEnemyReachedPathEnd);
+            GameEvents.OnLevelCleared.AddListener(OnLevelCleared);
+            GameEvents.OnDamageableDie.AddListener(OnKillObject);
+            GameEvents.OnClickCollectable.AddListener(OnClickCollectable);
             UserInputs.OnCancelSelectionInputEvent.AddListener(OnCancelSelectionInput);
             UserInputs.OnPerformActionInputEvent.AddListener(OnPerformActionInput);
         }
@@ -32,6 +37,10 @@ namespace TowerDefense3D
         {
             GameEvents.OnSelectPlaceableItem.RemoveListener(OnItemSelectedToPlace);
             GameEvents.OnGameSceneLoaded.RemoveListener(OnGameLevelLoaded);
+            GameEvents.OnEnemyReachedPathEnd.RemoveListener(OnEnemyReachedPathEnd);
+            GameEvents.OnLevelCleared.RemoveListener(OnLevelCleared);
+            GameEvents.OnDamageableDie.RemoveListener(OnKillObject);
+            GameEvents.OnClickCollectable.RemoveListener(OnClickCollectable);
             UserInputs.OnCancelSelectionInputEvent.RemoveListener(OnCancelSelectionInput);
             UserInputs.OnPerformActionInputEvent.RemoveListener(OnPerformActionInput);
         }
@@ -136,10 +145,43 @@ namespace TowerDefense3D
                 GameEvents.OnPLayerLIfeReachesZero?.Invoke();
         }
 
-        private void OnGameLevelLoaded(LevelData l_data)
+        private void OnGameLevelLoaded(int index, LevelData l_data)
         {
+            currentLevelIndex = index;
             playerLives = Constants.startPlayerLives;
             playerData = GameState.GetGameData.playerData;
+        }
+
+        private void OnEnemyReachedPathEnd(BaseEnemy l_enemy)
+        {
+            UpdatePlayerLives(-1);
+        }
+
+        private void OnLevelCleared(LevelData l_data)
+        {
+            SaveNewData();
+        }
+
+        private void SaveNewData()
+        {
+            GameData newData = GameState.GetGameData;
+            newData.maxLevelsCleared = (currentLevelIndex + 1) % Constants.maxLevelsCount;
+            newData.playerData = playerData;
+
+            GameState.SaveData(newData);
+        }
+
+        private void OnKillObject(IDamageable damageable)
+        {
+            if (damageable is BaseEnemy enemy)
+            {
+                UpdateMoneyAmount(enemy.GetKillReward());
+            }
+        }
+
+        private void OnClickCollectable(Collectable l_collectable)
+        {
+            UpdateMoneyAmount(l_collectable.collectableAmount);
         }
     }
 

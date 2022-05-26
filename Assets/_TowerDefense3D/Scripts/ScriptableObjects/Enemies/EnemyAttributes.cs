@@ -18,5 +18,9 @@ namespace TowerDefense3D
         public float attackRate;
         public int attackDamage;
         public float attackDistance;
+        public int killReward;
+        public int specialReward;
+        public float specialRewardProbability;
+        public AssetReferenceGameObject specialRewardPrefab;
     }
 }

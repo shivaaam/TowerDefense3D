@@ -20,6 +20,11 @@ namespace TowerDefense3D
             gameData = l_data;
         }
 
+        public static void SaveData()
+        {
+            SaveData(gameData);
+        }
+
         public static void SaveData(GameData l_data)
         {
             string dataToSave = JsonUtility.ToJson(l_data);
@@ -35,6 +40,15 @@ namespace TowerDefense3D
                 saveData = JsonUtility.FromJson<GameData>(System.IO.File.ReadAllText(SaveGamePath));
             }
             LoadData(saveData);
+        }
+
+        public static void UpdateLevelsCleared(int l_level)
+        {
+            gameData.maxLevelsCleared = l_level;
+        }
+        public static void UpdatePlayerMoney(int l_amount)
+        {
+            gameData.playerData.money = l_amount;
         }
     }
 
