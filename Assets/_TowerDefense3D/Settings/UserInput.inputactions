@@ -101,9 +101,31 @@
                 },
                 {
                     "name": "",
+                    "id": "9ef1d311-f32c-4284-827f-6bb965e71058",
+                    "path": "<Touchscreen>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse_Android_Gamepad",
+                    "action": "MousePosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "e416e3d3-274b-4c7a-8733-114adb4a82ff",
                     "path": "<Mouse>/middleButton",
                     "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse_Android_Gamepad",
+                    "action": "MiddleMouseButtonHold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2170e607-16e6-4a10-a346-9f8892a19e2e",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "Hold",
                     "processors": "",
                     "groups": "KeyboardMouse_Android_Gamepad",
                     "action": "MiddleMouseButtonHold",
@@ -260,6 +282,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse_Android_Gamepad",
+                    "action": "PerformAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "113264b7-ee3d-4d25-bdb2-b212e7894234",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "PerformAction",
                     "isComposite": false,
                     "isPartOfComposite": false

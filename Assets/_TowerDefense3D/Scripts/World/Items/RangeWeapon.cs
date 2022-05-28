@@ -36,15 +36,23 @@ namespace TowerDefense3D
         protected override void OnEnable()
         {
             base.OnEnable();
-            attackRadiusObject.OnObjectEnterRadius.AddListener(OnObjectEnterAttackRadius);
-            attackRadiusObject.OnObjectExitRadius.AddListener(OnObjectExitAttackRadius);
+            if (attackRadiusObject != null)
+            {
+                attackRadiusObject.OnObjectEnterRadius.AddListener(OnObjectEnterAttackRadius);
+                attackRadiusObject.OnObjectExitRadius.AddListener(OnObjectExitAttackRadius);
+            }
+            GameEvents.OnDamageableDie.AddListener(OnTargetDie);
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
-            attackRadiusObject.OnObjectEnterRadius.RemoveListener(OnObjectEnterAttackRadius);
-            attackRadiusObject.OnObjectExitRadius.RemoveListener(OnObjectExitAttackRadius);
+            if (attackRadiusObject != null)
+            {
+                attackRadiusObject.OnObjectEnterRadius.RemoveListener(OnObjectEnterAttackRadius);
+                attackRadiusObject.OnObjectExitRadius.RemoveListener(OnObjectExitAttackRadius);
+            }
+            GameEvents.OnDamageableDie.RemoveListener(OnTargetDie);
         }
 
         protected override void Start()
@@ -101,7 +109,7 @@ namespace TowerDefense3D
         private void OnObjectExitAttackRadius(GameObject obj)
         {
             BaseEnemy enemy = obj.GetComponent<BaseEnemy>();
-            if (enemy == null || enemy.GetCurrentDamageableHealth() <= 0)
+            if (enemy == null/* || enemy.GetCurrentDamageableHealth() <= 0*/)
                 return;
 
             Collider[] colls = Physics.OverlapSphere(attackRadiusCollider.transform.position, attackRadiusCollider.radius, Attributes.ammo.damageLayer);
@@ -204,6 +212,11 @@ namespace TowerDefense3D
         protected override void OnDamageableHealthZero(IDamageable l_damageable)
         {
             base.OnDamageableHealthZero(l_damageable);
+            OnObjectExitAttackRadius(l_damageable.GetDamageableTransform().gameObject);
+        }
+
+        private void OnTargetDie(IDamageable l_damageable)
+        {
             OnObjectExitAttackRadius(l_damageable.GetDamageableTransform().gameObject);
         }
 
