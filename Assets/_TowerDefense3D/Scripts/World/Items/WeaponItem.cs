@@ -22,6 +22,12 @@ namespace TowerDefense3D
             GameEvents.OnDamageableDie.AddListener(OnDamageableHealthZero);
         }
 
+        protected override void Start()
+        {
+            base.Start();
+            ToggleHealthBar(false);
+        }
+
         protected virtual void OnDamageableHealthZero(IDamageable l_damageable)
         {
             if (target == l_damageable)
@@ -61,6 +67,17 @@ namespace TowerDefense3D
         {
             GameEvents.OnDamageableDie?.Invoke(this);
             AddressableLoader.DestroyAndReleaseAddressable(gameObject);
+        }
+
+        public override void Place(Vector2 coordinate)
+        {
+            base.Place(coordinate);
+            ToggleHealthBar(true);
+        }
+
+        protected void ToggleHealthBar(bool isActive)
+        {
+            healthBar.gameObject.SetActive(isActive);
         }
     }
 }

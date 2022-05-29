@@ -18,6 +18,7 @@ namespace TowerDefense3D
         public LayerMask itemsLayer;
         public LayerMask placementValidityCheckLayer;
 
+        private Vector3 previousValidTouchPosition;
 
         private PlaceableItemAttributes selectedItem;
         public bool IsCurrentPositionValid { get; private set; }
@@ -38,13 +39,20 @@ namespace TowerDefense3D
         private void Start()
         {
             ToggleMarkerImage(false);
+            previousValidTouchPosition = Vector3.zero;
         }
 
         private void Update()
         {
             if (selectedItem != null)
             {
+                if (GraphicRaycastObject.IsMouseOverGraphics)
+                {
+                    return;
+                }
 #if UNITY_ANDROID || UNITY_IOS
+                //Vector3 touchPos = GraphicRaycastObject.IsMouseOverGraphics ? previousValidTouchPosition : new Vector3(UserInputs.inputData.primaryTouchPosition.x, UserInputs.inputData.primaryTouchPosition.y, 0);
+                //previousValidTouchPosition = touchPos;
                 Ray ray = currentCamera.ScreenPointToRay(new Vector3(UserInputs.inputData.primaryTouchPosition.x, UserInputs.inputData.primaryTouchPosition.y, 0));
 #else
                 Ray ray = currentCamera.ScreenPointToRay(new Vector3(UserInputs.inputData.mousePosition.x, UserInputs.inputData.mousePosition.y, 0));

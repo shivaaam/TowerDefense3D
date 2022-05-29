@@ -6,6 +6,7 @@ namespace TowerDefense3D
     public abstract class BaseItem : MonoBehaviour, IPlaceable, IObstacle
     {
         [SerializeField] protected PlaceableItemAttributes itemAttributes;
+        [SerializeField] protected GameObject placeButton;
         public PlaceableItemState state;
 
         protected AudioSource[] audioSources;
@@ -31,6 +32,9 @@ namespace TowerDefense3D
             renderers = GetComponentsInChildren<Renderer>();
             GetAllMaterials();
             ToggleGhostMode(true);
+#if UNITY_ANDROID || UNITY_IOS
+            TogglePlaceButton(true);
+#endif
             SetItemState(PlaceableItemState.GettingPlaced);
         }
 
@@ -48,6 +52,7 @@ namespace TowerDefense3D
         {
             SetItemState(PlaceableItemState.Ready);
             ToggleGhostMode(false);
+            TogglePlaceButton(false);
         }
 
         public void ToggleGhostMode(bool isActive)
@@ -111,6 +116,11 @@ namespace TowerDefense3D
         public float GetObstacleRadius()
         {
             return Mathf.Sqrt(Mathf.Pow(GetItemAttributes().size.x/2, 2) + Mathf.Pow(GetItemAttributes().size.y/2, 2));
+        }
+
+        protected void TogglePlaceButton(bool isActive)
+        {
+            placeButton.SetActive(isActive);
         }
     }
 

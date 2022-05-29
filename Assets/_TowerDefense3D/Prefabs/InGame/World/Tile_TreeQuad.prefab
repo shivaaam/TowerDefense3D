@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f45cca3f5f11b6a43b694d77e2e6b9f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  validForPlacement: -1
+  validForPlacement: 0
   cellType: 0
 --- !u!65 &8698742349716830397
 BoxCollider:

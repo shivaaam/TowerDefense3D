@@ -9,14 +9,12 @@ namespace TowerDefense3D
 
         private Transform camTransform;
         private CanvasGroup canvasGroup;
-        private Quaternion originalRotation;
 
         private bool isDead;
 
         private void Start()
         {
             InitializeHealthbar();
-            originalRotation = transform.rotation;
         }
 
         private void Update()
@@ -26,8 +24,6 @@ namespace TowerDefense3D
             
             float distanceFromCam = Mathf.Clamp(Vector3.Distance(transform.position, camTransform.position), Constants.minHealthBarDistance, Constants.maxHealthBarDistance);
             canvasGroup.alpha = !isDead ? Mathf.Clamp(1 - ((distanceFromCam - Constants.minHealthBarDistance )/ (Constants.maxHealthBarDistance - Constants.minHealthBarDistance)), 0, 1) : 0f;
-            if(canvasGroup.alpha > 0)
-                transform.rotation = camTransform.rotation * originalRotation;
         }
 
         public void InitializeHealthbar()

@@ -12,6 +12,7 @@ namespace TowerDefense3D
         public static UnityEvent<InputAction.CallbackContext> OnTogglePauseInputEvent = new UnityEvent<InputAction.CallbackContext>();
         public static UnityEvent<InputAction.CallbackContext> OnCancelSelectionInputEvent = new UnityEvent<InputAction.CallbackContext>();
         public static UnityEvent<InputAction.CallbackContext> OnSecondaryTouchInputEvent = new UnityEvent<InputAction.CallbackContext>();
+        public static UnityEvent<InputAction.CallbackContext> OnPrimaryTouchInputEvent = new UnityEvent<InputAction.CallbackContext>();
 
         public void OnMousePosition(InputAction.CallbackContext context)
         {
@@ -77,6 +78,19 @@ namespace TowerDefense3D
         public void OnSecondaryTouchActive(InputAction.CallbackContext context)
         {
             OnSecondaryTouchInputEvent?.Invoke(context);
+            if (context.phase == InputActionPhase.Started)
+                PerformSecondaryTouchInput(true);
+            else if (context.phase == InputActionPhase.Canceled)
+                PerformSecondaryTouchInput(false);
+        }
+
+        public void OnPrimaryTouchActive(InputAction.CallbackContext context)
+        {
+            OnPrimaryTouchInputEvent?.Invoke(context);
+            if(context.phase == InputActionPhase.Started)
+                PerformPrimaryTouchInput(true);
+            else if(context.phase == InputActionPhase.Canceled)
+                PerformPrimaryTouchInput(false);
         }
 
         private void MiddleMouseHoldInput(bool input)
@@ -137,6 +151,11 @@ namespace TowerDefense3D
         {
             inputData.isSecondaryTouchActive = input;
         }
+
+        private void PerformPrimaryTouchInput(bool input)
+        {
+            inputData.isPrimaryTouchActive = input;
+        }
     }
 
     [System.Serializable]
@@ -155,5 +174,6 @@ namespace TowerDefense3D
         public Vector2 primaryTouchPosition;
         public Vector2 secondaryTouchPosition;
         public bool isSecondaryTouchActive;
+        public bool isPrimaryTouchActive;
     }
 }

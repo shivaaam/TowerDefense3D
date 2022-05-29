@@ -20,11 +20,17 @@ namespace TowerDefense3D
         private void OnEnable()
         {
             UserInputs.OnPerformActionInputEvent.AddListener(OnPerformActionInput);
+#if UNITY_ANDROID || UNITY_IOS
+            UserInputs.OnPrimaryTouchInputEvent.AddListener(OnPerformActionInput);
+#endif
         }
 
         private void OnDisable()
         {
             UserInputs.OnPerformActionInputEvent.RemoveListener(OnPerformActionInput);
+#if UNITY_ANDROID || UNITY_IOS
+            UserInputs.OnPrimaryTouchInputEvent.RemoveListener(OnPerformActionInput);
+#endif
         }
 
         private void Start()
@@ -42,7 +48,11 @@ namespace TowerDefense3D
         {
             if (context.phase == InputActionPhase.Started)
             {
+#if UNITY_ANDROID || UNITY_IOS
+                Ray ray = raycastCam.ScreenPointToRay(new Vector3(UserInputs.inputData.primaryTouchPosition.x, UserInputs.inputData.primaryTouchPosition.y, 0));
+#else
                 Ray ray = raycastCam.ScreenPointToRay(new Vector3(UserInputs.inputData.mousePosition.x, UserInputs.inputData.mousePosition.y, 0));
+#endif
                 Physics.Raycast(ray, out RaycastHit hit, 200, 1 << gameObject.layer);
                 if (hit.collider != null && hit.collider.gameObject == gameObject)
                 {

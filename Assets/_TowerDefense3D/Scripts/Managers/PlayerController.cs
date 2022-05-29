@@ -79,16 +79,20 @@ namespace TowerDefense3D
                 (Time.time - lastSelectedItemPlacedTime < currentSelectedItemAttributes.cooldownTime) ||
                 playerData.money < currentSelectedItemAttributes.cost)
                 return;
-
+            
             UpdateMoneyAmount(-currentSelectedItemAttributes.cost);
             lastSelectedItemPlacedTime = Time.time;
             currentSelectedItem.Place(placementMarker.Marker.position);
             AddToPlacedItems(currentSelectedItem);
             GameEvents.OnPlaceSelectedItem?.Invoke(currentSelectedItem);
             currentSelectedItem = null;
-        
+
+#if UNITY_ANDROID || UNTIY_IOS
+            DeselectCurrentItem();
+#else
             // get another item instance to place
             OnItemSelectedToPlace(currentSelectedItemAttributes);
+#endif
         }
 
         private void AddToPlacedItems(BaseItem item)
@@ -123,8 +127,12 @@ namespace TowerDefense3D
 
         private void OnPerformActionInput(InputAction.CallbackContext context)
         {
+#if UNITY_ANDROID || UNITY_IOS
+            // do nothing
+#else 
             if (GraphicRaycastObject.IsMouseOverGraphics)
                 return;
+#endif
 
             if (context.phase == InputActionPhase.Started)
             {

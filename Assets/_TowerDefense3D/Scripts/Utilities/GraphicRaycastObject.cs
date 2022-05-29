@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 namespace TowerDefense3D
 {
@@ -18,13 +19,10 @@ namespace TowerDefense3D
 #if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX
             isOnGraphics = EventSystem.current.IsPointerOverGameObject();
 #elif UNITY_IOS || UNITY_ANDROID
-        if (Input.touchCount > 0)
+            if (Touchscreen.current.touches.Count > 0)
         {
-            foreach (Touch touch in Input.touches)
-            {
-                isOnGraphics = EventSystem.current.IsPointerOverGameObject(touch.fingerId);
-                //Debug.Log("IsMouseOverGraphics"+ IsMouseOverGraphics);
-            }
+            isOnGraphics = EventSystem.current.IsPointerOverGameObject(Touchscreen.current.touches[0].touchId.ReadValue());
+            //Debug.Log($"is mouse over graphics: {isOnGraphics}");
         }
         else
             isOnGraphics = false;

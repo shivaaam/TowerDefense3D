@@ -16,11 +16,11 @@ MonoBehaviour:
   moveSpeed: 15
   movementDamping: 0.8
   primaryRotationMultiplier: -0.15
-  rotateSpeed: 50
+  rotateSpeed: 70
   rotationDamping: 0.1
   minPitchAngle: 10
   maxPitchAngle: 70
-  zoomSpeed: 15
+  zoomSpeed: 5
   zoomDamping: 0.025
   minZoom: -37
   maxZoom: -4

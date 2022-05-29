@@ -262,6 +262,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 2ed5136b-3770-4e12-9e0c-10755cd913b1
     m_ActionName: InGameControls/IsSecondaryTouchActive
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7376687776073764003}
+        m_TargetAssemblyTypeName: TowerDefense3D.UserInputs, Assembly-CSharp
+        m_MethodName: OnPrimaryTouchActive
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fad9ae9e-6ff1-4437-9d44-995a5821467b
+    m_ActionName: InGameControls/IsPrimaryTouchActive[/Device Simulator Touchscreen/primaryTouch/press]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: InGameControls

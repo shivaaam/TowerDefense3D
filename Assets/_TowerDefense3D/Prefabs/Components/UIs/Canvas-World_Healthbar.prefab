@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.005}
+  m_AnchoredPosition: {x: 0, y: 1.0050049}
   m_SizeDelta: {x: 1.0271, y: 0.5779}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &3573739544117453069
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &7574890188709807385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +190,7 @@ GameObject:
   - component: {fileID: 5142380019128039275}
   - component: {fileID: 4150431308439122891}
   - component: {fileID: 5829458093752437272}
+  - component: {fileID: 4593161022609500772}
   m_Layer: 0
   m_Name: Healthbar
   m_TagString: Untagged
@@ -310,3 +311,15 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &4593161022609500772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8209357881546507709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b517094e8a832764daa6ec508e85f327, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
