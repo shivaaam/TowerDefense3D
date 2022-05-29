@@ -1,6 +1,8 @@
+using System.Collections;
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 namespace TowerDefense3D
 {
@@ -16,10 +18,15 @@ namespace TowerDefense3D
         private float currentCameraPitchFactor;
         private float currentCameraZoomFactor;
 
+        private bool isCameraPanInputActive;
+        private bool isCameraRotateInputActive;
+        private bool isCameraZoomInputActive;
+
         private Vector3 minFollowTargetPosition;
         private Vector3 maxFollowTargetPosition;
-
         private Vector2 lastMiddleMouseHoldPosition;
+
+        private Coroutine pinchCoroutine;
 
         private static UnityEvent<InitialCameraSetupSettings> SetInitialCameraSettingsEvent = new UnityEvent<InitialCameraSetupSettings>();
 
@@ -36,15 +43,19 @@ namespace TowerDefense3D
         private void OnEnable()
         {
             SetInitialCameraSettingsEvent.AddListener(SetupInitialCamera);
+            UserInputs.OnSecondaryTouchInputEvent.AddListener(SecondaryTouchInput);
         }
 
         private void OnDisable()
         {
             SetInitialCameraSettingsEvent.RemoveListener(SetupInitialCamera);
+            UserInputs.OnSecondaryTouchInputEvent.RemoveListener(SecondaryTouchInput);
         }
 
         private void Update()
         {
+            UpdateCameraInputsStatus();
+
             // move using primary controls
             Vector2 mousePositionDifference = lastMiddleMouseHoldPosition - UserInputs.inputData.mousePosition;
             lastMiddleMouseHoldPosition = UserInputs.inputData.mousePosition;
@@ -82,7 +93,6 @@ namespace TowerDefense3D
                 float clampedZ = Mathf.Clamp(cameraFollowTarget.position.z, minFollowTargetPosition.z, maxFollowTargetPosition.z);
                 cameraFollowTarget.position = new Vector3(clampedX, cameraFollowTarget.position.y, clampedZ);
             }
-
         }
 
         public void RotateCamera(Vector2 rotateInput)
@@ -137,6 +147,57 @@ namespace TowerDefense3D
         {
             return cameraFollowTarget.position.x >= minFollowTargetPosition.x && cameraFollowTarget.position.x <= maxFollowTargetPosition.x &&
                 cameraFollowTarget.position.z >= minFollowTargetPosition.z && cameraFollowTarget.position.z <= maxFollowTargetPosition.z;
+        }
+
+        private void SecondaryTouchInput(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Started)
+            {
+                var primaryPos = UserInputs.inputData.primaryTouchPosition;
+                var secondaryPos = UserInputs.inputData.secondaryTouchPosition;
+
+                if(!GraphicRaycastObject.IsMouseOverGraphics && !isCameraPanInputActive && !isCameraRotateInputActive)
+                    StartPinchZoom(primaryPos, secondaryPos);
+            }
+            else if (context.phase == InputActionPhase.Canceled)
+            {
+                StopPinchZoom();
+            }
+        }
+
+        private void StartPinchZoom(Vector2 primaryStartPosition, Vector2 secondaryStartPosition)
+        {
+            StopPinchZoom();
+            pinchCoroutine = StartCoroutine(PinchZoomCoroutine(primaryStartPosition, secondaryStartPosition));
+        }
+
+        private void StopPinchZoom()
+        {
+            if (pinchCoroutine != null)
+                StopCoroutine(pinchCoroutine);
+        }
+
+        private IEnumerator PinchZoomCoroutine(Vector2 primaryStartPosition, Vector2 secondaryStartPosition)
+        {
+            float previousDistance = Vector2.Distance(primaryStartPosition, secondaryStartPosition);
+            while (true)
+            {
+                var primaryPos = UserInputs.inputData.primaryTouchPosition;
+                var secondaryPos = UserInputs.inputData.secondaryTouchPosition;
+
+                float currentDistance = Vector2.Distance(primaryPos, secondaryPos);
+                UpdateCameraZoom(currentDistance - previousDistance);
+
+                previousDistance = currentDistance;
+                yield return null;
+            }
+        }
+
+        private void UpdateCameraInputsStatus()
+        {
+            isCameraPanInputActive = UserInputs.inputData.middleMouseButtonHold || (UserInputs.inputData.moveCameraSecondary != Vector2.zero);
+            isCameraRotateInputActive = UserInputs.inputData.mouseRightClickHold || (UserInputs.inputData.rotateCameraSecondary != Vector2.zero);
+            isCameraZoomInputActive = (UserInputs.inputData.zoomCamera <= Mathf.Epsilon) || (pinchCoroutine != null);
         }
     }
 }

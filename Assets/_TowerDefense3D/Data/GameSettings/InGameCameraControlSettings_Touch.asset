@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 399276fc56792bf418a4bfe2dab4785b, type: 3}
-  m_Name: InGameCameraControlSettings
+  m_Name: InGameCameraControlSettings_Touch
   m_EditorClassIdentifier: 
   primaryMovementMultiplier: 0.35
   moveSpeed: 15
   movementDamping: 0.8
   primaryRotationMultiplier: -0.15
-  rotateSpeed: 200
+  rotateSpeed: 50
   rotationDamping: 0.1
   minPitchAngle: 10
   maxPitchAngle: 70
-  zoomSpeed: 250
+  zoomSpeed: 15
   zoomDamping: 0.025
   minZoom: -37
   maxZoom: -4

@@ -103,9 +103,14 @@ namespace TowerDefense3D
                 return;
             if (context.phase == InputActionPhase.Started)
             {
-                RemoveCurrentSelectedItem();
-                GameEvents.OnDeselectCurrentItem?.Invoke();
+                DeselectCurrentItem();
             }
+        }
+
+        public void DeselectCurrentItem()
+        {
+            RemoveCurrentSelectedItem();
+            GameEvents.OnDeselectCurrentItem?.Invoke();
         }
 
         private void RemoveCurrentSelectedItem()

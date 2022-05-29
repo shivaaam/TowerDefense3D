@@ -70,6 +70,9 @@ namespace TowerDefense3D
 
         private void Start()
         {
+#if UNITY_ANDROID || UNITY_IOS
+            Application.targetFrameRate = 60;
+#endif
             HideAllMainMenuUIPanels();
             ShowMainMenu();
             InstantiateLevelButtons(levels);
@@ -271,8 +274,7 @@ namespace TowerDefense3D
 
             for (int i = 0; i < l_levels.Length; i++)
             {
-                GameObject levelButton = Instantiate(levelSelectionButtonObject);
-                levelButton.transform.SetParent(levelSelectionButtonParent);
+                GameObject levelButton = Instantiate(levelSelectionButtonObject, levelSelectionButtonParent);
 
                 LevelSelectionButton lsb = levelButton.GetComponent<LevelSelectionButton>();
                 if (lsb != null)

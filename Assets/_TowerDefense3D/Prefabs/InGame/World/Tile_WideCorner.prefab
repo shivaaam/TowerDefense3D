@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8796575664132958409
 Transform:
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f45cca3f5f11b6a43b694d77e2e6b9f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  validForPlacement: 2
+  validForPlacement: -1
   cellType: 1
 --- !u!65 &5791541138116964236
 BoxCollider:
@@ -119,6 +119,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: def6b4480da518f4190307b8e5eb6860, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: def6b4480da518f4190307b8e5eb6860, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: def6b4480da518f4190307b8e5eb6860, type: 3}

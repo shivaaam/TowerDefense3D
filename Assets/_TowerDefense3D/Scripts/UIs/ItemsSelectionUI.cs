@@ -8,7 +8,24 @@ namespace TowerDefense3D
     {
         public SelectItemButton sampleButtonObject;
         public Transform buttonsParent;
+
+        [Header("Selected item")] 
+        public GameObject selectedItemPanel;
+        public UnityEngine.UI.Image selectedItemImage;
+
         [SerializeField] private List<PlaceableItemAttributes> availableItems;
+
+        private void OnEnable()
+        {
+            GameEvents.OnSelectPlaceableItem.AddListener(OnItemSelect);
+            GameEvents.OnDeselectCurrentItem.AddListener(OnItemDeselect);
+        }
+
+        private void OnDisable()
+        {
+            GameEvents.OnSelectPlaceableItem.RemoveListener(OnItemSelect);
+            GameEvents.OnDeselectCurrentItem.RemoveListener(OnItemDeselect);
+        }
 
         private void Start()
         {
@@ -27,6 +44,22 @@ namespace TowerDefense3D
                 buttonComponent.SetButtonData(item);
                 obj.SetActive(true);
             }
+        }
+
+        private void OnItemSelect(PlaceableItemAttributes item)
+        {
+            selectedItemImage.sprite = item.icon;
+            ToggleSelectedItemPanel(true);
+        }
+
+        private void ToggleSelectedItemPanel(bool isActive)
+        {
+            selectedItemPanel.SetActive(isActive);
+        }
+
+        private void OnItemDeselect()
+        {
+            ToggleSelectedItemPanel(false);
         }
     }
 }

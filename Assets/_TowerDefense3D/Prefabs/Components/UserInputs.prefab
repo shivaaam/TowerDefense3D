@@ -28,6 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.8489685, y: 0.35424614, z: 2.07582}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -213,6 +214,54 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 8b043965-173b-4d7f-b562-1f42d00b02ca
     m_ActionName: InGameControls/CancelSelection[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7376687776073764003}
+        m_TargetAssemblyTypeName: TowerDefense3D.UserInputs, Assembly-CSharp
+        m_MethodName: OnPrimaryTouchPosition
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2ab212f8-7e74-48af-ae62-76586b58b084
+    m_ActionName: InGameControls/PrimaryTouchPosition
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7376687776073764003}
+        m_TargetAssemblyTypeName: TowerDefense3D.UserInputs, Assembly-CSharp
+        m_MethodName: OnSecondaryTouchPosition
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c7ae0d02-9f45-46d5-855c-9f26e38981d1
+    m_ActionName: InGameControls/SecondaryTouchPosition
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7376687776073764003}
+        m_TargetAssemblyTypeName: TowerDefense3D.UserInputs, Assembly-CSharp
+        m_MethodName: OnSecondaryTouchActive
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2ed5136b-3770-4e12-9e0c-10755cd913b1
+    m_ActionName: InGameControls/IsSecondaryTouchActive
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: InGameControls

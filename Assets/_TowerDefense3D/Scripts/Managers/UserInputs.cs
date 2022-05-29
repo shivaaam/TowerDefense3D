@@ -8,10 +8,10 @@ namespace TowerDefense3D
     {
         public static InGameControls inputData;
 
-
         public static UnityEvent<InputAction.CallbackContext> OnPerformActionInputEvent = new UnityEvent<InputAction.CallbackContext>();
         public static UnityEvent<InputAction.CallbackContext> OnTogglePauseInputEvent = new UnityEvent<InputAction.CallbackContext>();
         public static UnityEvent<InputAction.CallbackContext> OnCancelSelectionInputEvent = new UnityEvent<InputAction.CallbackContext>();
+        public static UnityEvent<InputAction.CallbackContext> OnSecondaryTouchInputEvent = new UnityEvent<InputAction.CallbackContext>();
 
         public void OnMousePosition(InputAction.CallbackContext context)
         {
@@ -64,6 +64,21 @@ namespace TowerDefense3D
             OnCancelSelectionInputEvent?.Invoke(context);
         }
 
+        public void OnPrimaryTouchPosition(InputAction.CallbackContext context)
+        {
+            PrimaryTouchInputPosition(context.action.ReadValue<Vector2>());
+        }
+
+        public void OnSecondaryTouchPosition(InputAction.CallbackContext context)
+        {
+            SecondaryTouchInputPosition(context.action.ReadValue<Vector2>());
+        }
+
+        public void OnSecondaryTouchActive(InputAction.CallbackContext context)
+        {
+            OnSecondaryTouchInputEvent?.Invoke(context);
+        }
+
         private void MiddleMouseHoldInput(bool input)
         {
             inputData.middleMouseButtonHold = input;
@@ -81,6 +96,16 @@ namespace TowerDefense3D
             inputData.moveCameraPrimary = input;
             //inputData.rotateCameraPrimary = inputData.rightClickHold ? input : Vector2.zero;
             inputData.rotateCameraPrimary = input;
+        }
+
+        private void PrimaryTouchInputPosition(Vector2 input)
+        {
+            inputData.primaryTouchPosition = input;
+        }
+
+        private void SecondaryTouchInputPosition(Vector2 input)
+        {
+            inputData.secondaryTouchPosition = input;
         }
 
         private void MoveCameraInputSecondary(Vector2 input)
@@ -107,6 +132,11 @@ namespace TowerDefense3D
         {
             inputData.performAction = input;
         }
+
+        private void PerformSecondaryTouchInput(bool input)
+        {
+            inputData.isSecondaryTouchActive = input;
+        }
     }
 
     [System.Serializable]
@@ -122,5 +152,8 @@ namespace TowerDefense3D
         public float zoomCamera;
         public bool togglePause;
         public bool performAction;
+        public Vector2 primaryTouchPosition;
+        public Vector2 secondaryTouchPosition;
+        public bool isSecondaryTouchActive;
     }
 }
