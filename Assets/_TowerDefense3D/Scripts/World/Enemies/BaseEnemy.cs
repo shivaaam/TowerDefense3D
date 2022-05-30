@@ -101,8 +101,8 @@ namespace TowerDefense3D
 
             if (health <= 0)
             {
-                Die(hitPoint);
                 GameEvents.OnDamageableDie?.Invoke(this);
+                Die(hitPoint);
             }
 
         }
@@ -178,8 +178,6 @@ namespace TowerDefense3D
 
             // spawn special Rewards
             SpawnSpecialRewards();
-
-            BuryInGround(5f);
         }
 
         private void SpawnSpecialRewards()

@@ -57,6 +57,8 @@ namespace TowerDefense3D
             float dot = Vector3.Dot(transform.forward, (hitPoint - transform.position));
             int hitDir = dot >= 0 ? 1 : 2;
             animator.SetInteger(animParamHitDirection, hitDir);
+
+            BuryInGround(5f);
         }
     }
 }

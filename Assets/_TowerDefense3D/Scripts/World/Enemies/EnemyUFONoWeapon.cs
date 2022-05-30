@@ -56,8 +56,11 @@ namespace TowerDefense3D
 
         protected override void Die(Vector3 hitPoint)
         {
+            base.Die(hitPoint);
             // spawn explosion particles and sounds here
-            AddressableLoader.DestroyAndReleaseAddressable(gameObject);
+            //AddressableLoader.DestroyAndReleaseAddressable(gameObject);
+            meshObject.SetActive(false);
+            BuryInGround(1f);
         }
 
     }

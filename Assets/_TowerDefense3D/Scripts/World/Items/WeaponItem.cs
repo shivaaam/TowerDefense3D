@@ -19,7 +19,7 @@ namespace TowerDefense3D
         protected override void OnDisable()
         {
             base.OnDisable();
-            GameEvents.OnDamageableDie.AddListener(OnDamageableHealthZero);
+            GameEvents.OnDamageableDie.RemoveListener(OnDamageableHealthZero);
         }
 
         protected override void Start()

@@ -102,7 +102,8 @@ namespace TowerDefense3D
             
             if (target == null)
             {
-                target = obj.GetComponent<IDamageable>();
+                if (enemy.GetCurrentDamageableHealth() > 0)
+                    target = obj.GetComponent<IDamageable>();
             }
         }
 
@@ -117,9 +118,15 @@ namespace TowerDefense3D
             {
                 var nearestEnemy = colls.OrderBy(t => Vector3.Distance(t.transform.position, transform.position)).FirstOrDefault();
                 if (nearestEnemy != null)
-                    target = nearestEnemy.GetComponent<IDamageable>();
+                {
+                    if (enemy.GetCurrentDamageableHealth() > 0)
+                        target = nearestEnemy.GetComponent<IDamageable>();
+                }
                 else
+                {
                     target = null;
+                }
+
             }
             else
             {

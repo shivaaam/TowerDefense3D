@@ -120,6 +120,8 @@ namespace TowerDefense3D
         {
             base.Die(hitPoint);
             animator.SetBool(animParamIsDead, true);
+
+            BuryInGround(5f);
         }
 
         public override void Attack(IDamageDealer attacker, IDamageable defender)
