@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,6 +9,7 @@ namespace TowerDefense3D
     public class PlayerController : MonoBehaviour
     {
         public PlacementMarker placementMarker;
+        public GameObject notEnoughMoneyPanel;
 
         private PlayerData playerData;
         private PlaceableItemAttributes currentSelectedItemAttributes;
@@ -17,6 +19,7 @@ namespace TowerDefense3D
 
         private List<BaseItem> placedItems = new List<BaseItem>();
         private float lastSelectedItemPlacedTime;
+        private Coroutine hideNoMoneyCoroutine;
 
         [HideInInspector] public UnityEvent<int> OnUpdateCollectedMoney = new UnityEvent<int>();
         [HideInInspector] public UnityEvent<int> OnUpdatePlayerLives = new UnityEvent<int>();
@@ -78,8 +81,14 @@ namespace TowerDefense3D
             if (currentSelectedItem == null || placementMarker == null || !placementMarker.IsCurrentPositionValid ||
                 (Time.time - lastSelectedItemPlacedTime < currentSelectedItemAttributes.cooldownTime) ||
                 playerData.money < currentSelectedItemAttributes.cost)
+            {
+                if (playerData.money < currentSelectedItemAttributes.cost)
+                {
+                    ShowNotEnoughMoneyPanel();
+                }
                 return;
-            
+            }
+
             UpdateMoneyAmount(-currentSelectedItemAttributes.cost);
             lastSelectedItemPlacedTime = Time.time;
             currentSelectedItem.Place(placementMarker.Marker.position);
@@ -195,6 +204,24 @@ namespace TowerDefense3D
         private void OnClickCollectable(Collectable l_collectable)
         {
             UpdateMoneyAmount(l_collectable.collectableAmount);
+        }
+
+        private void ShowNotEnoughMoneyPanel(float disappearTime = 2f)
+        {
+            if (notEnoughMoneyPanel != null)
+                notEnoughMoneyPanel.SetActive(true);
+
+            if (hideNoMoneyCoroutine != null)
+                StopCoroutine(hideNoMoneyCoroutine);
+            hideNoMoneyCoroutine = StartCoroutine(HideNotEnoughMoneyCoroutine(disappearTime));
+        }
+
+        IEnumerator HideNotEnoughMoneyCoroutine(float disappearTime)
+        {
+            yield return new WaitForSeconds(disappearTime);
+
+            if (notEnoughMoneyPanel != null)
+                notEnoughMoneyPanel.SetActive(false);
         }
     }
 

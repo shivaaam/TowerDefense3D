@@ -15144,6 +15144,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7301700536219129518, guid: 48b7a1a6c43300c45857cedf65ad5f5f, type: 3}
+      propertyPath: notEnoughMoneyPanel
+      value: 
+      objectReference: {fileID: 1947419988}
     - target: {fileID: 7301700536219129519, guid: 48b7a1a6c43300c45857cedf65ad5f5f, type: 3}
       propertyPath: m_Name
       value: Player
@@ -23316,6 +23320,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3913271857946443928, guid: f15d9cbd5d9f34d45afed9877a9cf5ab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4859320101635567875, guid: f15d9cbd5d9f34d45afed9877a9cf5ab, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -23362,7 +23370,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7017061839715490723, guid: f15d9cbd5d9f34d45afed9877a9cf5ab, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7017061839715490723, guid: f15d9cbd5d9f34d45afed9877a9cf5ab, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -23462,6 +23470,11 @@ PrefabInstance:
       objectReference: {fileID: 1259480416}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f15d9cbd5d9f34d45afed9877a9cf5ab, type: 3}
+--- !u!1 &1947419988 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3913271857946443928, guid: f15d9cbd5d9f34d45afed9877a9cf5ab, type: 3}
+  m_PrefabInstance: {fileID: 1947419987}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1948072181
 PrefabInstance:
   m_ObjectHideFlags: 0
