@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25b7191bf34892d4a858ff9ba8e38c99, type: 3}
-  m_Name: Level1WaveTest
+  m_Name: Level2Wave2
   m_EditorClassIdentifier: 
   enemiesDictionary:
-    m_keys: 00000000
-    m_values: 02000000
+    m_keys: 0100000000000000
+    m_values: 0600000008000000
   spawnIntervalSameEnemies: 1
   spawnIntervalDifferentEnemies: 2

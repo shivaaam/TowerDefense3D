@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe2795de6132e3a40879163124acdabb, type: 3}
+  m_Name: Level2Data
+  m_EditorClassIdentifier: 
+  id: level2
+  name: Level 2
+  scene:
+    m_AssetGUID: 4f9084d057207e340b697cc4a5c39f92
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  levelGrid:
+    origin: {x: 0, y: 0}
+    rows: 20
+    columns: 30
+    cellSize: 1
+    drawGrid: 1
+    gridColor: {r: 1, g: 0.7921569, b: 0, a: 0.2509804}
+  initialCameraSettings: {fileID: 11400000, guid: 8a1bc77117385294296fbbe5212dce06, type: 2}
+  levelWaves: {fileID: 11400000, guid: b28d35b5d750e3b429234f84b99f9226, type: 2}
+  thumbnail: {fileID: 21300000, guid: e80d4472cb7025448b29303318c131eb, type: 3}

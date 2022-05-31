@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea02781d68f459d41aa88e239f77140a, type: 3}
   m_Name: Enemy_UFOMissile
   m_EditorClassIdentifier: 
-  category: 2
+  category: 4
   type: 1
   prefab:
     m_AssetGUID: 28b6af987a7f121499b940e7ca4d16b2
@@ -35,9 +35,9 @@ MonoBehaviour:
     maxEvadeForce: 2
   maxHealth: 100
   perceptionRadius: 6
-  attackRate: 1.5
+  attackRate: 3
   attackDamage: 10
-  attackDistance: 6
+  attackDistance: 12
   killReward: 30
   specialReward: 200
   specialRewardProbability: 0.2

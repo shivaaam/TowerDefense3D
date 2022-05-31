@@ -19,7 +19,7 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   moveSpeed: 8
   targetTrackingLookAheadFactor: 0.5
-  damage: 40
+  damage: 70
   damageRadius: 6
   damageDistanceCurve:
     serializedVersion: 2

@@ -33,10 +33,10 @@ MonoBehaviour:
       m_Bits: 384
     minEvadeDistance: 8
     maxEvadeForce: 2
-  maxHealth: 150
+  maxHealth: 250
   perceptionRadius: 3
   attackRate: 1
-  attackDamage: 4
+  attackDamage: 30
   attackDistance: 1.2
   killReward: 20
   specialReward: 100
