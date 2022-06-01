@@ -15,7 +15,7 @@ MonoBehaviour:
   id: level2
   name: Level 2
   scene:
-    m_AssetGUID: 4f9084d057207e340b697cc4a5c39f92
+    m_AssetGUID: c2f766df3f4a9dd4ca26020f94d4340c
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
@@ -28,4 +28,4 @@ MonoBehaviour:
     gridColor: {r: 1, g: 0.7921569, b: 0, a: 0.2509804}
   initialCameraSettings: {fileID: 11400000, guid: 8a1bc77117385294296fbbe5212dce06, type: 2}
   levelWaves: {fileID: 11400000, guid: b28d35b5d750e3b429234f84b99f9226, type: 2}
-  thumbnail: {fileID: 21300000, guid: e80d4472cb7025448b29303318c131eb, type: 3}
+  thumbnail: {fileID: 21300000, guid: 90c3c122f861ea348b2a6b381e74b43d, type: 3}

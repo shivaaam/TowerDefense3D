@@ -319,7 +319,7 @@ namespace TowerDefense3D
         {
             HideLevelClearedLostPanel();
             int currentIndex = GetLevelIndex(lastClickedLevel);
-            UnloadLevel(SceneManager.GetSceneAt(currentIndex + 1), () => { OnClickLevelButton(levels[currentIndex]); });
+            UnloadLevel(SceneManager.GetSceneAt(currentIndex), () => { OnClickLevelButton(levels[currentIndex]); });
         }
 
         private void OnLevelCleared(LevelData l_data)
