@@ -3229,7 +3229,7 @@ MonoBehaviour:
   levels:
   - {fileID: 11400000, guid: 3d72bed2d55f3f04cb39f723950d69dc, type: 2}
   - {fileID: 11400000, guid: 30f588718badfb746b646c4d758a3cd0, type: 2}
-  - {fileID: 11400000, guid: 3d72bed2d55f3f04cb39f723950d69dc, type: 2}
+  - {fileID: 11400000, guid: a6a6d96e9c8a0c546967dbc94d9ce7e2, type: 2}
   mainMenuSceneIndex: 0
   mainMenuParentUIObject: {fileID: 508842043}
   mainMenuPanel: {fileID: 330272428}

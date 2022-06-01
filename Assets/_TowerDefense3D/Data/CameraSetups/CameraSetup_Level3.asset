@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 527a11a61a195d742a515a2ad75f89bd, type: 3}
-  m_Name: CameraSetup_Level2
+  m_Name: CameraSetup_Level3
   m_EditorClassIdentifier: 
   targetPosition: {x: 9.804385, y: 0, z: 1.5954436}
   cameraFollowOffset: {x: 0, y: 14.662598, z: -32.932735}
   cameraYawBias: 25.19107
   minCameraPanPosition: {x: 0.2, y: -5.5}
-  maxCameraPanPosition: {x: 30, y: 20}
+  maxCameraPanPosition: {x: 27, y: 17}

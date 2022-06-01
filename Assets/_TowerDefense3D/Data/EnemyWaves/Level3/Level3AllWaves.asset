@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78235c019df32bc4c922a705282f220e, type: 3}
+  m_Name: Level3AllWaves
+  m_EditorClassIdentifier: 
+  spawnStartTime: 5
+  waves:
+  - {fileID: 11400000, guid: 14c81b2fa740e2943b6a385886b02826, type: 2}
+  - {fileID: 11400000, guid: 709c4e0530972d84690f3f5a27d48455, type: 2}
+  - {fileID: 11400000, guid: ce43fe296d8cda641aca11993b3b0ceb, type: 2}
+  - {fileID: 11400000, guid: f22136a416f136b45956f64673ea0859, type: 2}
+  - {fileID: 11400000, guid: 87049ec141f3a4d4ea78da4831072cbb, type: 2}
+  spawnIntervalBetweenWaves: 5
