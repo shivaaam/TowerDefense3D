@@ -1615,6 +1615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyAttributes: {fileID: 11400000, guid: 095444c3669248742802952be23d9ce8, type: 2}
+  meshObject: {fileID: 4303760950802290140}
   perceptionTrigger: {fileID: 6047011160586481612}
   healthBar: {fileID: 6937306416710174734}
   currentPath:

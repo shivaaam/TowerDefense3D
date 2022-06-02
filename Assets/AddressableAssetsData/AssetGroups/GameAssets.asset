@@ -65,6 +65,42 @@ MonoBehaviour:
     m_Address: Coin
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 3263a5ac4c7ee0547b3e93f942b9e49d
+    m_Address: FX_Explostion
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0818a38e3bf794542ba6b109db8a94c1
+    m_Address: FX_MuzzleFlashCannon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c25b573259cb32b4da910985b2fa2d5a
+    m_Address: FX_MuzzleFlash
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4459a05451de75146ad78c21d44c7547
+    m_Address: FireBulletHeavy
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d8e75b491b00efe469a9edaeff4464b7
+    m_Address: FireBulletLight
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ac9e432c632f28c4284df4ca449bf30b
+    m_Address: RocketExplosion
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: be9e4af9fd1f5c14aa87f08250f73d2a
+    m_Address: RocketLaunch
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 746b676e33ea6904797fd43646eda20f
+    m_Address: BigExplosion
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b3eeb91e5497f9d4fb2258b806fb7bac
+    m_Address: FX_Destruction
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 27dc8d6da581831498fe9fee5c77f8e0, type: 2}
   m_SchemaSet:

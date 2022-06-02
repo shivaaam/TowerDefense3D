@@ -50,9 +50,9 @@ MonoBehaviour:
     m_Bits: 320
   maxLifetime: 2.5
   fireSound: {fileID: 8300000, guid: be9e4af9fd1f5c14aa87f08250f73d2a, type: 3}
-  collisionSound: {fileID: 0}
+  collisionSound: {fileID: 8300000, guid: ac9e432c632f28c4284df4ca449bf30b, type: 3}
   collisionParticlesPrefab:
-    m_AssetGUID: 
+    m_AssetGUID: 3263a5ac4c7ee0547b3e93f942b9e49d
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0

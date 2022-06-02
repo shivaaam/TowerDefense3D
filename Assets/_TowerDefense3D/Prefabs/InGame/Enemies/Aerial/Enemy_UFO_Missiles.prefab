@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyAttributes: {fileID: 11400000, guid: 526494af48d2d3340858e589e34ded89, type: 2}
+  meshObject: {fileID: 5747212789117362610}
   perceptionTrigger: {fileID: 5780336051139700393}
   healthBar: {fileID: 8834392370702853823}
   currentPath:
@@ -67,7 +68,6 @@ MonoBehaviour:
       m_Bits: 0
     minEvadeDistance: 0
     maxEvadeForce: 0
-  meshObject: {fileID: 5747212789117362610}
   muzzle: {fileID: 8329044114738097049}
 --- !u!135 &4828802478380928477
 SphereCollider:
@@ -248,6 +248,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: eea5f6e8b6ae57241acd32e19de706a2, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d4ded9655aa35f14f8a317ffa7de7a02, type: 2}
     - target: {fileID: 919132149155446097, guid: eea5f6e8b6ae57241acd32e19de706a2, type: 3}
       propertyPath: m_Name
       value: enemy_ufoPurpleWeapon

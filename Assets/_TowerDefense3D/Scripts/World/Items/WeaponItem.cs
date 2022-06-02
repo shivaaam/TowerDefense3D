@@ -54,8 +54,12 @@ namespace TowerDefense3D
             health = Mathf.Clamp(health - damage, 0, Attributes.maxHealth);
             if (healthBar != null)
                 healthBar.UpdateHealth(health, Attributes.maxHealth);
-            if(health <= 0)
+            if (health <= 0)
+            {
+                SpawnDestroyParticles();
                 DestroyItem();
+            }
+
         }
 
         public virtual void Attack(IDamageable l_target)
@@ -67,6 +71,16 @@ namespace TowerDefense3D
         {
             GameEvents.OnDamageableDie?.Invoke(this);
             AddressableLoader.DestroyAndReleaseAddressable(gameObject);
+        }
+
+        protected void SpawnDestroyParticles()
+        {
+            if (!string.IsNullOrEmpty(Attributes.particlesOnDestroyPrefab.AssetGUID))
+            {
+                GameObject deadParticles = AddressableLoader.InstantiateAddressable(Attributes.particlesOnDestroyPrefab);
+                //deadParticles.transform.SetParent(transform);
+                deadParticles.transform.position = transform.position;
+            }
         }
 
         public override void Place(Vector2 coordinate)

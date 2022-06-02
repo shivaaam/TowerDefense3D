@@ -1059,7 +1059,7 @@ PrefabInstance:
     - target: {fileID: 1572187716871105176, guid: 876f1232fadaa564cbb3c7cd2313f7e9, type: 3}
       propertyPath: settings
       value: 
-      objectReference: {fileID: 11400000, guid: 73f81801b41c27247baa43a74823c19f, type: 2}
+      objectReference: {fileID: 11400000, guid: d181c14743f4ec54aaec076e2eee67fc, type: 2}
     - target: {fileID: 1572187716871105176, guid: 876f1232fadaa564cbb3c7cd2313f7e9, type: 3}
       propertyPath: initialSetup
       value: 

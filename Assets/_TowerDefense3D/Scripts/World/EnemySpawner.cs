@@ -8,6 +8,7 @@ namespace TowerDefense3D
     public class EnemySpawner : MonoBehaviour
     {
         public BoxCollider spawnArea;
+        public Transform particlesParent;
         public LevelWavesData levelWaves;
         public EnemyTypePrefabDictionary enemyPrefabsDictionary = new EnemyTypePrefabDictionary();
 

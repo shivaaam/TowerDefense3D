@@ -101,8 +101,11 @@ namespace TowerDefense3D
 
         private void SpawnCollisionParticles(Vector3 position)
         {
-            // TODO: Spawn collision particles
-            // TODO: Play collision sound on the particle object
+            if (!string.IsNullOrEmpty(attributes.collisionParticlesPrefab.AssetGUID))
+            {
+                GameObject particlesObj = AddressableLoader.InstantiateAddressable(attributes.collisionParticlesPrefab);
+                particlesObj.transform.position = position;
+            }
         }
 
         private IEnumerator SelfDestructionTimer(float time)

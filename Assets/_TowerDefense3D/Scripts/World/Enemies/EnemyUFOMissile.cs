@@ -5,7 +5,6 @@ namespace TowerDefense3D
 {
     public class EnemyUFOMissile : AerialRangeEnemy
     {
-        [SerializeField] private GameObject meshObject;
         [SerializeField] private GameObject muzzle;
 
         private Transform BulletsParent
@@ -79,6 +78,8 @@ namespace TowerDefense3D
         protected override void Die(Vector3 hitPoint)
         {
             // spawn explosion particles and sounds here
+            meshObject.SetActive(false);
+            BuryInGround(5f);
             AddressableLoader.DestroyAndReleaseAddressable(gameObject);
         }
 

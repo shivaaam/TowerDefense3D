@@ -10,4 +10,7 @@ namespace TowerDefense3D
 
     [CustomPropertyDrawer(typeof(EnemyCountDictionary))]
     public class EnemyCountSerializableDictionaryPropertyDrawer : SerializableDictionaryPropertyDrawer { }
+
+    [CustomPropertyDrawer(typeof(RangeWeapon.MuzzleParticleDictionary))]
+    public class MuzzleParticleSerializableDictionaryPropertyDrawer : SerializableDictionaryPropertyDrawer { }
 }

@@ -12,6 +12,7 @@ namespace TowerDefense3D
         private Vector3 previousPosition;
         protected bool isFollowingPath;
         protected Collider collider;
+        [SerializeField] protected GameObject meshObject;
         [SerializeField] protected PerceptionTrigger perceptionTrigger;
         [SerializeField] protected Healthbar healthBar;
         [SerializeField] protected Path currentPath;
@@ -175,9 +176,20 @@ namespace TowerDefense3D
         {
             // disable all the components
             collider.enabled = false;
+            SpawnDeadParticles();
 
             // spawn special Rewards
             SpawnSpecialRewards();
+        }
+
+        protected void SpawnDeadParticles()
+        {
+            if (!string.IsNullOrEmpty(enemyAttributes.particlesOnDeadPrefab.AssetGUID))
+            {
+                GameObject deadParticles = AddressableLoader.InstantiateAddressable(enemyAttributes.particlesOnDeadPrefab);
+                deadParticles.transform.SetParent(transform);
+                deadParticles.transform.position = transform.position;
+            }
         }
 
         private void SpawnSpecialRewards()
@@ -208,12 +220,12 @@ namespace TowerDefense3D
             yield return new WaitForSeconds(delayTime);
             float animationTime = 1f;
             float timeElapsed = 0f;
-            float initY = transform.position.y;
+            float initY = meshObject.transform.position.y;
             float yOffset = 2f;
             while (timeElapsed < animationTime)
             {
                 float y = Mathf.Lerp(initY, initY-yOffset, timeElapsed / animationTime);
-                transform.position = new Vector3(transform.position.x, y, transform.position.z);
+                meshObject.transform.position = new Vector3(meshObject.transform.position.x, y, meshObject.transform.position.z);
                 timeElapsed += Time.deltaTime;
                 yield return null; 
             }

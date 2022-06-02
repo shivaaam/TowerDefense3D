@@ -24,10 +24,15 @@ MonoBehaviour:
   cooldownTime: 10
   icon: {fileID: 21300000, guid: 1a6b8d1fea31d0446a5b0edcf6652974, type: 3}
   constructTime: 2
+  particlesOnDestroyPrefab:
+    m_AssetGUID: b3eeb91e5497f9d4fb2258b806fb7bac
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   lookAheadFactor: 0.25
   attackRadius: 7
   maxHealth: 200
   ammo: {fileID: 11400000, guid: b4139856847402540b7fd412b6c3a900, type: 2}
-  fireRate: 1
+  fireRate: 0.85
   trackTargetSpeed: 4
   rotationAxis: {x: 1, y: 1}

@@ -8,6 +8,7 @@ namespace TowerDefense3D
         public EnemyCategory category;
         public EnemyType type;
         public AssetReferenceGameObject prefab;
+        public AssetReferenceGameObject particlesOnDeadPrefab;
         public float spawnHeight;
         public PathFollowSettings pathFollowSettings;
         public EvadeSettings evadeSettings;

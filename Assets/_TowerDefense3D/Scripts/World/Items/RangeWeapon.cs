@@ -13,6 +13,7 @@ namespace TowerDefense3D
         public Transform weaponYawRoot;
         public Transform weaponPitchRoot;
         public Transform[] muzzles;
+        public MuzzleParticleDictionary muzzleFlashParticles;
 
         private SphereCollider attackRadiusCollider;
         private float fireInterval;
@@ -172,6 +173,7 @@ namespace TowerDefense3D
             if (Time.time - lastFireTime >= l_interval)
             {
                 // fire weapon 
+                PlayMuzzleFlashParticles(muzzles[currentMuzzleIndex]);
                 Attack(target);
                 lastFireTime = Time.time;
             }
@@ -227,6 +229,12 @@ namespace TowerDefense3D
             OnObjectExitAttackRadius(l_damageable.GetDamageableTransform().gameObject);
         }
 
+        public void PlayMuzzleFlashParticles(Transform muzzle)
+        {
+            if(muzzleFlashParticles.ContainsKey(muzzle))
+                muzzleFlashParticles[muzzle].Play();
+        }
+
         private void OnDrawGizmos()
         {
             //// draw attack radius
@@ -241,5 +249,8 @@ namespace TowerDefense3D
             //    Gizmos.DrawSphere(target.GetDamageableTransform().position, 1f);
             //}
         }
+
+        [System.Serializable]
+        public class MuzzleParticleDictionary : SerializableDictionary<Transform, ParticlesParent> { }
     }
 }
