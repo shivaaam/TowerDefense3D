@@ -6,7 +6,6 @@ namespace TowerDefense3D
 {
     public class Collectable : MonoBehaviour
     {
-        public float selfDestructTime = 5f;
         public float selfDestructHeight = -200f;
 
         public int collectableAmount;
@@ -42,11 +41,6 @@ namespace TowerDefense3D
 #endif
         }
 
-        private void Start()
-        {
-            StartSelfDestructTimer();
-        }
-
         private void Update()
         {
             if(transform.position.y < selfDestructHeight)
@@ -69,17 +63,6 @@ namespace TowerDefense3D
                     AddressableLoader.DestroyAndReleaseAddressable(gameObject);
                 }
             }
-        }
-
-        private void StartSelfDestructTimer()
-        {
-            StartCoroutine(SelfDestructTimer(selfDestructTime));
-        }
-
-        private IEnumerator SelfDestructTimer(float waitTime)
-        {
-            yield return new WaitForSeconds(waitTime);
-            AddressableLoader.DestroyAndReleaseAddressable(gameObject);
         }
     }
 }
