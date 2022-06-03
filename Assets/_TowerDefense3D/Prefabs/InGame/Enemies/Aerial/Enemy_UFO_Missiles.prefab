@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyAttributes: {fileID: 11400000, guid: 526494af48d2d3340858e589e34ded89, type: 2}
   meshObject: {fileID: 5747212789117362610}
+  rootBoneObject: {fileID: 0}
   perceptionTrigger: {fileID: 5780336051139700393}
   healthBar: {fileID: 8834392370702853823}
   currentPath:

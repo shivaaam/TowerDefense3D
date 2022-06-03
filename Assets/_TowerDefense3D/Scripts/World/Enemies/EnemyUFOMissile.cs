@@ -66,10 +66,14 @@ namespace TowerDefense3D
                 // STATE: Attacking
                 if (currentState == EnemyStates.Attacking)
                 {
-                    if (Time.time - LastAttackTime > Attributes.attackRate)
+                    float fireInterval = Attributes.attackRate > 0 ? 1f / Attributes.attackRate : -1f;
+                    if (Time.time - LastAttackTime > fireInterval)
                     {
-                        if(target != null)
+                        if (target != null)
+                        {
                             Attack(this, target);
+                        }
+
                     }
                 }
             }

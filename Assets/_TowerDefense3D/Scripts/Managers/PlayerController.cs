@@ -187,7 +187,8 @@ namespace TowerDefense3D
         private void SaveNewData()
         {
             GameData newData = GameState.GetGameData;
-            newData.maxLevelsCleared = (currentLevelIndex + 1) % Constants.maxLevelsCount;
+            if(currentLevelIndex + 1 > newData.maxLevelsCleared)
+                newData.maxLevelsCleared = Mathf.Clamp(currentLevelIndex + 1, 0, Constants.maxLevelsCount - 1);
             newData.playerData = playerData;
 
             GameState.SaveData(newData);

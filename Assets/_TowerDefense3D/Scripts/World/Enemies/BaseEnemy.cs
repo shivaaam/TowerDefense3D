@@ -13,6 +13,7 @@ namespace TowerDefense3D
         protected bool isFollowingPath;
         protected Collider collider;
         [SerializeField] protected GameObject meshObject;
+        [SerializeField] protected GameObject rootBoneObject;
         [SerializeField] protected PerceptionTrigger perceptionTrigger;
         [SerializeField] protected Healthbar healthBar;
         [SerializeField] protected Path currentPath;
@@ -212,20 +213,21 @@ namespace TowerDefense3D
         {
             if(buryCoroutine != null)
                 StopCoroutine(buryCoroutine);
-            buryCoroutine = StartCoroutine(BuryCorouitine(delayTime));
+            buryCoroutine = StartCoroutine(BuryCoroutine(delayTime));
         }
 
-        private IEnumerator BuryCorouitine(float delayTime)
+        private IEnumerator BuryCoroutine(float delayTime)
         {
             yield return new WaitForSeconds(delayTime);
             float animationTime = 1f;
             float timeElapsed = 0f;
-            float initY = meshObject.transform.position.y;
+            GameObject selectedObject = rootBoneObject != null ? rootBoneObject : meshObject;
+            float initY = selectedObject.transform.position.y;
             float yOffset = 2f;
             while (timeElapsed < animationTime)
             {
-                float y = Mathf.Lerp(initY, initY-yOffset, timeElapsed / animationTime);
-                meshObject.transform.position = new Vector3(meshObject.transform.position.x, y, meshObject.transform.position.z);
+                float y = Mathf.Lerp(initY, initY - yOffset, timeElapsed / animationTime);
+                selectedObject.transform.position = new Vector3(selectedObject.transform.position.x, y, selectedObject.transform.position.z);
                 timeElapsed += Time.deltaTime;
                 yield return null; 
             }

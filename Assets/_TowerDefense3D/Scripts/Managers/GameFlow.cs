@@ -302,7 +302,7 @@ namespace TowerDefense3D
             }
             else
             {
-                UnloadLevel(SceneManager.GetSceneAt(GetLevelIndex(lastClickedLevel) + 1), () => { lastClickedLevel = data; StartLevel(data.scene); });
+                UnloadLevel(SceneManager.GetSceneAt(/*GetLevelIndex(lastClickedLevel) + */1), () => { lastClickedLevel = data; StartLevel(data.scene); });
             }
         }
 
@@ -312,14 +312,14 @@ namespace TowerDefense3D
             int currentLevelIndex = GetLevelIndex(lastClickedLevel);
             int nextLevelIndex = (currentLevelIndex + 1) % levels.Length;
 
-            UnloadLevel(SceneManager.GetSceneAt(GetLevelIndex(lastClickedLevel) + 1), () => { OnClickLevelButton(levels[nextLevelIndex]); }); 
+            UnloadLevel(SceneManager.GetSceneAt(/*GetLevelIndex(lastClickedLevel) + */1), () => { OnClickLevelButton(levels[nextLevelIndex]); }); 
         }
 
         public void ReplayLevel()
         {
             HideLevelClearedLostPanel();
             int currentIndex = GetLevelIndex(lastClickedLevel);
-            UnloadLevel(SceneManager.GetSceneAt(currentIndex), () => { OnClickLevelButton(levels[currentIndex]); });
+            UnloadLevel(SceneManager.GetSceneAt(1), () => { OnClickLevelButton(levels[currentIndex]); });
         }
 
         private void OnLevelCleared(LevelData l_data)

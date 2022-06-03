@@ -79,7 +79,7 @@ namespace TowerDefense3D
             {
                 GameObject deadParticles = AddressableLoader.InstantiateAddressable(Attributes.particlesOnDestroyPrefab);
                 //deadParticles.transform.SetParent(transform);
-                deadParticles.transform.position = transform.position;
+                deadParticles.transform.position = new Vector3(transform.position.x, transform.position.y + 0.6f, transform.position.z);
             }
         }
 

@@ -39,10 +39,10 @@ MonoBehaviour:
     minEvadeDistance: 8
     maxEvadeForce: 2
   maxHealth: 100
-  perceptionRadius: 6
-  attackRate: 3
+  perceptionRadius: 15
+  attackRate: 1.3
   attackDamage: 10
-  attackDistance: 12
+  attackDistance: 15
   killReward: 30
   specialReward: 200
   specialRewardProbability: 0.2

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace TowerDefense3D
@@ -27,16 +28,28 @@ namespace TowerDefense3D
 
         private void OnDamageableHealthZero(IDamageable damageable)
         {
-            if (enemiesOnItemDictionary.ContainsKey(damageable))
+            if (damageable is BaseItem item)
             {
-                // change state of all the enemies to 'moving'
-                foreach (var enemy in enemiesOnItemDictionary[damageable])
+                if (enemiesOnItemDictionary.ContainsKey(damageable))
                 {
-                    enemy.SetTarget(null);
-                }
+                    // change state of all the enemies to 'moving'
+                    foreach (var enemy in enemiesOnItemDictionary[damageable])
+                    {
+                        enemy.SetTarget(null);
+                    }
 
-                // remove key from the dictionary
-                enemiesOnItemDictionary.Remove(damageable);
+                    // remove key from the dictionary
+                    enemiesOnItemDictionary.Remove(damageable);
+                }
+            }
+            else if (damageable is BaseEnemy diedEnemy) // if enemy has died, remove it from the building, let others attack
+            {
+                var dictionaryEntry = enemiesOnItemDictionary.FirstOrDefault(t => t.Value.Exists(y => y == diedEnemy));
+                //Debug.Log($"dictionaryEntry: {dictionaryEntry}");
+                if (dictionaryEntry.Key != null)
+                {
+                    enemiesOnItemDictionary[dictionaryEntry.Key].Remove(diedEnemy);
+                }
             }
         }
 
