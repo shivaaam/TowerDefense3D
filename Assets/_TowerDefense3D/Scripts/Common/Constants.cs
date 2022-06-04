@@ -8,7 +8,7 @@ namespace TowerDefense3D
 
         public const int maxLevelsCount = 3;
 
-        public const int startPlayerMoney = 2000;
+        public const int startPlayerMoney = 5000;
         public const int maxPlayerMoney = 99999;
         public const int startPlayerLives = 3;
         public const int maxPlayerLives = 5;

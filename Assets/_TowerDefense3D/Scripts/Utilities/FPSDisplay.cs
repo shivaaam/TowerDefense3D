@@ -8,6 +8,7 @@ using TMPro;
 
 public class FPSDisplay : MonoBehaviour
 {
+    public bool showFps = true;
     public TextMeshProUGUI fpsText;
     private float deltaTime = 0.0f;
 
@@ -15,6 +16,8 @@ public class FPSDisplay : MonoBehaviour
     {
         if (fpsText == null)
             fpsText = GetComponent<TextMeshProUGUI>();
+        
+        gameObject.SetActive(showFps);
     }
 
     void Update()
