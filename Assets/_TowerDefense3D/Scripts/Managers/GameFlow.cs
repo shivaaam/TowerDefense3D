@@ -99,6 +99,7 @@ namespace TowerDefense3D
 
         public void UnloadLevel(Scene l_level, System.Action onDone = null)
         {
+            Time.timeScale = 1;
             StartCoroutine(UnloadLevelCoroutine(l_level, onDone));
         }
 
@@ -324,12 +325,14 @@ namespace TowerDefense3D
 
         private void OnLevelCleared(LevelData l_data)
         {
+            Time.timeScale = 0;
             HideLevelClearedLostPanel();
             ShowLevelClearedPanel();
         }
 
         private void OnLevelLost(LevelData l_data)
         {
+            Time.timeScale = 0;
             ShowLevelLostPanel();
         }
 

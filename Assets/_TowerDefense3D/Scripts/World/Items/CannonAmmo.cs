@@ -13,12 +13,13 @@ namespace TowerDefense3D
             if (!isSpawned)
                 return;
 
-            if (target != null)
+            if (target != null && !target.Equals(null))
             {
                 Vector3 predictedPos = target.GetDamageableTransform().position + target.GetDamageableVelocity() * (attributes.targetTrackingLookAheadFactor > 0 ? attributes.targetTrackingLookAheadFactor : 1);
                 Vector3 desired = (predictedPos - transform.position).normalized;
 
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(desired), maxSteeringForce * Time.deltaTime);
+                if(desired.magnitude != 0)
+                    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(desired), maxSteeringForce * Time.deltaTime);
             }
             transform.Translate(Vector3.forward * attributes.moveSpeed * Time.deltaTime);
             transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, Constants.minMissileHeight, Constants.maxMissileHeight), transform.position.z);
